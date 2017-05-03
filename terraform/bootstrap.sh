@@ -30,6 +30,8 @@ EOF
 
 chmod +x get-credential-cluster-$1.sh
 
+./get-credential-cluster-$1.sh
+
 kubectl proxy --address="0.0.0.0" --accept-hosts='.*' &
 
 

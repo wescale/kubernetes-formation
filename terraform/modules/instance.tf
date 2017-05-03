@@ -26,5 +26,5 @@ resource "google_compute_instance" "training-instance" {
     scopes = ["https://www.googleapis.com/auth/cloud-platform", "compute-rw", "storage-rw"]
   }
 
-  metadata_startup_script = "curl -s https://gist.githubusercontent.com/cedbossneo/9e331a8136a37a7304051d4fa730bc14/raw/287ca7454fc4957b06fba24aec072fddb99a4cc9/bootstrap.sh | bash -s ${count.index}"
+  metadata_startup_script = "curl -s https://raw.githubusercontent.com/WeScale/kubernetes-formation/master/terraform/bootstrap.sh | bash -s ${count.index}"
 }

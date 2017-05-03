@@ -1,3 +1,6 @@
 .DS_Store
 gemalto.privkey
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform.tfstate.lock.info
 

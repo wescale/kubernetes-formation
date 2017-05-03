@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  webservice:
+    image: webservice-app:v1
+    networks:
+      - web
+    expose:
+      - "8080"
+    labels:
+      - "traefik.backend=webservice"
+      - "traefik.frontend.rule=Host:webservice.docker.localhost"
+
+networks:
+  web:
+    external:
+      name: traefik_webgateway

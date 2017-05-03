@@ -15,7 +15,7 @@ chmod +x /usr/bin/kops
 gcloud config set compute/zone europe-west1-b
 gcloud container clusters create training-cluster-$1
 
-cat <<EOF > get-credential-cluster-$1.sh
+cat <<EOF > /tmp/get-credential-cluster-$1.sh
 #!/bin/bash
 
 until gcloud container clusters list | grep RUNNING
@@ -28,9 +28,9 @@ gcloud container clusters get-credentials "training-cluster-$1" --zone europe-we
 
 EOF
 
-chmod +x get-credential-cluster-$1.sh
+chmod +x /tmp/get-credential-cluster-$1.sh
 
-./get-credential-cluster-$1.sh
+/tmp/get-credential-cluster-$1.sh
 
 kubectl proxy --address="0.0.0.0" --accept-hosts='.*' &
 

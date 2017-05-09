@@ -15,6 +15,9 @@ chmod +x /usr/bin/kops
 gcloud config set compute/zone europe-west1-b
 gcloud container clusters create training-cluster-$1
 
+cat <<EOF > /tmp/get-credential-cluster-$1.sh
+#!/bin/bash
+
 until gcloud container clusters list | grep RUNNING
 do
     echo "Wait for cluster provisionning"
@@ -23,11 +26,12 @@ done
 
 gcloud container clusters get-credentials "training-cluster-$1" --zone europe-west1-b
 
+kubectl proxy --address="0.0.0.0" --accept-hosts='.*' &
+
+EOF
+
 chmod +x /tmp/get-credential-cluster-$1.sh
 
-/tmp/get-credential-cluster-$1.sh
-
-kubectl proxy --address="0.0.0.0" --accept-hosts='.*' &
 
 
 

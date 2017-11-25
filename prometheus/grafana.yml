@@ -27,4 +27,4 @@ spec:
       name: grafana-port 
   selector:
     app: grafana
-  type: NodePort
+  type: LoadBalancer

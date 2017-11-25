@@ -5,3 +5,4 @@ WORKDIR /usr/app
 COPY build /usr/app
 EXPOSE 5000
 CMD [ "serve", "-s /usr/app" ]
+

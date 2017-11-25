@@ -10,10 +10,7 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 # Update the package list and install the Cloud SDK
 apt-get update && sudo apt-get install -y google-cloud-sdk kubectl nano unzip git
-wget -O /usr/bin/kops https://github.com/kubernetes/kops/releases/download/1.5.3/kops-linux-amd64
-chmod +x /usr/bin/kops
 gcloud config set compute/zone europe-west1-b
-gcloud container clusters create training-cluster-$1
 
 cat <<EOF > /tmp/get-credential-cluster-$1.sh
 #!/bin/bash

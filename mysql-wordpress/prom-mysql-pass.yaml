@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  prom-mysql-password.txt: cm9vdDpzZWNyZXQtcGFzc3dvcmRAKDEyNy4wLjAuMTozMzA2KS93b3JkcHJlc3M=
+kind: Secret
+metadata:
+  creationTimestamp: 2017-12-04T18:08:22Z
+  name: prom-mysql-pass
+  namespace: default
+  resourceVersion: "99633"
+  selfLink: /api/v1/namespaces/default/secrets/prom-mysql-pass
+  uid: 1d911a08-d91e-11e7-837e-42010a84007f
+type: Opaque

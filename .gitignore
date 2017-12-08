@@ -6,3 +6,4 @@ terraform/.terraform.tfstate.lock.info
 terraform/sandbox-wescale-3b00dc1686b7.json
 recap-retour de formation.numbers
 list-ip.li
+terraform/.terraform*

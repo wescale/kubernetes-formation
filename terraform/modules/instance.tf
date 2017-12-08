@@ -4,10 +4,12 @@ resource "google_compute_instance" "training-instance" {
   machine_type = "g1-small"
   zone         = "${var.MOD_REGION}-b"
 
-  disk {
-    image = "ubuntu-1610-yakkety-v20170330"
-    type = "pd-ssd"
-    size = "10" # ie 10GB
+  boot_disk {
+    initialize_params {
+      image = "projects/ubuntu-os-cloud/global/images/ubuntu-1710-artful-v20171122"
+      type = "pd-standard"
+      size = "10" # ie 10GB
+    }
     auto_delete = true
   }
 

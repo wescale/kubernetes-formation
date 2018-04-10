@@ -7,5 +7,7 @@ do
 done
 sleep 1
 
+export DATA_SOURCE_NAME=$MYSQL_USER:$MYSQL_PASSWORD@($MYSQL_HOST:$MYSQL_PORT)/$MYSQL_DB
+
 /bin/mysqld_exporter
 

@@ -53,6 +53,10 @@ spec:
       labels:
         app: wordpress
         tier: mysql
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/metrics'
+        prometheus.io/port: '9104'
     spec:
       containers:
       - image: mysql:5.6
@@ -71,14 +75,22 @@ spec:
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
-      - image: eu.gcr.io/sandbox-wescale/my-prom-mysql:master-v2
+      - image: eu.gcr.io/sandbox-wescale/my-prom-mysql:master-v3
         name: prom-mysql
         env:
-        - name: DATA_SOURCE_NAME
+        - name: MYSQL_USER 
+          value: root
+        - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: prom-mysql-pass
-              key: prom-mysql-password.txt
+              name: mysql-pass
+              key: password.txt
+        - name: MYSQL_HOST
+          value: localhost
+        - name: MYSQL_PORT
+          value: 3306
+        - name: MYSQL_DB 
+          value: wordpress
         ports:
         - containerPort: 9104
       volumes:

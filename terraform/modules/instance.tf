@@ -21,7 +21,7 @@ resource "google_compute_instance" "training-instance" {
   }
 
   metadata {
-    ssh-keys = "training:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiZOht7hDWIomDFom83ecX0ZzGP0dVaJoBWzBKUeqUyR3oagwICCBybKw4tthwBG8jimx+vd8P6fEvJwVIzfBG1kPsmjtACLa9Dnox+m4mvBib3X7FC+3Uo2JEbmIbiRpmjm7JhK1hFdMgn06I2qywBTXrPUPRA6M1zdCABDF+Lfafmq3RObBj5TpNx0yWY7r9iBy7V/VE4U+EiDaih57Vhx7cyeBQ7XiGPUbjKAfsFaDHxGl3YOAywQu+Ur977vCblCY2fWXZfrNzqRzkz/dM4p9dJnfoCwVVX1kYJl60c75EU9chS3Jes6XaW7ae309jcUksW6N10LHJD+50CHE3 training@gemalto"
+    ssh-keys = "training:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRu/6NgZXgc8A2d+BX2gjsiGK+SHzxNeLevi2Xkr02/laqcFcbQ4hmZLd4S5oxAr+xN1r7GCE/WZOHOiXWe2j6RElroMMpi4RW0kkxqDicTLlQzgTqejB2rgM3kN3WLmQNn6tW5CuWPNcQecPkp/8WuXIEmiSK+y6CvFDUgfdgYbJPKQnI6pgkkTa+QFRPKqQl9gtId8L6b8asnUUJ/fADUzLmgesx3kvjJLwV73iMfIQ0GFuCo6NJ0wgSyhoJMzzcbk/El1q0AZKFW+24+HKa4Rlza7mccceShHNbr7OXt0zekwSkTA2Q4GILsuPA0rv07ZgmUfEXfeOUGFzuYb8B slavayssiere@Sebastiens-MBP"
   }
 
   service_account {

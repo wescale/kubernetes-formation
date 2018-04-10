@@ -21,6 +21,11 @@ type Client struct {
 	Service string `json:"service"`
 }
 
+type Status struct {
+	Name string `json:"name"`
+	Code int    `json:"code"`
+}
+
 func handlerFactureFunc(w http.ResponseWriter, r *http.Request) {
 	var clt Facture
 	clt = Facture{Contrat: "Gemalto", Days: 1.5, Cost: 22.2}
@@ -38,6 +43,16 @@ func handlerClientFunc(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 	if err := json.NewEncoder(w).Encode(clt); err != nil {
+		panic(err)
+	}
+}
+
+func handlerStatusFunc(w http.ResponseWriter, r *http.Request) {
+	stt := Status{Name: "OK", Code: 200}
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+
+	if err := json.NewEncoder(w).Encode(stt); err != nil {
 		panic(err)
 	}
 }
@@ -81,6 +96,9 @@ func main() {
 	var handlerIP http.HandlerFunc
 	handlerIP = handlerIPFunc
 
+	var handlerStatus http.HandlerFunc
+	handlerStatus = handlerStatusFunc
+
 	router.
 		Methods("GET").
 		Path("/facture").
@@ -98,6 +116,18 @@ func main() {
 		Path("/ips").
 		Name("ips_get").
 		Handler(handlerIP)
+
+	router.
+		Methods("GET").
+		Path("/").
+		Name("root").
+		Handler(handlerStatus)
+
+	router.
+		Methods("GET").
+		Path("/healthz").
+		Name("heatlth").
+		Handler(handlerStatus)
 
 	headersOk := handlers.AllowedHeaders([]string{"authorization", "content-type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})

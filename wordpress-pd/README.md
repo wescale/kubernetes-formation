@@ -21,20 +21,6 @@ Demonstrated Kubernetes Concepts:
 * [Secrets](http://kubernetes.io/docs/user-guide/secrets/) to store sensitive
   passwords.
 
-## Quickstart
-
-Put your desired MySQL password in a file called `password.txt` with
-no trailing newline. The first `tr` command will remove the newline if
-your editor added one.
-
-```shell
-tr --delete '\n' <password.txt >.strippedpassword.txt && mv .strippedpassword.txt password.txt
-kubectl create -f https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/mysql-wordpress-pd/local-volumes.yaml
-kubectl create secret generic mysql-pass --from-file=password.txt
-kubectl create -f https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/mysql-wordpress-pd/mysql-deployment.yaml
-kubectl create -f https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/mysql-wordpress-pd/wordpress-deployment.yaml
-```
-
 ## Table of Contents
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
@@ -72,22 +58,15 @@ This storage option is applicable if you are running on
 Create two persistent disks. You will need to create the disks in the
 same [GCE zone](https://cloud.google.com/compute/docs/zones) as the
 Kubernetes cluster. The default setup script will create the cluster
-in the `us-central1-b` zone, as seen in the
+in the `europe-west1-b` zone, as seen in the
 [config-default.sh](../../cluster/gce/config-default.sh) file. Replace
-`<zone>` below with the appropriate zone. The names `wordpress-1` and
-`wordpress-2` must match the `pdName` fields we have specified in
+`<zone>` below with the appropriate zone. The names `CHANGE-THIS-NAME-1` and
+`CHANGE-THIS-NAME-2` must match the `pdName` fields we have specified in
 [gce-volumes.yaml](gce-volumes.yaml).
 
 ```shell
-gcloud compute disks create --size=20GB --zone=<zone> wordpress-1
-gcloud compute disks create --size=20GB --zone=<zone> wordpress-2
-```
-
-Create the persistent volume objects in Kubernetes for those disks:
-
-```shell
-export KUBE_REPO=https://raw.githubusercontent.com/kubernetes/kubernetes/master
-kubectl create -f $KUBE_REPO/examples/mysql-wordpress-pd/gce-volumes.yaml
+gcloud compute disks create --size=20GB --zone=<zone> CHANGE-THIS-NAME-1
+gcloud compute disks create --size=20GB --zone=<zone> CHANGE-THIS-NAME-2
 ```
 
 ## Create the MySQL Password Secret
@@ -115,10 +94,6 @@ access the database.
 Now that the persistent disks and secrets are defined, the Kubernetes
 pods can be launched. Start MySQL using
 [mysql-deployment.yaml](mysql-deployment.yaml).
-
-```shell
-kubectl create -f $KUBE_REPO/examples/mysql-wordpress-pd/mysql-deployment.yaml
-```
 
 Take a look at [mysql-deployment.yaml](mysql-deployment.yaml), and
 note that we've defined a volume mount for `/var/lib/mysql`, and then
@@ -203,11 +178,7 @@ local-pv-2   20Gi       RWO           Bound       default/mysql-pv-claim        
 ## Deploy WordPress
 
 Next deploy WordPress using
-[wordpress-deployment.yaml](wordpress-deployment.yaml):
-
-```shell
-kubectl create -f $KUBE_REPO/examples/mysql-wordpress-pd/wordpress-deployment.yaml
-```
+[wordpress-deployment.yaml](wordpress-deployment.yaml).
 
 Here we are using many of the same features, such as a volume claim
 for persistent storage and a secret for the password.

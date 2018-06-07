@@ -1,7 +1,7 @@
-FROM node:7.7.4-alpine
-RUN npm install -g serve
+FROM node:8.11.2-alpine
 RUN mkdir -p /usr/app
 WORKDIR /usr/app
 COPY build /usr/app
-EXPOSE 5000
-CMD [ "serve", "-s /usr/app" ]
+RUN npm install -g serve
+EXPOSE 3000
+CMD [ "serve" ]

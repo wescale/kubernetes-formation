@@ -27,22 +27,3 @@ spec:
   selector:
     app: webservice
   type: NodePort
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: ingress-ws-client
-  annotations:
-    kubernetes.io/ingress.class: "gce"
-    ingress.kubernetes.io/rewrite-target: /
-spec:
-  backend:
-    serviceName: ws-service
-    servicePort: 8080
-  rules:
-  - http:
-      paths:
-      - path: /v1/*
-        backend:
-          serviceName: ws-service
-          servicePort: 8080

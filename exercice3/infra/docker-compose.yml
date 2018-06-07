@@ -10,6 +10,15 @@ services:
     labels:
       - "traefik.backend=webservice"
       - "traefik.frontend.rule=Host:webservice.docker.localhost"
+  front:
+    image: front-app:v1
+    networks:
+      - web
+    expose:
+      - "3000"
+    labels:
+      - "traefik.backend=front"
+      - "traefik.frontend.rule=Host:front.docker.localhost"
 
 networks:
   web:

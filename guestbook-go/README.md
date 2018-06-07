@@ -24,7 +24,7 @@ Use the `redis-master-controller.json` file to create a [replication controller]
 2. To verify that the redis-master controller is up, list the replication controllers you created in the cluster with the `kubectl get rc` command(if you don't specify a `--namespace`, the `default` namespace will be used. The same below):
 
     ```console
-    $ kubectl get rc
+    $ kubectl get rc -o wide
     CONTROLLER             CONTAINER(S)            IMAGE(S)                    SELECTOR                         REPLICAS
     redis-master           redis-master            gurpartap/redis             app=redis,role=master            1
     ...
@@ -56,7 +56,7 @@ Services find the pods to load balance based on pod labels. The pod that you cre
     services/redis-master
     ```
 
-2. To verify that the redis-master service is up, list the services you created in the cluster with the `kubectl get services` command:
+2. To verify that the redis-master service is up, list the services you created in the cluster with the `kubectl get services -o wide` command:
 
     ```console
     $ kubectl get services
@@ -79,10 +79,9 @@ The Redis master we created earlier is a single pod (REPLICAS = 1), while the Re
     replicationcontrollers/redis-slave
     ```
 
-2. To verify that the redis-slave controller is running, run the `kubectl get rc` command:
+2. To verify that the redis-slave controller is running, run the `kubectl get rc -o wide` command:
 
     ```console
-    $ kubectl get rc
     CONTROLLER              CONTAINER(S)            IMAGE(S)                         SELECTOR                    REPLICAS
     redis-master            redis-master            redis                            app=redis,role=master       1
     redis-slave             redis-slave             kubernetes/redis-slave:v2        app=redis,role=slave        2
@@ -122,10 +121,9 @@ Just like the master, we want to have a service to proxy connections to the read
     services/redis-slave
     ```
 
-2. To verify that the redis-slave service is up, list the services you created in the cluster with the `kubectl get services` command:
+2. To verify that the redis-slave service is up, list the services you created in the cluster with the `kubectl get services -o wide` command:
 
     ```console
-    $ kubectl get services
     NAME              CLUSTER_IP       EXTERNAL_IP       PORT(S)       SELECTOR               AGE
     redis-master      10.0.136.3       <none>            6379/TCP      app=redis,role=master  1h
     redis-slave       10.0.21.92       <none>            6379/TCP      app-redis,role=slave   1h
@@ -149,10 +147,9 @@ This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni
 
  Tip: If you want to modify the guestbook code open the `_src` of this example and read the README.md and the Makefile. If you have pushed your custom image be sure to update the `image` accordingly in the guestbook-controller.json.
 
-2. To verify that the guestbook replication controller is running, run the `kubectl get rc` command:
+2. To verify that the guestbook replication controller is running, run the `kubectl get rc -o wide` command:
 
     ```console
-    $ kubectl get rc
     CONTROLLER            CONTAINER(S)         IMAGE(S)                               SELECTOR                  REPLICAS
     guestbook             guestbook            k8s.gcr.io/guestbook:v3  app=guestbook             3
     redis-master          redis-master         redis                                  app=redis,role=master     1

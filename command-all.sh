@@ -19,17 +19,17 @@ do
     #scp -r -i ./terraform/kubernetes-formation ./exercice3/webservice-test training@${ip}:~/exercice3
 
     ## Exercice 3 bis
-    scp -r -i ./terraform/kubernetes-formation ./exercice3/infra training@${ip}:~/exercice3
-    scp -r -i ./terraform/kubernetes-formation ./exercice3/traefik training@${ip}:~/exercice3
+    #scp -r -i ./terraform/kubernetes-formation ./exercice3/infra training@${ip}:~/exercice3
+    #scp -r -i ./terraform/kubernetes-formation ./exercice3/traefik training@${ip}:~/exercice3
 
-    # ssh -i /Users/sebastienlavayssiere/Documents/Gemalto/gemalto.privkey training@${ip} "curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh" < /dev/null
-    # ssh -i /Users/sebastienlavayssiere/Documents/Gemalto/gemalto.privkey training@${ip} "chmod 700 get_helm.sh" < /dev/null
-    # ssh -i /Users/sebastienlavayssiere/Documents/Gemalto/gemalto.privkey training@${ip} "./get_helm.sh" < /dev/null
-    # scp -r -i /Users/sebastienlavayssiere/Documents/Gemalto/gemalto.privkey ~/Documents/Gemalto/prometheus/* training@${ip}:/home/training/prometheus/
-    # scp -r -i ./terraform/kubernetes-formation ./webservice.yaml training@${ip}:/home/training/
-    # scp -r -i ./terraform/kubernetes-formation ./dashboard.yaml training@${ip}:/home/training/
-    # scp -r -i ./terraform/kubernetes-formation ./get-token-dashboard.sh training@${ip}:/home/training/
-    # scp -r -i ./terraform/kubernetes-formation ./prometheus/* training@${ip}:/home/training/prometheus
+
+    ## Exercice 3 bis
+    #scp -r -i ./terraform/kubernetes-formation ./get-token-dashboard.sh training@${ip}:~/
+
+
+    ## Prometheus
+    ssh -i  ./terraform/kubernetes-formation training@${ip} "mkdir -p ~/prometheus/" < /dev/null
+    scp -r -i ./terraform/kubernetes-formation ./prometheus/* training@${ip}:/home/training/prometheus
     
     echo "Done for ${ip}"
 

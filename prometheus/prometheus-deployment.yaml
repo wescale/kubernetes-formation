@@ -36,6 +36,8 @@ spec:
         image: quay.io/prometheus/prometheus:v2.0.0
         args:
           - '--config.file=/etc/prometheus/prometheus.yml'
+          - '--web.external-url=http://35.205.34.180/prom'
+          - '--web.route-prefix=/'
         ports:
         - name: web
           containerPort: 9090
@@ -173,3 +175,18 @@ data:
         - source_labels: [__meta_kubernetes_service_name]
           action: replace
           target_label: kubernetes_name
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prom-ui-ing
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /prom
+        backend:
+          serviceName: prometheus
+          servicePort: 9090

@@ -182,6 +182,7 @@ metadata:
   name: prom-ui-ing
   annotations:
     kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
   - http:

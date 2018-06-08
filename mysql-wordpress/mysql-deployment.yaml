@@ -75,7 +75,7 @@ spec:
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
-      - image: eu.gcr.io/sandbox-wescale/my-prom-mysql:master-v3
+      - image: eu.gcr.io/sandbox-wescale/my-prom-mysql:master-v4
         name: prom-mysql
         env:
         - name: MYSQL_USER 
@@ -88,7 +88,7 @@ spec:
         - name: MYSQL_HOST
           value: localhost
         - name: MYSQL_PORT
-          value: 3306
+          value: "3306"
         - name: MYSQL_DB 
           value: wordpress
         ports:

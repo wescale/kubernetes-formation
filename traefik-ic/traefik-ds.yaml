@@ -18,6 +18,8 @@ spec:
       labels:
         k8s-app: traefik-ingress-lb
         name: traefik-ingress-lb
+      annotations:
+        prometheus.io/scrape: 'true'
     spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
@@ -41,6 +43,7 @@ spec:
         - --api
         - --kubernetes
         - --logLevel=INFO
+        - --metrics.prometheus 
 ---
 kind: Service
 apiVersion: v1

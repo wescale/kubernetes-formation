@@ -264,7 +264,7 @@ spec:
   - http:
       paths:
       - backend:
-          serviceName: guestbook-go
+          serviceName: guestbook
           servicePort: 3000
 ```
 

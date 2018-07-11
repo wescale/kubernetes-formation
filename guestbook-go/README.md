@@ -8,6 +8,7 @@
  * [Step Five: Create the guestbook pods](#step-five)
  * [Step Six: Create the guestbook service](#step-six)
  * [Step Seven: View the guestbook](#step-seven)
+ * [Step Seven bis: View the guestbook by ingress](#step-seven-bis)
  * [Step Eight: Cleanup](#step-eight)
 
 ### Step One: Create the Redis master pod<a id="step-one"></a>
@@ -188,10 +189,10 @@ Just like the others, we create a service to group the guestbook pods but this t
 
     ```console
     $ kubectl get services
-    NAME              CLUSTER_IP       EXTERNAL_IP       PORT(S)       SELECTOR               AGE
-    guestbook         10.0.217.218     146.148.81.8      3000/TCP      app=guestbook          1h
-    redis-master      10.0.136.3       <none>            6379/TCP      app=redis,role=master  1h
-    redis-slave       10.0.21.92       <none>            6379/TCP      app-redis,role=slave   1h
+    NAME              CLUSTER_IP       EXTERNAL_IP       PORT(S)               SELECTOR               AGE
+    guestbook         10.0.217.218     <none>            3000/TCP,xxx/TCP      app=guestbook          1h
+    redis-master      10.0.136.3       <none>            6379/TCP              app=redis,role=master  1h
+    redis-slave       10.0.21.92       <none>            6379/TCP              app-redis,role=slave   1h
     ...
     ```
 
@@ -202,37 +203,11 @@ Just like the others, we create a service to group the guestbook pods but this t
 You can now play with the guestbook that you just created by opening it in a browser (it might take a few moments for the guestbook to come up).
 
  * **Remote Host:**
-    1. To view the guestbook on a remote host, locate the external IP of the load balancer in the **IP** column of the `kubectl get services` output. In our example, the internal IP address is `10.0.217.218` and the external IP address is `146.148.81.8` (*Note: you might need to scroll to see the IP column*).
+    1. To view the guestbook on a remote host, locate the external IP of one node with `kubectl get nodes -o wide` output. 
 
-    2. Append port `3000` to the IP address (for example `http://146.148.81.8:3000`), and then navigate to that address in your browser.
+    2. Append port get by `kubectl get svc` (xxx here) to the IP address (for example `http://146.148.81.8:xxx`), and then navigate to that address in your browser.
 
-    Result: The guestbook displays in your browser:
-
-    ![Guestbook](guestbook-page.png)
-
-    **Further Reading:**
-    If you're using Google Compute Engine, see the details about limiting traffic to specific sources at [Google Compute Engine firewall documentation][gce-firewall-docs].
-
-[cloud-console]: https://console.developer.google.com
-[gce-firewall-docs]: https://cloud.google.com/compute/docs/networking#firewalls
-
-### Step Eight: Cleanup <a id="step-eight"></a>
-
-After you're done playing with the guestbook, you can cleanup by deleting the guestbook service and removing the associated resources that were created, including load balancers, forwarding rules, target pools, and Kubernetes replication controllers and services.
-
-Delete all the resources by running the following `kubectl delete -f` *`filename`* command:
-
-```console
-$ kubectl delete -f examples/guestbook-go
-guestbook-controller
-guestbook
-redid-master-controller
-redis-master
-redis-slave-controller
-redis-slave
-```
-
-### Step nine
+### Step seven bis - Ingress<a id="step-seven-bis"></a>
 
 You already have an Traefik Ingress Controller !
 
@@ -266,6 +241,22 @@ spec:
       - backend:
           serviceName: guestbook
           servicePort: 3000
+```
+
+### Step Eight: Cleanup <a id="step-eight"></a>
+
+After you're done playing with the guestbook, you can cleanup by deleting the guestbook service and removing the associated resources that were created, including load balancers, forwarding rules, target pools, and Kubernetes replication controllers and services.
+
+Delete all the resources by running the following `kubectl delete -f` *`filename`* command:
+
+```console
+$ kubectl delete -f examples/guestbook-go
+guestbook-controller
+guestbook
+redid-master-controller
+redis-master
+redis-slave-controller
+redis-slave
 ```
 
 

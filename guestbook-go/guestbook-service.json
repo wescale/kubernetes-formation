@@ -17,6 +17,6 @@
       "selector":{
          "app":"guestbook"
       },
-      "type": "LoadBalancer"
+      "type": "NodePort"
    }
 }

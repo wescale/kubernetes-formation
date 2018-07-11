@@ -234,11 +234,13 @@ metadata:
   namespace: default
   annotations:
     kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
   - http:
       paths:
-      - backend:
+      - path: /guestbook
+        backend:
           serviceName: guestbook
           servicePort: 3000
 ```

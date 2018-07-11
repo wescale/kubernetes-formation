@@ -47,6 +47,26 @@ func handlerClientFunc(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func handlerHealthFunc(w http.ResponseWriter, r *http.Request) {
+	var stt Status
+	var statusCode int
+	if _, err := os.Stat("/tmp/health_KO"); err == nil {
+		stt.Name = "KO"
+		stt.Code = 500
+		statusCode = http.StatusInternalServerError
+	} else {
+		stt.Name = "OK"
+		stt.Code = 200
+		statusCode = http.StatusOK
+	}
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(statusCode)
+
+	if err := json.NewEncoder(w).Encode(stt); err != nil {
+		panic(err)
+	}
+}
+
 func handlerStatusFunc(w http.ResponseWriter, r *http.Request) {
 	stt := Status{Name: "OK", Code: 200}
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
@@ -99,6 +119,9 @@ func main() {
 	var handlerStatus http.HandlerFunc
 	handlerStatus = handlerStatusFunc
 
+	var handlerHealth http.HandlerFunc
+	handlerHealth = handlerHealthFunc
+
 	router.
 		Methods("GET").
 		Path("/facture").
@@ -127,7 +150,7 @@ func main() {
 		Methods("GET").
 		Path("/healthz").
 		Name("heatlth").
-		Handler(handlerStatus)
+		Handler(handlerHealth)
 
 	headersOk := handlers.AllowedHeaders([]string{"authorization", "content-type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})

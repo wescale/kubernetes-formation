@@ -231,3 +231,41 @@ redis-master
 redis-slave-controller
 redis-slave
 ```
+
+### Step nine
+
+You already have an Traefik Ingress Controller !
+
+You can get the UI:
+
+```
+kubectl get svc -n kube-system
+```
+
+You can see the TraefikWebUI:
+```
+http://{IPOfTheLoadBalancer}:8080
+```
+
+to see how add an Ingress [follow this link](https://docs.traefik.io/user-guide/kubernetes/#submitting-an-ingress-to-the-cluster)
+
+Exemple:
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: guestbook-go-ing
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: guestbook-go
+          servicePort: 3000
+```
+
+

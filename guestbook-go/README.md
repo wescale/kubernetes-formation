@@ -234,7 +234,7 @@ metadata:
   namespace: default
   annotations:
     kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
+    traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
 spec:
   rules:
   - http:

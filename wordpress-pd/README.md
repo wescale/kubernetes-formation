@@ -23,22 +23,18 @@ Demonstrated Kubernetes Concepts:
 
 ## Table of Contents
 
-<!-- BEGIN MUNGE: GENERATED_TOC -->
-
-- [Persistent Installation of MySQL and WordPress on Kubernetes](#persistent-installation-of-mysql-and-wordpress-on-kubernetes)
-  - [Quickstart](#quickstart)
-  - [Table of Contents](#table-of-contents)
-  - [Cluster Requirements](#cluster-requirements)
-  - [Decide where you will store your data](#decide-where-you-will-store-your-data)
-    - [GCE Persistent Disk](#gce-persistent-disk)
-  - [Create the MySQL Password Secret](#create-the-mysql-password-secret)
-  - [Deploy MySQL](#deploy-mysql)
-  - [Deploy WordPress](#deploy-wordpress)
-  - [Visit your new WordPress blog](#visit-your-new-wordpress-blog)
-  - [Take down and restart your blog](#take-down-and-restart-your-blog)
-  - [Next Steps](#next-steps)
-
-<!-- END MUNGE: GENERATED_TOC -->
+* [Persistent Installation of MySQL and WordPress on Kubernetes](#persistent-installation-of-mysql-and-wordpress-on-kubernetes)
+  * [Quickstart](#quickstart)
+  * [Table of Contents](#table-of-contents)
+  * [Cluster Requirements](#cluster-requirements)
+  * [Decide where you will store your data](#decide-where-you-will-store-your-data)
+    * [GCE Persistent Disk](#gce-persistent-disk)
+  * [Create the MySQL Password Secret](#create-the-mysql-password-secret)
+  * [Deploy MySQL](#deploy-mysql)
+  * [Deploy WordPress](#deploy-wordpress)
+  * [Visit your new WordPress blog](#visit-your-new-wordpress-blog)
+  * [Take down and restart your blog](#take-down-and-restart-your-blog)
+  * [Next Steps](#next-steps)
 
 ## Decide where you will store your data
 
@@ -116,7 +112,7 @@ state.  List all pods to see the status of this new pod.
 kubectl get pods
 ```
 
-```
+```shell
 NAME                          READY     STATUS    RESTARTS   AGE
 wordpress-mysql-cqcf4-9q8lo   1/1       Running   0          1m
 ```
@@ -129,7 +125,7 @@ logs for a pod by using `kubectl log`. Copy the pod name from the
 kubectl logs <pod-name>
 ```
 
-```
+```shell
 ...
 2016-02-19 16:58:05 1 [Note] InnoDB: 128 rollback segment(s) are active.
 2016-02-19 16:58:05 1 [Note] InnoDB: Waiting for purge to start
@@ -188,12 +184,11 @@ database hostname through the environment variable
 `WORDPRESS_DB_HOST`. We set the env value to the name of the MySQL
 service we created: `wordpress-mysql`.
 
-
 ```shell
 kubectl get services wordpress
 ```
 
-```
+```shell
 NAME        CLUSTER-IP     EXTERNAL-IP     PORT(S)   AGE
 wordpress   10.0.0.5       1.2.3.4         80/TCP    19h
 ```
@@ -203,7 +198,7 @@ wordpress   10.0.0.5       1.2.3.4         80/TCP    19h
 Now, we can visit the running WordPress app. Use the external IP of
 the service that you obtained above.
 
-```
+```shell
 http://<external-ip>
 ```
 

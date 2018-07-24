@@ -10,17 +10,20 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Facture a test facture struct
 type Facture struct {
 	Contrat string  `json:"contrat"`
 	Days    float32 `json:"days"`
 	Cost    float32 `json:"cost"`
 }
 
+// Client a test client struct
 type Client struct {
 	Name    string `json:"name"`
 	Service string `json:"service"`
 }
 
+// Status a test status struct
 type Status struct {
 	Name string `json:"name"`
 	Code int    `json:"code"`

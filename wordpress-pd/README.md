@@ -188,12 +188,6 @@ database hostname through the environment variable
 `WORDPRESS_DB_HOST`. We set the env value to the name of the MySQL
 service we created: `wordpress-mysql`.
 
-The WordPress service has the setting `type: LoadBalancer`.  This will
-set up the wordpress service behind an external IP.
-
-Find the external IP for your WordPress service. **It may take a minute
-to have an external IP assigned to the service, depending on your
-cluster environment.**
 
 ```shell
 kubectl get services wordpress

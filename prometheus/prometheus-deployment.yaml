@@ -36,7 +36,7 @@ spec:
         image: quay.io/prometheus/prometheus:v2.3.1
         args:
           - '--config.file=/etc/prometheus/prometheus.yml'
-          - '--web.external-url=http://35.205.34.180/prom'
+          - '--web.external-url=/prom'
           - '--web.route-prefix=/'
         ports:
         - name: web

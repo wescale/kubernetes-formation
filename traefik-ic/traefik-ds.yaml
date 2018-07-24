@@ -20,6 +20,7 @@ spec:
         name: traefik-ingress-lb
       annotations:
         prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
     spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60

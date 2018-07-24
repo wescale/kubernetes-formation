@@ -8,5 +8,5 @@ FROM alpine
 RUN apk add --no-cache curl
 WORKDIR /app
 COPY --from=build-env /src/goapp /app/
-HEALTHCHECK --interval=5s --retries=3 --timeout=5s CMD curl -f http://localhost:8080/health || exit 1
+HEALTHCHECK --interval=5s --retries=3 --timeout=5s CMD curl -f http://localhost:8080/healthz || exit 1
 ENTRYPOINT ./goapp

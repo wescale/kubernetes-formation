@@ -11,3 +11,5 @@ terraform/sandbox-wescale.json
 terraform/kubernetes-formation
 terraform/kubernetes-formation.pub
 demo2/front-test/package-lock.json
+terraform/terraform.tfstate.backup
+terraform/terraform.tfstate.backup

@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: redis
+    role: master
+  name: redis-master
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: master
+    spec:
+      containers:
+      - image: redis:2.8.23
+        name: redis-master
+        ports:
+        - containerPort: 6379
+          name: redis-server
+          protocol: TCP

@@ -9,22 +9,24 @@ do
     echo "ip = ${ip}"
     
     ## Exercice 2
-    #ssh -i  ./terraform/kubernetes-formation training@${ip} "mkdir -p ~/exercice2/" < /dev/null
-    #scp -r -i ./terraform/kubernetes-formation ./exercice2/create.sh training@${ip}:~/exercice2/create.sh
-    #ssh -i  ./terraform/kubernetes-formation training@${ip} "~/exercice2/create.sh" < /dev/null
+    # ssh -i  ./terraform/kubernetes-formation training@${ip} "mkdir -p ~/exercice2/" < /dev/null
+    # scp -r -i ./terraform/kubernetes-formation ./exercice2/create.sh training@${ip}:~/exercice2/create.sh
+    # ssh -i  ./terraform/kubernetes-formation training@${ip} "~/exercice2/create.sh" < /dev/null
 
     ## Exercice 3
-    #ssh -i  ./terraform/kubernetes-formation training@${ip} "mkdir -p ~/exercice3/" < /dev/null
-    #scp -r -i ./terraform/kubernetes-formation ./exercice3/front-test training@${ip}:~/exercice3
-    #scp -r -i ./terraform/kubernetes-formation ./exercice3/webservice-test training@${ip}:~/exercice3
+    # ssh -i  ./terraform/kubernetes-formation training@${ip} "mkdir -p ~/exercice3/" < /dev/null
+    # scp -r -i ./terraform/kubernetes-formation ./exercice3/front-test training@${ip}:~/exercice3
+    # scp -r -i ./terraform/kubernetes-formation ./exercice3/webservice-test training@${ip}:~/exercice3
 
     ## Exercice 3 bis
-    #scp -r -i ./terraform/kubernetes-formation ./exercice3/infra training@${ip}:~/exercice3
-    #scp -r -i ./terraform/kubernetes-formation ./exercice3/traefik training@${ip}:~/exercice3
+    # scp -r -i ./terraform/kubernetes-formation ./exercice3/infra training@${ip}:~/exercice3
+    # scp -r -i ./terraform/kubernetes-formation ./exercice3/traefik training@${ip}:~/exercice3
 
+    ## demo Kubernetes
+    # scp -r -i ./terraform/kubernetes-formation ./webservice.yaml training@${ip}:~/
 
     ## Exercice 3 bis
-    #scp -r -i ./terraform/kubernetes-formation ./get-token-dashboard.sh training@${ip}:~/
+    # scp -r -i ./terraform/kubernetes-formation ./get-token-dashboard.sh training@${ip}:~/
 
 
     ## Prometheus

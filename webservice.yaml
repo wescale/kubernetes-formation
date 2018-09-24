@@ -4,6 +4,9 @@ metadata:
   name: ws-deployment
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: webservice
   template:
     metadata:
       labels:
@@ -11,9 +14,26 @@ spec:
     spec:
       containers:
       - name: webservice
-        image: eu.gcr.io/sandbox-wescale/webservice-app:v3
+        image: eu.gcr.io/kozikaza-cd/api-test:0.0.1
         ports:
         - containerPort: 8080
+          name: api-ws
+        resources:
+          limits:
+            memory: "40Mi"
+            cpu: "200m"
+          requests:
+            memory: "40Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+
 ---
 apiVersion: v1
 kind: Service

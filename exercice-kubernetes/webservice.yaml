@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webservice
-        image: eu.gcr.io/kozikaza-cd/api-test:0.0.1
+        image: eu.gcr.io/sandbox-wescale/webservice-app:v4
         ports:
         - containerPort: 8080
           name: api-ws

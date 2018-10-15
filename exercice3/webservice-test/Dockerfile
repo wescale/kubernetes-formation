@@ -10,3 +10,4 @@ WORKDIR /app
 COPY --from=build-env /src/goapp /app/
 HEALTHCHECK --interval=5s --retries=3 --timeout=5s CMD curl -f http://localhost:8080/healthz || exit 1
 ENTRYPOINT ./goapp
+EXPOSE 8080

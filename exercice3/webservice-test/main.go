@@ -1,160 +1,129 @@
 package main
 
 import (
-	"encoding/json"
-	"net"
+	"log"
 	"net/http"
-	"os"
+	"time"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-// Facture a test facture struct
-type Facture struct {
-	Contrat string  `json:"contrat"`
-	Days    float32 `json:"days"`
-	Cost    float32 `json:"cost"`
-}
+// LoggerMiddleware add logger and metrics
+func LoggerMiddleware(inner http.HandlerFunc, name string, histogram *prometheus.HistogramVec, counter *prometheus.CounterVec) http.Handler {
 
-// Client a test client struct
-type Client struct {
-	Name    string `json:"name"`
-	Service string `json:"service"`
-}
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-// Status a test status struct
-type Status struct {
-	Name string `json:"name"`
-	Code int    `json:"code"`
-}
+		start := time.Now()
 
-func handlerFactureFunc(w http.ResponseWriter, r *http.Request) {
-	var clt Facture
-	clt = Facture{Contrat: "Gemalto", Days: 1.5, Cost: 22.2}
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+		inner.ServeHTTP(w, r)
 
-	if err := json.NewEncoder(w).Encode(clt); err != nil {
-		panic(err)
-	}
-}
+		time := time.Since(start)
+		log.Printf(
+			"%s\t%s\t%s\t%s",
+			r.Method,
+			r.RequestURI,
+			name,
+			time,
+		)
 
-func handlerClientFunc(w http.ResponseWriter, r *http.Request) {
-	clt := Client{Name: "Gemalto", Service: "Formation"}
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-
-	if err := json.NewEncoder(w).Encode(clt); err != nil {
-		panic(err)
-	}
-}
-
-func handlerHealthFunc(w http.ResponseWriter, r *http.Request) {
-	var stt Status
-	var statusCode int
-	if _, err := os.Stat("/tmp/health_KO"); err == nil {
-		stt.Name = "KO"
-		stt.Code = 500
-		statusCode = http.StatusInternalServerError
-	} else {
-		stt.Name = "OK"
-		stt.Code = 200
-		statusCode = http.StatusOK
-	}
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(statusCode)
-
-	if err := json.NewEncoder(w).Encode(stt); err != nil {
-		panic(err)
-	}
-}
-
-func handlerStatusFunc(w http.ResponseWriter, r *http.Request) {
-	stt := Status{Name: "OK", Code: 200}
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-
-	if err := json.NewEncoder(w).Encode(stt); err != nil {
-		panic(err)
-	}
-}
-
-func handlerIPFunc(w http.ResponseWriter, r *http.Request) {
-	var clt []string
-
-	addrs, err := net.InterfaceAddrs()
-	if err != nil {
-		os.Stderr.WriteString("Oops: " + err.Error() + "\n")
-		os.Exit(1)
-	}
-
-	for _, a := range addrs {
-		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
-			if ipnet.IP.To4() != nil {
-				clt = append(clt, ipnet.IP.String())
-				os.Stdout.WriteString(ipnet.IP.String() + "\n")
-			}
+		histogram.WithLabelValues(r.RequestURI).Observe(time.Seconds())
+		if counter != nil {
+			counter.WithLabelValues(r.RequestURI).Inc()
 		}
-	}
-
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-
-	if err := json.NewEncoder(w).Encode(clt); err != nil {
-		panic(err)
-	}
+	})
 }
 
 func main() {
 
 	router := mux.NewRouter().StrictSlash(true)
 
-	var handlerFacture http.HandlerFunc
-	handlerFacture = handlerFactureFunc
+	histogram := prometheus.NewHistogramVec(prometheus.HistogramOpts{
+		Name: "webservice_uri_duration_seconds",
+		Help: "Time to respond",
+	}, []string{"uri"})
 
-	var handlerClient http.HandlerFunc
-	handlerClient = handlerClientFunc
+	promCounter := prometheus.NewCounterVec(prometheus.CounterOpts{
+		Name: "webservice_count",
+		Help: "counter for api",
+	}, []string{"uri"})
 
-	var handlerIP http.HandlerFunc
-	handlerIP = handlerIPFunc
-
-	var handlerStatus http.HandlerFunc
-	handlerStatus = handlerStatusFunc
-
-	var handlerHealth http.HandlerFunc
-	handlerHealth = handlerHealthFunc
-
-	router.
-		Methods("GET").
-		Path("/facture").
-		Name("facture_get").
-		Handler(handlerFacture)
-
-	router.
-		Methods("GET").
-		Path("/client").
-		Name("client_get").
-		Handler(handlerClient)
-
-	router.
-		Methods("GET").
-		Path("/ips").
-		Name("ips_get").
-		Handler(handlerIP)
-
+	/// Root
+	var handlerStatus http.Handler
+	handlerStatus = LoggerMiddleware(handlerStatusFunc, "root", histogram, nil)
 	router.
 		Methods("GET").
 		Path("/").
 		Name("root").
 		Handler(handlerStatus)
 
+	/// Métier
+	var handlerFacture http.Handler
+	handlerFacture = LoggerMiddleware(handlerFactureFunc, "facture_get", histogram, promCounter)
+	router.
+		Methods("GET").
+		Path("/facture").
+		Name("facture_get").
+		Handler(handlerFacture)
+
+	var handlerClient http.Handler
+	handlerClient = LoggerMiddleware(handlerClientFunc, "client_get", histogram, promCounter)
+	router.
+		Methods("GET").
+		Path("/client").
+		Name("client_get").
+		Handler(handlerClient)
+
+	/// Monitoring
+	var handlerIP http.Handler
+	handlerIP = LoggerMiddleware(handlerIPFunc, "ips_get", histogram, nil)
+	router.
+		Methods("GET").
+		Path("/ips").
+		Name("ips_get").
+		Handler(handlerIP)
+
+	var handlerHealth http.Handler
+	handlerHealth = LoggerMiddleware(handlerHealthFunc, "heatlth", histogram, nil)
 	router.
 		Methods("GET").
 		Path("/healthz").
 		Name("heatlth").
 		Handler(handlerHealth)
 
+	var readyHealth http.Handler
+	readyHealth = LoggerMiddleware(handlerHealthFunc, "ready", histogram, nil)
+	router.
+		Methods("GET").
+		Path("/ready").
+		Name("ready").
+		Handler(readyHealth)
+
+	//Hack
+	var putLatencyHealth http.Handler
+	putLatencyHealth = LoggerMiddleware(putLatencyFunc, "latency", histogram, nil)
+	router.
+		Methods("PUT").
+		Path("/hack/latency/{latency_ms}").
+		Name("latency").
+		Handler(putLatencyHealth)
+
+	var postFileHealth http.Handler
+	postFileHealth = LoggerMiddleware(postFileFunc, "create_file", histogram, nil)
+	router.
+		Methods("POST").
+		Path("/hack/file").
+		Name("create_file").
+		Handler(postFileHealth)
+
+	// add prometheus
+	prometheus.Register(histogram)
+	prometheus.Register(promCounter)
+	router.Methods("GET").Path("/metrics").Name("Metrics").Handler(promhttp.Handler())
+
+	// CORS
 	headersOk := handlers.AllowedHeaders([]string{"authorization", "content-type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"})

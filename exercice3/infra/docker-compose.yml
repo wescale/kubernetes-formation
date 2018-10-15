@@ -2,7 +2,7 @@ version: '2'
 
 services:
   webservice:
-    image: webservice-app:v1
+    image: my-back-app:v1
     networks:
       - web
     expose:

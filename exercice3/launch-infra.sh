@@ -13,3 +13,5 @@ docker-compose scale webservice=10
 cd ..
 
 curl -H Host:webservice.docker.localhost http://localhost/ips
+
+curl -H Host:webservice.docker.localhost -X POST -d '{ "path": "/tmp/health_KO" }' http://localhost/hack/file

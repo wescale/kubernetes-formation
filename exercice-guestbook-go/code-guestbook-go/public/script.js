@@ -18,7 +18,7 @@ $(document).ready(function() {
     var entryValue = entryContentElement.val()
     if (entryValue.length > 0) {
       entriesElement.append("<p>...</p>");
-      $.getJSON("rpush/guestbook/" + entryValue, appendGuestbookEntries);
+      $.getJSON("guestbook/rpush/guestbook/" + entryValue, appendGuestbookEntries);
     }
     return false;
   }
@@ -38,7 +38,7 @@ $(document).ready(function() {
 
   // Poll every second.
   (function fetchGuestbook() {
-    $.getJSON("lrange/guestbook").done(appendGuestbookEntries).always(
+    $.getJSON("guestbook/lrange/guestbook").done(appendGuestbookEntries).always(
       function() {
         setTimeout(fetchGuestbook, 1000);
       });

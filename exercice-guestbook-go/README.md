@@ -13,9 +13,9 @@
 
 ### Step One: Create the Redis master pod<a id="step-one"></a>
 
-Use the `redis-master-controller.yaml` file to create a [replication controller](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/) and Redis master [pod](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). The pod runs a Redis key-value server in a container. Using a replication controller is the preferred way to launch long-running pods, even for 1 replica, so that the pod benefits from the self-healing mechanism in Kubernetes (keeps the pods alive).
+Use the `redis-master-deploy.yaml` file to create a Deployment and Redis master . The pod runs a Redis key-value server in a container. Using a replication controller is the preferred way to launch long-running pods, even for 1 replica, so that the pod benefits from the self-healing mechanism in Kubernetes (keeps the pods alive).
 
-1. Use the [redis-master-controller.yaml](redis-master-controller.yaml) file to create the Redis master replication controller in your Kubernetes cluster by running the `kubectl create -f` *`filename`* command:
+1. Use the "redis-master-deploy.yaml" file to create the Redis master replication controller in your Kubernetes cluster by running the `kubectl create -f` *`filename`* command:
 
     ```console
     $ kubectl create -f redis-master-controller.yaml
@@ -50,7 +50,7 @@ A Kubernetes [service](https://kubernetes.io/docs/concepts/services-networking/s
 
 Services find the pods to load balance based on pod labels. The pod that you created in Step One has the label `app=redis` and `role=master`. The selector field of the service determines which pods will receive the traffic sent to the service.
 
-1. Use the [redis-master-service.yaml](redis-master-service.yaml) file to create the service in your Kubernetes cluster by running the `kubectl create -f` *`filename`* command:
+1. Use the "redis-master-service.yaml" file to create the service in your Kubernetes cluster by running the `kubectl create -f` *`filename`* command:
 
     ```console
     $ kubectl create -f redis-master-service.yaml
@@ -73,7 +73,7 @@ Services find the pods to load balance based on pod labels. The pod that you cre
 
 The Redis master we created earlier is a single pod (REPLICAS = 1), while the Redis read slaves we are creating here are 'replicated' pods. In Kubernetes, a replication controller is responsible for managing the multiple instances of a replicated pod.
 
-1. Use the file [redis-slave-controller.yaml](redis-slave-controller.yaml) to create the replication controller by running the `kubectl create -f` *`filename`* command:
+1. Use the file "redis-slave-controller.yaml" to create the replication controller by running the `kubectl create -f` *`filename`* command:
 
     ```console
     $ kubectl create -f redis-slave-controller.yaml
@@ -115,7 +115,7 @@ The Redis master we created earlier is a single pod (REPLICAS = 1), while the Re
 
 Just like the master, we want to have a service to proxy connections to the read slaves. In this case, in addition to discovery, the Redis slave service provides transparent load balancing to clients.
 
-1. Use the [redis-slave-service.yaml](redis-slave-service.yaml) file to create the Redis slave service by running the `kubectl create -f` *`filename`* command:
+1. Use the "redis-slave-service.yaml" file to create the Redis slave service by running the `kubectl create -f` *`filename`* command:
 
     ```console
     $ kubectl create -f redis-slave-service.yaml
@@ -139,7 +139,7 @@ Tip: It is helpful to set labels on your services themselves--as we've done here
 
 This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni) based) server that is configured to talk to either the slave or master services depending on whether the request is a read or a write. The pods we are creating expose a simple JSON interface and serves a jQuery-Ajax based UI. Like the Redis read slaves, these pods are also managed by a replication controller.
 
-1. Use the [guestbook-controller.yaml](guestbook-controller.yaml) file to create the guestbook replication controller by running the `kubectl create -f` *`filename`* command:
+1. Use the "guestbook-controller.yaml" file to create the guestbook replication controller by running the `kubectl create -f` *`filename`* command:
 
     ```console
     $ kubectl create -f guestbook-controller.yaml
@@ -178,7 +178,7 @@ This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni
 
 Just like the others, we create a service to group the guestbook pods but this time, to make the guestbook front end externally visible, we specify `"type": "LoadBalancer"`.
 
-1. Use the [guestbook-service.yaml](guestbook-service.yaml) file to create the guestbook service by running the `kubectl create -f` *`filename`* command:
+1. Use the "guestbook-service.yaml" file to create the guestbook service by running the `kubectl create -f` *`filename`* command:
 
     ```console
     $ kubectl create -f guestbook-service.yaml

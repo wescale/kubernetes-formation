@@ -21,12 +21,12 @@ resource "google_compute_instance" "training-instance" {
   }
 
   metadata {
-    ssh-keys = "${file("${path.cwd}/kubernetes-formation.pub")}"
+    ssh-keys = "training:${file("${path.cwd}/kubernetes-formation.pub")}"
   }
 
   service_account {
     scopes = ["https://www.googleapis.com/auth/cloud-platform", "compute-rw", "storage-rw"]
   }
 
-  metadata_startup_script = "curl -s https://raw.githubusercontent.com/WeScale/kubernetes-formation/master/terraform/modules/bootstrap-vm.sh | bash -s ${count.index}"
+  metadata_startup_script = "curl -s https://raw.githubusercontent.com/WeScale/kubernetes-formation/master/kubernetes-ressources/terraform/modules/bootstrap-vm.sh | bash -s ${count.index}"
 }

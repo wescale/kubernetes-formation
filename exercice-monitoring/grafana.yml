@@ -18,6 +18,8 @@ spec:
         env:
         - name: GF_SERVER_ROOT_URL
           value: /grafana
+        - name: GF_INSTALL_PLUGINS
+          value: "grafana-piechart-panel"
 ---
 apiVersion: v1
 kind: Service

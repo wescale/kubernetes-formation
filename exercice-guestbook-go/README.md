@@ -19,7 +19,6 @@ Use the `redis-master-deploy.yaml` file to create a Deployment and Redis master 
 
     ```console
     $ kubectl create -f redis-master-deploy.yaml
-    replicationcontrollers/redis-master
     ```
 
 2. To verify that the redis-master controller is up, list the deployments you created in the cluster with the `kubectl get deployment` command(if you don't specify a `--namespace`, the `default` namespace will be used. The same below):
@@ -73,14 +72,13 @@ Services find the pods to load balance based on pod labels. The pod that you cre
 
 The Redis master we created earlier is a single pod (REPLICAS = 1), while the Redis read slaves we are creating here are 'replicated' pods. In Kubernetes, a deployment is responsible for managing the multiple instances of a replicated pod.
 
-1. Use the file "redis-slave-controller.yaml" to create the deployment by running the `kubectl create -f` *`filename`* command:
+1. Use the file "redis-slave-deploy.yaml" to create the deployment by running the `kubectl create -f` *`filename`* command:
 
     ```console
-    $ kubectl create -f redis-slave-controller.yaml
-    replicationcontrollers/redis-slave
+    $ kubectl create -f redis-slave-deploy.yaml
     ```
 
-2. To verify that the redis-slave controller is running, run the `kubectl get deployment -o wide` command:
+2. To verify that the redis-slave controller is running, run the `kubectl get deploy -o wide` command:
 
     ```console
     CONTROLLER              CONTAINER(S)            IMAGE(S)                         SELECTOR                    REPLICAS
@@ -143,16 +141,15 @@ This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni
 
     ```console
     $ kubectl create -f guestbook-deploy.yaml
-    replicationcontrollers/guestbook
     ```
 
  Tip: If you want to modify the guestbook code open the `_src` of this example and read the README.md and the Makefile. If you have pushed your custom image be sure to update the `image` accordingly in the guestbook-controller.yaml.
 
-2. To verify that the guestbook deployment is running, run the `kubectl get deployment -o wide` command:
+2. To verify that the guestbook deployment is running, run the `kubectl get deploy -o wide` command:
 
     ```console
     CONTROLLER            CONTAINER(S)         IMAGE(S)                               SELECTOR                  REPLICAS
-    guestbook             guestbook            k8s.gcr.io/guestbook:v3  app=guestbook             3
+    guestbook             guestbook            k8s.gcr.io/guestbook:v3                app=guestbook             3
     redis-master          redis-master         redis                                  app=redis,role=master     1
     redis-slave           redis-slave          kubernetes/redis-slave:v2              app=redis,role=slave      2
     ...
@@ -258,13 +255,7 @@ After you're done playing with the guestbook, you can cleanup by deleting the gu
 Delete all the resources by running the following `kubectl delete -f` *`filename`* command:
 
 ```console
-$ kubectl delete -f examples/guestbook-go
-guestbook-controller
-guestbook
-redid-master-controller
-redis-master
-redis-slave-controller
-redis-slave
+$ kubectl delete -f .
 ```
 
 

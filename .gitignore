@@ -15,3 +15,4 @@ terraform/terraform.tfstate.backup
 terraform/terraform.tfstate.backup
 kubernetes-ressources/terraform/sandbox-wescale.json
 kubernetes-ressources/terraform/terraform.tfstate.backup
+**/.terraform/*

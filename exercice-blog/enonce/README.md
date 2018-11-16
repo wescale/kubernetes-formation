@@ -26,44 +26,12 @@ Demonstrated Kubernetes Concepts:
 * [Persistent Installation of MySQL and WordPress on Kubernetes](#persistent-installation-of-mysql-and-wordpress-on-kubernetes)
   * [Quickstart](#quickstart)
   * [Table of Contents](#table-of-contents)
-  * [Cluster Requirements](#cluster-requirements)
-  * [Decide where you will store your data](#decide-where-you-will-store-your-data)
-    * [GCE Persistent Disk](#gce-persistent-disk)
   * [Create the MySQL Password Secret](#create-the-mysql-password-secret)
   * [Deploy MySQL](#deploy-mysql)
   * [Deploy WordPress](#deploy-wordpress)
   * [Visit your new WordPress blog](#visit-your-new-wordpress-blog)
   * [Take down and restart your blog](#take-down-and-restart-your-blog)
   * [Next Steps](#next-steps)
-
-## Decide where you will store your data
-
-MySQL and WordPress will each use a
-[Persistent Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
-to store their data. We will use a Persistent Volume Claim to claim an
-available persistent volume. This example covers HostPath and
-GCEPersistentDisk volumes. Choose one of the two, or see
-[Types of Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes)
-for more options.
-
-### GCE Persistent Disk
-
-This storage option is applicable if you are running on
-[Google Compute Engine](http://kubernetes.io/docs/getting-started-guides/gce/).
-
-Create two persistent disks. You will need to create the disks in the
-same [GCE zone](https://cloud.google.com/compute/docs/zones) as the
-Kubernetes cluster. The default setup script will create the cluster
-in the `europe-west1-b` zone, as seen in the
-[config-default.sh](../../cluster/gce/config-default.sh) file. Replace
-`<zone>` below with the appropriate zone. The names `CHANGE-THIS-NAME-1` and
-`CHANGE-THIS-NAME-2` must match the `pdName` fields we have specified in
-[gce-volumes.yaml](gce-volumes.yaml).
-
-```shell
-gcloud compute disks create --size=20GB --zone=<zone> CHANGE-THIS-NAME-1
-gcloud compute disks create --size=20GB --zone=<zone> CHANGE-THIS-NAME-2
-```
 
 ## Create the MySQL Password Secret
 

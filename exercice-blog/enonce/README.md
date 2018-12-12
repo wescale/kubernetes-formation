@@ -55,9 +55,7 @@ access the database.
 
 ## Deploy MySQL
 
-Now that the persistent disks and secrets are defined, the Kubernetes
-pods can be launched. Start MySQL using
-[mysql-deployment.yaml](mysql-deployment.yaml).
+Now that the secrets is defined, the Kubernetes pods can be launched. Start MySQL using [mysql-deployment.yaml](mysql-deployment.yaml).
 
 Take a look at [mysql-deployment.yaml](mysql-deployment.yaml), and
 note that we've defined a volume mount for `/var/lib/mysql`, and then

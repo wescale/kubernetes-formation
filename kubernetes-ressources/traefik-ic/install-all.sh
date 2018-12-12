@@ -10,5 +10,5 @@ do
         kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$username
         kubectl apply -f traefik-rbac.yaml
         kubectl apply -f traefik-ds.yaml
-        kubectl create -f ../../exercice-monitoring/rbac.yaml
+        kubectl apply -f ../../exercice-monitoring/rbac.yaml
 done

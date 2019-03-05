@@ -15,10 +15,10 @@
 
 Use the `redis-master-deploy.yaml` file to create a Deployment and Redis master . The pod runs a Redis key-value server in a container. Using a deployment is the preferred way to launch long-running pods, even for 1 replica, so that the pod benefits from the self-healing mechanism in Kubernetes (keeps the pods alive).
 
-1. Use the "redis-master-deploy.yaml" file to create the Redis master deployment in your Kubernetes cluster by running the `kubectl create -f` *`filename`* command:
+1. Use the "redis-master-deploy.yaml" file to create the Redis master deployment in your Kubernetes cluster by running the `kubectl apply -f` *`filename`* command:
 
     ```console
-    $ kubectl create -f redis-master-deploy.yaml
+    $ kubectl apply -f redis-master-deploy.yaml
     ```
 
 2. To verify that the redis-master controller is up, list the deployments you created in the cluster with the `kubectl get deployment` command(if you don't specify a `--namespace`, the `default` namespace will be used. The same below):
@@ -49,10 +49,10 @@ A Kubernetes [service](https://kubernetes.io/docs/concepts/services-networking/s
 
 Services find the pods to load balance based on pod labels. The pod that you created in Step One has the label `app=redis` and `role=master`. The selector field of the service determines which pods will receive the traffic sent to the service.
 
-1. Use the "redis-master-service.yaml" file to create the service in your Kubernetes cluster by running the `kubectl create -f` *`filename`* command:
+1. Use the "redis-master-service.yaml" file to create the service in your Kubernetes cluster by running the `kubectl apply -f` *`filename`* command:
 
     ```console
-    $ kubectl create -f redis-master-service.yaml
+    $ kubectl apply -f redis-master-service.yaml
     services/redis-master
     ```
 
@@ -72,10 +72,10 @@ Services find the pods to load balance based on pod labels. The pod that you cre
 
 The Redis master we created earlier is a single pod (REPLICAS = 1), while the Redis read slaves we are creating here are 'replicated' pods. In Kubernetes, a deployment is responsible for managing the multiple instances of a replicated pod.
 
-1. Use the file "redis-slave-deploy.yaml" to create the deployment by running the `kubectl create -f` *`filename`* command:
+1. Use the file "redis-slave-deploy.yaml" to create the deployment by running the `kubectl apply -f` *`filename`* command:
 
     ```console
-    $ kubectl create -f redis-slave-deploy.yaml
+    $ kubectl apply -f redis-slave-deploy.yaml
     ```
 
 2. To verify that the redis-slave controller is running, run the `kubectl get deploy -o wide` command:
@@ -113,10 +113,10 @@ The Redis master we created earlier is a single pod (REPLICAS = 1), while the Re
 
 Just like the master, we want to have a service to proxy connections to the read slaves. In this case, in addition to discovery, the Redis slave service provides transparent load balancing to clients.
 
-1. Use the "redis-slave-service.yaml" file to create the Redis slave service by running the `kubectl create -f` *`filename`* command:
+1. Use the "redis-slave-service.yaml" file to create the Redis slave service by running the `kubectl apply -f` *`filename`* command:
 
     ```console
-    $ kubectl create -f redis-slave-service.yaml
+    $ kubectl apply -f redis-slave-service.yaml
     services/redis-slave
     ```
 
@@ -137,10 +137,10 @@ Tip: It is helpful to set labels on your services themselves--as we've done here
 
 This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni) based) server that is configured to talk to either the slave or master services depending on whether the request is a read or a write. The pods we are creating expose a simple JSON interface and serves a jQuery-Ajax based UI. Like the Redis read slaves, these pods are also managed by a deployment.
 
-1. Use the "guestbook-deploy.yaml" file to create the guestbook deployment by running the `kubectl create -f` *`filename`* command:
+1. Use the "guestbook-deploy.yaml" file to create the guestbook deployment by running the `kubectl apply -f` *`filename`* command:
 
     ```console
-    $ kubectl create -f guestbook-deploy.yaml
+    $ kubectl apply -f guestbook-deploy.yaml
     ```
 
  Tip: If you want to modify the guestbook code open the `_src` of this example and read the README.md and the Makefile. If you have pushed your custom image be sure to update the `image` accordingly in the guestbook-controller.yaml.
@@ -175,10 +175,10 @@ This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni
 
 Just like the others, we create a service to group the guestbook pods but this time, to make the guestbook front end externally visible, we specify `"type": "LoadBalancer"`.
 
-1. Use the "guestbook-service.yaml" file to create the guestbook service by running the `kubectl create -f` *`filename`* command:
+1. Use the "guestbook-service.yaml" file to create the guestbook service by running the `kubectl apply -f` *`filename`* command:
 
     ```console
-    $ kubectl create -f guestbook-service.yaml
+    $ kubectl apply -f guestbook-service.yaml
     ```
 
 

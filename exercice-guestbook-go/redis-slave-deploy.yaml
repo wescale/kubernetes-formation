@@ -14,7 +14,7 @@ spec:
         role: slave
     spec:
       containers:
-      - image: kubernetes/redis-slave:v2
+      - image: k8s.gcr.io/redis-slave:v2
         imagePullPolicy: IfNotPresent
         name: redis-slave
         ports:

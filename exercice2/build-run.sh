@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cp Dockerfile app-test/
-cd app-test
+cp Dockerfile app/
+cd app
 
 npm run build
 

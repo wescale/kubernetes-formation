@@ -83,7 +83,7 @@ The Redis master we created earlier is a single pod (REPLICAS = 1), while the Re
     ```console
     CONTROLLER              CONTAINER(S)            IMAGE(S)                         SELECTOR                    REPLICAS
     redis-master            redis-master            redis                            app=redis,role=master       1
-    redis-slave             redis-slave             kubernetes/redis-slave:v2        app=redis,role=slave        2
+    redis-slave             redis-slave             k8s.gcr.io/redis-slave:v2        app=redis,role=slave        2
     ...
     ```
 
@@ -242,7 +242,7 @@ spec:
           servicePort: 3000
 ```
 
-Warning !
+**Warning !**
 
 You have to change image in "guestbook" Deployment, please use "eu.gcr.io/sandbox-wescale/guestbook-go:with-guestbook-url-2" instead of "k8s.gcr.io/guestbook:v3".
 

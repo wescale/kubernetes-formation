@@ -11,6 +11,9 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 # Update the package list and install the Cloud SDK
 apt-get update && sudo apt-get install -y google-cloud-sdk kubectl nano unzip git
 
+apt install -y xsel nodejs npm jq
+npm i -g create-react-app
+
 gcloud config set compute/zone europe-west1-b
 
 cat <<EOF > /tmp/get-credential-cluster-$1.sh

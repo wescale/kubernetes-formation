@@ -23,7 +23,9 @@ function clean() {
   local project_id=1
   while [ $project_id -lt $NB_PROJECTS ];do
     echo "Destroy content of project ${project_id}"
+    set +e
     terraform workspace new "wsc-kubernetes-training-${project_id}"
+    set -e
     terraform workspace select "wsc-kubernetes-training-${project_id}"
     terraform destroy
     terraform workspace select "default"

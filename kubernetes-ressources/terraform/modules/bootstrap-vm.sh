@@ -27,7 +27,7 @@ done
 
 gcloud container clusters get-credentials "training-cluster-$1" --zone europe-west1-b
 
-kubectl proxy --address="0.0.0.0" --accept-hosts='.*' &
+#kubectl proxy --address="0.0.0.0" --accept-hosts='.*' &
 
 EOF
 

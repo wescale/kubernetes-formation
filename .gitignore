@@ -8,6 +8,7 @@ recap-retour de formation.numbers
 list-ip.li
 terraform/.terraform*
 terraform/sandbox-wescale.json
+terraform/wsc-training-deploy.json
 terraform/kubernetes-formation
 terraform/kubernetes-formation.pub
 demo2/front-test/package-lock.json
@@ -16,3 +17,4 @@ terraform/terraform.tfstate.backup
 kubernetes-ressources/terraform/sandbox-wescale.json
 kubernetes-ressources/terraform/terraform.tfstate.backup
 **/.terraform/*
+*.iml

@@ -20,7 +20,7 @@ resource "google_compute_instance" "training-instance" {
     }
   }
 
-  metadata {
+  metadata = {
     ssh-keys = "training:${file("${path.cwd}/kubernetes-formation.pub")}"
   }
 

@@ -1,17 +1,26 @@
 terraform {
   backend "gcs" {
-    bucket  = "sandbox-wescale-terraform-states"
-    prefix  = "kubernetes-formation"
-    project = "sandbox-wescale"
-    region = "europe-west1"
+    bucket = "wsc-training-tfstates"
+    prefix = "k8s-training-niv-1" //project = "wsc-training-deploy"
   }
 }
 
-module "bootstrap-training" {
-  MOD_JSON_PATH       = "sandbox-wescale.json"
-  MOD_PROJECT         = "sandbox-wescale"
-  MOD_REGION          = "europe-west1"
-  MOD_COUNT           = 8
-
-  source = "modules"
+provider "google" {
+  project     = "${terraform.workspace}"
+  region      = "europe-west1"
+  alias = "default"
+  version = "~> 2.8.0"
 }
+
+module "bootstrap-training" {
+  /*providers = {
+    google = google.default
+  }*/
+
+  MOD_REGION    = "europe-west1"
+  MOD_COUNT     = 1
+  MOD_PROJECT = "${terraform.workspace}"
+
+  source = "./modules"
+}
+

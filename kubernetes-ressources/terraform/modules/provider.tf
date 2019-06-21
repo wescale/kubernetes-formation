@@ -1,17 +1,16 @@
-variable "MOD_JSON_PATH" {
+variable "MOD_REGION" {
+  description = "The region where the infra must be provisioned"
+}
+
+variable "MOD_COUNT" {
+  description = "The number of pair (GKE cluster + bastion instance)"
 }
 
 variable "MOD_PROJECT" {
 }
 
-variable "MOD_REGION" {
-}
-
-variable "MOD_COUNT" {
-}
-
 provider "google" {
-  credentials = "${file("${var.MOD_JSON_PATH}")}"
+  version = "~> 2.8.0"
   project     = "${var.MOD_PROJECT}"
   region      = "${var.MOD_REGION}"
 }

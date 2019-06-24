@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: guestbook
+  name: guestbook
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: guestbook
+  template:
+    metadata:
+      labels:
+        app: guestbook
+    spec:
+      containers:
+      - image: k8s.gcr.io/guestbook:v3
+        imagePullPolicy: IfNotPresent
+        name: guestbook
+        ports:
+        - containerPort: 3000
+          name: http-server
+          protocol: TCP

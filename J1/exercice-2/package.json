@@ -1,0 +1,29 @@
+{
+  "name": "compose-workshop",
+  "version": "1.0.0",
+  "description": "Atelier docker-compose pour la journée DevelopR6 / 2RCE du 2 juin 2006",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inist-CNRS/compose-workshop.git"
+  },
+  "keywords": [
+    "docker",
+    "compose",
+    "nodejs"
+  ],
+  "author": "Claude Niederlender <claude.niederlender@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Inist-CNRS/compose-workshop/issues"
+  },
+  "homepage": "https://github.com/Inist-CNRS/compose-workshop#readme",
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "express": "^4.13.4",
+    "redis": "^2.5.3"
+  }
+}

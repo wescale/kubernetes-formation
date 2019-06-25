@@ -1,0 +1,9 @@
+version: '2'
+services:
+  chat:
+    build:
+      context: .
+    ports:
+      - 8000:8080
+    volumes:
+      - ./client:/usr/src/my-app/client

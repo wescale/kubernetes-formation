@@ -1,0 +1,11 @@
+version: '2'
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - 8000:8080
+    links:
+      - redis
+  redis:
+    image: redis

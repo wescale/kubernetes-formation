@@ -1,0 +1,10 @@
+admin/resource/memory-defaults-pod.yaml 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: default-mem-demo
+spec:
+  containers:
+  - name: default-mem-demo-ctr
+    image: nginx

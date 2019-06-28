@@ -1,5 +1,6 @@
 
-# CREATE DEPLOYMENT hello-app version 1.0 with two replicas
+# Créer un fichier de configuration DEPLOYMENT qui permet de déployer le conteneur hello-app de version 1.0 avec deux replicas
+```
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -22,11 +23,14 @@ deployment
         name: hello-dep
         ports:
         - containerPort: 8080
-
-# Apply modification
+```
+# appliquer la modification
+```
 kubectl apply -f hello-v1.yml
+```
 
-# Edit Deployment file to deploy version 2.0
+# Editer le fichier Deployment pour déployer la version 2.0 de hello-world
+```
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -49,13 +53,18 @@ deployment
         name: hello-dep
         ports:
         - containerPort: 8080
+ ```
 
-# Apply modification
+# Appliquer les modifications
+```
 kubectl apply -f hello-v2.yml
+```
 
-# Scale up 
-# Scaling de l'application 
+# "Scale up" l'application
+```
 kubectl scale deployment hello-dep --replicas=3
-
+```
 # nettoyage de l'ensemble:
+```
 kubectl delete po,deployment,hpa --all
+```

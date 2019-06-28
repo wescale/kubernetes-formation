@@ -1,13 +1,13 @@
-admin/resource/memory-defaults.yaml 
-
 apiVersion: v1
 kind: LimitRange
 metadata:
-  name: mem-limit-range
+  name: default-requests-and-limits
 spec:
   limits:
   - default:
       memory: 512Mi
+      cpu: 0.8
     defaultRequest:
       memory: 256Mi
+      cpu: 0.4
     type: Container

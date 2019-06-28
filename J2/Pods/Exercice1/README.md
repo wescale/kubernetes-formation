@@ -1,5 +1,6 @@
-# Create a yaml file containing the pod spec for the nginx pod.
+# Créer un fichier yaml permettant de créer un pod nginx:
 
+```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -15,28 +16,52 @@ spec:
     args: ["-g", "daemon off;", "-q"]
     ports:
     - containerPort: 80
+```
 
-# Create the pod.
+# Créer un pod à partir de ce fichier yaml du pod
+```
 kubectl create -f nginx.yml
+```
 
-# You should see the pod listed with this command and It should have a status of Running.
+# Lister les pods lancés et voir les états des pods
+
+```
 kubectl get pods
+```
 
-# Get a shell to the running Container:
+# Positionnez vous au niveau du conteneur nginx:
+
+```
 kubectl exec -it nginx -- /bin/bash
+```
 
-# In your shell, list the root directory:
+# Lister les dossiers au niveau du dossier root:
+
+```
 ls -l
+```
 
-# Writing the root page for nginx
+# Créer un fichier.html contenant un texte "Hello shell demo" et le copier le au niveau du /usr/share/nginx/html/
+
+```
 echo Hello shell demo > /usr/share/nginx/html/index.html
+```
 
-# Install Curl
+# Installer Curl
+
+```
 apt-get update
 apt-get install -Y curl
+```
 
-# Test nginx and hello page
+# Tester nginx et hello page
+
+```
 curl localhost
+```
 
-# Exit container in pod and delete it
+# Quitter le conteneur et supprimer le pod:
+
+```
 kubectl delete pod nginx
+```

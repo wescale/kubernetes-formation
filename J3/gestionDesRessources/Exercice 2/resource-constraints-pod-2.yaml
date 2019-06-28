@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-constraints-pod-2
+spec:
+  containers:
+  - name: resource-constraints-ctr-2
+    image: httpd:2.4
+    resources:
+      limits:
+        memory: "1200Mi"
+        cpu: 1.2
+      requests:
+        memory: "200Mi"
+        cpu: 0.2

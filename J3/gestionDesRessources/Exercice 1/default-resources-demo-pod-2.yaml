@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: default-resources-demo-2
+spec:
+  containers:
+  - name: default-resources-cont
+    image: httpd:2.4
+    resources:
+      limits:
+        memory: "1Gi"
+        cpu: 1

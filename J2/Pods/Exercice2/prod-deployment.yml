@@ -13,7 +13,7 @@ spec:
     - "3600"
    command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
  tolerations:
-    - key: node-type
-      operator: Equal
-      value: prod
-      effect: NoSchedule
+    - key: "node-type"
+      operator: "Equal"
+      value: "prod"
+      effect: "NoSchedule"

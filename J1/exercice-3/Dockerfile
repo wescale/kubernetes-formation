@@ -1,7 +1,6 @@
 FROM node:4
 
-MAINTAINER Akram BLOUZA <akram.blouza@wescale.fr>
-MAINTAINER Claude Niederlender <claude.niederlender@inist.fr>
+MAINTAINER Wescale Formation <training@wescale.fr>
 
 RUN mkdir -p /usr/src/my-app
 RUN mkdir -p /usr/src/my-app/client

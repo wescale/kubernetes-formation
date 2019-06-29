@@ -1,6 +1,6 @@
 FROM node:4
 
-MAINTAINER Akram BLOUZA <akram.blouza@wescale.fr>
+MAINTAINER Wescale Formation <training@wescale.fr>
 
 RUN mkdir /usr/src/my-app
 WORKDIR /usr/src/my-app

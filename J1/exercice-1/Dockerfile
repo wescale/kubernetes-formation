@@ -1,7 +1,6 @@
 FROM node:4
 
-MAINTAINER Rémy Méja <remy.meja@inist.fr>
-MAINTAINER Claude Niederlender <claude.niederlender@inist.fr>
+MAINTAINER Wescale Formation <training@wescale.fr>
 
 RUN mkdir /usr/src/my-app
 WORKDIR /usr/src/my-app

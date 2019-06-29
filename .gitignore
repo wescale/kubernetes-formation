@@ -18,3 +18,5 @@ kubernetes-ressources/terraform/sandbox-wescale.json
 kubernetes-ressources/terraform/terraform.tfstate.backup
 **/.terraform/*
 *.iml
+.gitsecret/keys/random_seed
+!*.secret

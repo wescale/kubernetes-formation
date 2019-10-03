@@ -51,7 +51,7 @@ echo Hello shell demo > /usr/share/nginx/html/index.html
 
 ```
 apt-get update
-apt-get install -Y curl
+apt-get install -y curl
 ```
 
 # Tester nginx et hello page

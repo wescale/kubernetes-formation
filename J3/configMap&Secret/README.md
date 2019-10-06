@@ -1,20 +1,22 @@
 # Creation du secret MYSQL_ROOT_PASSWORD
 ```
-$ echo -n 'KubernetesTraining!' | base64
+echo -n 'KubernetesTraining!' | base64
 ```
 # Creation du secret mariadb-root-password 
 
 Une fois le password rajouté:
-apply -f mysql-secret.yaml
+```
+kubectl apply -f mysql-secret.yaml
+```
 
 # Voir si tout c'est bien passé
 ```
-$ kubectl describe secret mariadb-root-password
-$ kubectl get secret mariadb-root-password -o jsonpath='{.data.password}'
+kubectl describe secret mariadb-root-password
+kubectl get secret mariadb-root-password -o jsonpath='{.data.password}'
 ```
 # Creation secret pour le user ( Deuxieme méthode de creation de secret)
 ```
-$ kubectl create secret generic mariadb-user-creds \
+kubectl create secret generic mariadb-user-creds \
       --from-literal=MYSQL_USER=kubeuser\
       --from-literal=MYSQL_PASSWORD=KubernetesTraining
 ```
@@ -22,16 +24,16 @@ $ kubectl create secret generic mariadb-user-creds \
 
 # Création de configMap
 ```
-$ kubectl create configmap mariadb-config --from-file=max_allowed_packet.cnf
+kubectl create configmap mariadb-config --from-file=max_allowed_packet.cnf
 ```
 # Validation que tout est bien passé:
 ```
-$ kubectl get configmap mariadb-config
+kubectl get configmap mariadb-config
 ```
 # Editer la configMap pour changer la valeur max_allowed_packet à 32M
 # Consulter le contenur du ConfigMap
 ```
-$ kubectl get configmap mariadb-config -o yaml
+kubectl get configmap mariadb-config -o yaml
 ```
 # Utilisation du secret et configMap
 # Rajouter les deux secret au Deployment comme variable d'environnement:
@@ -54,7 +56,7 @@ envFrom:
     name: mariadb-user-creds
 ```
 
-You can add your ConfigMap as a source by adding it to the volume list and then adding a volumeMount for it to the container definition:
+Vous pouvez ajouter votre ConfigMap comme source, en l'ajoutant aux volumes et ensuite en ajoutant un volumeMount à la définition du conteneur :
 
 # Rajouter votre configMap au deployment et le positionner au niveau du /etc/mysql/conf.d comme un volumeMount.
 

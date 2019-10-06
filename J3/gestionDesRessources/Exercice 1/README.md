@@ -41,7 +41,7 @@ spec:
 ```
 kubectl create -f default-resources-demo-pod.yaml --namespace default-resources-config
 ```
-# Consultation de l'outpu du POD
+# Consultation de l'output du POD
 
 ```
 kubectl get pod default-resources-demo --output=yaml --namespace=default-resources-config

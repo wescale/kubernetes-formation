@@ -20,7 +20,7 @@ kubectl get services
 kubectl apply -f broken-deployment.yaml
 ```
 
-### Qu'est ce qui s'affit en warning ?
+### Qu'est ce qui s'affiche en warning ?
 ```
 kubectl get event
 ```

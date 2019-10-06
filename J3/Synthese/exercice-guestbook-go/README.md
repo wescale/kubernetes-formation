@@ -204,51 +204,7 @@ You can now play with the guestbook that you just created by opening it in a bro
 
     2. Append port get by `kubectl get svc` (xxx here) to the IP address (for example `http://146.148.81.8:xxx`), and then navigate to that address in your browser.
 
-### Step seven bis - Ingress<a id="step-seven-bis"></a>
-
-You already have an Traefik Ingress Controller !
-
-You can get the UI:
-
-```
-kubectl get svc -n kube-system
-```
-
-You can see the TraefikWebUI:
-```
-http://{IPOfTheLoadBalancer}:8080
-```
-
-to see how add an Ingress [follow this link](https://docs.traefik.io/user-guide/kubernetes/#submitting-an-ingress-to-the-cluster)
-
-Exemple:
-
-```
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: guestbook-go-ing
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /guestbook
-        backend:
-          serviceName: guestbook
-          servicePort: 3000
-```
-
-Warning !
-
-You have to change image in "guestbook" Deployment, please use "eu.gcr.io/sandbox-wescale/guestbook-go:with-guestbook-url-2" instead of "k8s.gcr.io/guestbook:v3".
-
-It's just works :-)
-
-### Step Eight: Cleanup <a id="step-eight"></a>
+### Step Eight: Cleanup
 
 After you're done playing with the guestbook, you can cleanup by deleting the guestbook service and removing the associated resources that were created, including load balancers, forwarding rules, target pools, and Kubernetes deployments and services.
 

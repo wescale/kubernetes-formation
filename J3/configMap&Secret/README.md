@@ -93,7 +93,7 @@ kubectl create -f mariadb-deployment.yaml
 kubectl exec -it [pod-id] env |grep MYSQL
 kubectl exec -it [pod-id] ls /etc/mysql/conf.d
 
-kubectl exec -it mariadb-deployment-5465c6655c-7jfqm cat /etc/mysql/conf.d/max_allowed_packet.cnf
+kubectl exec -it [pod-id] cat /etc/mysql/conf.d/max_allowed_packet.cnf
 ```
 
 # Verification du fonctionnement

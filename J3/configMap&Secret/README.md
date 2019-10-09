@@ -67,7 +67,7 @@ Vous pouvez ajouter votre ConfigMap comme source, en l'ajoutant aux volumes et e
   - mountPath: /var/lib/mysql
     name: mariadb-volume-1
   - mountPath: /etc/mysql/conf.d
-    name: mariadb-config
+    name: mariadb-config-volume
 
 <...>
 

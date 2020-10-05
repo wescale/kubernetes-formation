@@ -1,5 +1,11 @@
 ## Exercice n°2 : Heureusement, il y a docker-compose
 
+### Pré-requis installation de docker compose
+
+Read the doc : [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+
+### Instructions
+
 Nous utilisons la même application web NodeJS utilisée pour le premier exercice.
 
 L'ojectif de cette étape est de lancer les deux conteneurs et de les connecter ensemble, non plus avec docker-cli mais avec un fichier docker-compose.yml.
@@ -12,7 +18,6 @@ Une fois votre docker-compose.yml finalisé, vous pouvez lancer la commande suiv
 ```
 docker-compose up -d
 ```
-
 
 Pour tester si votre application web NodeJS est bien connectée à Redis, vous pouvez consulter la page à l'adresse suivante : [http://localhost:8000](http://localhost:8000)
 Pour stopper tous les conteneurs liés aux services décrits dans docker-compose, vous pouvez lancer la commande suivante :

@@ -2,7 +2,8 @@ version: '2'
 
 services:
   webservice:
-    image: my-back-app:v1
+    build:
+      context: ../webservice-test
     networks:
       - web
     expose:
@@ -11,7 +12,8 @@ services:
       - "traefik.backend=webservice"
       - "traefik.frontend.rule=Host:webservice.docker.localhost"
   front:
-    image: front-app:v1
+    build:
+      context: ../front-test
     networks:
       - web
     expose:

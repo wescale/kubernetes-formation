@@ -29,7 +29,7 @@ kubectl apply -f fanout-ingress.yaml
 ```
 # Accéder à l'application web2 (Ceci prend du temps ... faut patienter)
 ```
-kubectl get ingress basic-ingress
+kubectl get ingress fanout-ingress
 ```
 # Nettoyage
 ```

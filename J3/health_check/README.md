@@ -4,8 +4,8 @@ Nous explorons la haute disponibilité d'un déploiement kubnernetes avec un Rea
 
 ### Executer le déploiement du service / healthy déployment  
 ```
-kubectl apply -f health_check/service.yaml
-kubectl apply -f health_check/healthy-deployment.yaml
+kubectl apply -f service.yaml
+kubectl apply -f healthy-deployment.yaml
 ```
 ### Affichage des pods
 ```
@@ -17,10 +17,10 @@ kubectl get services
 ```
 ### Utilisé le déploiement qui est en echec
 ```
-kubectl apply -f health_check/broken-deployment.yaml
+kubectl apply -f broken-deployment.yaml
 ```
 
-### Qu'est ce qui s'affit en warning ?
+### Qu'est ce qui s'affiche en warning ?
 ```
 kubectl get event
 ```
@@ -31,6 +31,6 @@ Toujours "version 1.0 qui s'affiche"
 
 Suppression du service et déploiement
 ```
-kubectl delete -f health_check/service.yaml
-kubectl delete -f health_check/broken-deployment.yaml
+kubectl delete -f service.yaml
+kubectl delete -f broken-deployment.yaml
 ```

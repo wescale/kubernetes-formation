@@ -1,9 +1,9 @@
 # OBJECTIF: Effectuer un Rolling Update
 ## Déployer V1.0
 ```
-kubectl apply -f Strategies_deploiement/deployment-v1.0.yaml
+kubectl apply -f deployment-v1.0.yaml
 ```
-## Vérifier que tout c'est bien passé
+## Vérifier que tout s'est bien passé
 ```
 kubectl get deployments
 kubectl describe deployments kdemo-dep
@@ -20,7 +20,7 @@ kubectl expose deployment kdemo-dep \
 ```
 ou 
 ```
-kubectl create -f Strategies_deploiement/service.yaml
+kubectl create -f service.yaml
 ```
 ## Retrouver l'IP Externe
 ```
@@ -30,7 +30,7 @@ kubectl get services kdemo-svc
 
 ## Déployer une nouvelle version du site
 ```
-kubectl apply -f Strategies_deploiement/deployment-v1.1.yaml
+kubectl apply -f deployment-v1.1.yaml
 ```
 ## Vérifier l'etat des pods
 ```
@@ -50,5 +50,5 @@ kubectl delete services kdemo-svc
 ```
 ##  Suppression du deployment
 ```
-kubectl delete -f Strategies_deploiement/deployment-v1.1.yaml
+kubectl delete -f deployment-v1.1.yaml
 ```

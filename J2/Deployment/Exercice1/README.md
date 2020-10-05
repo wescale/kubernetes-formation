@@ -11,7 +11,6 @@ spec:
   selector:
     matchLabels:
       app: hello-dep 
-deployment
   template:
     metadata:
       labels:
@@ -41,7 +40,6 @@ spec:
   selector:
     matchLabels:
       app: hello-dep 
-deployment
   template:
     metadata:
       labels:

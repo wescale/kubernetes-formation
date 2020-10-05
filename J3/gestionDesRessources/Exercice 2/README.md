@@ -4,7 +4,7 @@
 kubectl create namespace resource-constraints-demo
 ```
 
-# Création des LimiteRange
+# Création des LimitRange
 
 ```
 apiVersion: v1
@@ -21,6 +21,10 @@ spec:
       cpu: 0.3
     type: Container
 ```
+```
+kubectl create -f limit-range-2.yaml --namespace=resource-constraints-demo
+```
+
 ```
 kubectl create -f resource-constraints-pod.yaml --namespace resource-constraints-demo
 ```

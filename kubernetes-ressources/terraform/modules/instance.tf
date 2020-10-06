@@ -6,7 +6,7 @@ resource "google_compute_instance" "training-instance" {
 
   boot_disk {
     initialize_params {
-      image = "projects/ubuntu-os-cloud/global/images/ubuntu-1810-cosmic-v20190514"
+      image = "projects/ubuntu-os-cloud/global/images/ubuntu-1804-bionic-v20200923"
       type = "pd-standard"
       size = "10" # ie 10GB
     }

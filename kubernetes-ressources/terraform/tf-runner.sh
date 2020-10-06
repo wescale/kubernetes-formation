@@ -2,7 +2,7 @@
 
 set -e
 
-NB_PROJECTS=5 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=6 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 OPT=$1   # option
 
@@ -34,6 +34,7 @@ function clean() {
   done
 }
 
+terraform init -get
 
 case $OPT in
    "provision") provision;;

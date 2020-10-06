@@ -18,7 +18,7 @@ To achieve this, we create a terraform workspace per element.
 
 ## Pre-requisites
 
-1. Create the GSuite users on **training.wecontrol.cloud** domain and place them in *k8s-training-niv-1* group and *kube-niv-1* OU.
+1. Create the GSuite users on **training.wecontrol.cloud** domain and place them in *k8s-training-niv-1* group and *kube-niv-1* OU. For that, ask an admin on the suite Domain.
 2. Create the target GCP projects. For this, see https://gitlab.com/wescalefr/bootstrap-gcp-kube-training.
  
 ## Get Terraform 
@@ -29,10 +29,7 @@ In version "~> 0.12"
 
 Terraform needs to runs actions on GCP in folder *folders/795997944654* (belonging to wescale.fr domain).
 
-The simplest way is to get a GCP service account key file in JSON format:
-* as Wescale.fr user, connect on [GCP/IAM/Service accounts](https://console.cloud.google.com/iam-admin/serviceaccounts?folder=&orgonly=true&project=wsc-training-deploy).
-* select tf-deploy and click on *create key*
-* export the downloaded file: `export GOOGLE_CREDENTIALS=PATH_TO_KEY.json`
+Ask an admin to be set in the correct GSuite group.
 
 ## Run the wrapper script
 
@@ -43,7 +40,13 @@ Then:
 bash tf-runner.sh provision
 ```
 
-## Clean
+## At the end of training, clean the GKE clusters
+
+
 ```
 bash tf-runner.sh clean
 ```
+
+## At the end of training, clean the Wecontrol users
+
+Ask a domain admin on training.wecontrol.cloud

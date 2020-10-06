@@ -21,7 +21,7 @@ class AppStore extends EventEmitter {
     }
 
     getHandlerFacture() {
-        fetch('http://localhost:8080/facture', {
+        fetch('http://webservice-infra/facture', {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ class AppStore extends EventEmitter {
     }
 
     getHandlerClient() {
-        fetch('http://localhost:8080/client', {
+        fetch('http://webservice-infra/client', {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ class AppStore extends EventEmitter {
     }
 
     getHandlerIPs() {
-        fetch('http://localhost:8080/ips', {
+        fetch('http://webservice-infra/ips', {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',

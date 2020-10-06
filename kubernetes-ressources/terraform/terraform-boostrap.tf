@@ -9,7 +9,7 @@ provider "google" {
   project     = "${terraform.workspace}"
   region      = "europe-west1"
   alias = "default"
-  version = "~> 2.8.0"
+  version = "~> 2.14.0"
 }
 
 module "bootstrap-training" {

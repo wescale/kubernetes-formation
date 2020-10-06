@@ -13,4 +13,4 @@ spec:
  - key: node-type
    operator: Equal
    value: dev
-   effect: NoSchedule
+   effect: NoExecute

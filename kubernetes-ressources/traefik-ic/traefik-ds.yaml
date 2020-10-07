@@ -42,8 +42,9 @@ spec:
             - NET_BIND_SERVICE
         args:
         - --api
-        - --kubernetes
-        - --logLevel=INFO
+        - --api.insecure=true
+        - --log.level=DEBUG
+        - --providers.kubernetesingress=true
         - --metrics.prometheus 
 ---
 kind: Service

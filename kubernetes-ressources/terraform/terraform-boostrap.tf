@@ -6,7 +6,7 @@ terraform {
 }
 
 provider "google" {
-  project     = "${terraform.workspace}"
+  project     = terraform.workspace
   region      = "europe-west1"
   alias = "default"
   version = "~> 2.14.0"

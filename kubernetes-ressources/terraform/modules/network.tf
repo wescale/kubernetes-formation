@@ -6,14 +6,14 @@ resource "google_compute_network" "training_net" {
 resource "google_compute_subnetwork" "training_subnet" {
   name          = "training-subnet"
   ip_cidr_range = "10.123.0.0/24"
-  network       = "${google_compute_network.training_net.self_link}"
-  region        = "${var.MOD_REGION}"
+  network       = google_compute_network.training_net.self_link
+  region        = var.MOD_REGION
 }
 
 
 resource "google_compute_firewall" "training_fw_rules" {
   name    = "training-fw-rules"
-  network = "${google_compute_network.training_net.name}"
+  network = google_compute_network.training_net.name
 
   allow {
     protocol = "icmp"

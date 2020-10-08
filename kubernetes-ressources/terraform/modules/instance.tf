@@ -1,5 +1,5 @@
 resource "google_compute_instance" "training-instance" {
-  count        = "${var.MOD_COUNT}"
+  count        = var.MOD_COUNT
   name         = "training-instance-${count.index}"
   machine_type = "g1-small"
   zone         = "${var.MOD_REGION}-b"
@@ -14,7 +14,7 @@ resource "google_compute_instance" "training-instance" {
   }
 
   network_interface {
-    subnetwork = "${google_compute_subnetwork.training_subnet.name}"
+    subnetwork = google_compute_subnetwork.training_subnet.name
     access_config {
       # Ephemeral
     }

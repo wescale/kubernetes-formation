@@ -6,11 +6,11 @@ spec:
   rules:
   - http:
       paths:
-      - path: /*
+      - path: /v1
         backend:
           serviceName: web
           servicePort: 8080
-      - path: /v2/*
+      - path: /v2
         backend:
           serviceName: web2
           servicePort: 8080

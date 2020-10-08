@@ -1,12 +1,12 @@
 resource "google_container_cluster" "training-cluster" {
-  count        = "${var.MOD_COUNT}"
+  count        = var.MOD_COUNT
   name         = "training-cluster-${count.index}"
-  zone         = "${var.MOD_REGION}-b"
+  location         = "${var.MOD_REGION}-b"
   initial_node_count = 3
 
 
-  network = "${google_compute_network.training_net.name}"
-  subnetwork = "${google_compute_subnetwork.training_subnet.name}"
+  network = google_compute_network.training_net.name
+  subnetwork = google_compute_subnetwork.training_subnet.name
 
   node_config {
     oauth_scopes = [

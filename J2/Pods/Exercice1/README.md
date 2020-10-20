@@ -29,7 +29,7 @@ kubectl create -f nginx.yml
 kubectl get pods
 ```
 
-# Lister les pods lancés et identifié l'ip du pod
+# Lister les pods lancés et identifier l'ip du pod
 
 ```
 kubectl get pods -owide

@@ -30,7 +30,7 @@ kubectl taint node NODE-3 node-type=prod:NoExecute
 
 # Verify the taints are ok
 ```
-kubectl taint node <node_name> node-type=prod:NoSchedule
+kubectl describe node <name node>
 ```
 
 Is the no-toleration-pod still running ? Why?

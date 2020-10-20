@@ -64,5 +64,5 @@ kubectl scale deployment hello-dep --replicas=3
 ```
 # nettoyage de l'ensemble:
 ```
-kubectl delete po,deployment,hpa --all
+kubectl delete deployment --all
 ```

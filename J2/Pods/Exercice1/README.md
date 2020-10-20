@@ -29,6 +29,12 @@ kubectl create -f nginx.yml
 kubectl get pods
 ```
 
+# Lister les pods lancés et identifié l'ip du pod
+
+```
+kubectl get pods -owide
+```
+
 # Positionnez vous au niveau du conteneur nginx:
 
 ```
@@ -47,17 +53,10 @@ ls -l
 echo Hello shell demo > /usr/share/nginx/html/index.html
 ```
 
-# Installer Curl
-
-```
-apt-get update
-apt-get install -y curl
-```
-
 # Tester nginx et hello page
 
 ```
-curl localhost
+curl http://<IP_POD>
 ```
 
 # Quitter le conteneur et supprimer le pod:

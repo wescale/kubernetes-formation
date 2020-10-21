@@ -6,7 +6,7 @@ spec:
   replicas: 3
   selector:
    matchLabels:
-    name: kdemo-dep
+    name: kdemo
   strategy:
     rollingUpdate:
       maxSurge: 1

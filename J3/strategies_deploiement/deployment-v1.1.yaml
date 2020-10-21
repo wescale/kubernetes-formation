@@ -5,6 +5,7 @@ metadata:
 spec:
   replicas: 3
   selector:
+   matchLabels:
     name: kdemo-dep
   strategy:
     rollingUpdate:

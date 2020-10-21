@@ -1,15 +1,17 @@
 kind: Deployment
-apiVersion:	extensions/v1beta1
+apiVersion:	apps/v1
 metadata:
   name: kdemo-dep
 spec:
   replicas: 3
+  selector:
+    name: kdemo-dep
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-  minReadySeconds: 30
+  minReadySeconds: 5
   template:
     metadata:
       labels:

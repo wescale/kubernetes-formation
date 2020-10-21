@@ -187,7 +187,7 @@ Just like the others, we create a service to group the guestbook pods but this t
     ```console
     $ kubectl get services
     NAME              CLUSTER_IP       EXTERNAL_IP       PORT(S)               SELECTOR               AGE
-    guestbook         10.0.217.218     <none>            3000/TCP,xxx/TCP      app=guestbook          1h
+    guestbook         10.0.217.218     <none>            80:xxx/TCP      app=guestbook          1h
     redis-master      10.0.136.3       <none>            6379/TCP              app=redis,role=master  1h
     redis-slave       10.0.21.92       <none>            6379/TCP              app-redis,role=slave   1h
     ...

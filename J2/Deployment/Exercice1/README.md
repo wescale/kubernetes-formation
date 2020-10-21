@@ -1,7 +1,7 @@
 
 # Créer un fichier de configuration DEPLOYMENT qui permet de déployer le conteneur hello-app de version 1.0 avec deux replicas
 ```
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-dep
@@ -30,7 +30,7 @@ kubectl apply -f hello-v1.yml
 
 # Editer le fichier Deployment pour déployer la version 2.0 de hello-world
 ```
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-dep

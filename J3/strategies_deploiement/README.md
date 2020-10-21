@@ -34,7 +34,7 @@ kubectl apply -f deployment-v1.1.yaml
 ```
 ## Vérifier l'etat des pods
 ```
-kubectl get pods -o wide
+watch kubectl get pods -o wide
 ```
 ## Roll Back le déploiement
 ```

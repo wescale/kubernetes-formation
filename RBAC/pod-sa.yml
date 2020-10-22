@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-sa
+spec:
+  serviceAccountName: myapp
+  containers:
+   - image: roffe/kubectl
+     imagePullPolicy: Always
+     name: kubectl
+     command: [ "bash", "-c", "--" ]
+     args: [ "while true; do sleep 30; done;" ]

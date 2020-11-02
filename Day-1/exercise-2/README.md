@@ -6,7 +6,7 @@ Read the doc : [https://docs.docker.com/compose/install/](https://docs.docker.co
 
 ### Instructions
 
-Nous utilisons la même application web NodeJS utilisée pour le premier exercice.
+Nous utilisons la même application web NodeJS utilisée pour le premier exercise.
 
 L'ojectif de cette étape est de lancer les deux conteneurs et de les connecter ensemble, non plus avec docker-cli mais avec un fichier docker-compose.yml.
 

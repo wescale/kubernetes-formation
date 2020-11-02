@@ -19,7 +19,7 @@ module "bootstrap-training" {
 
   MOD_REGION    = "europe-west1"
   MOD_COUNT     = 1
-  MOD_PROJECT = "${terraform.workspace}"
+  MOD_PROJECT = terraform.workspace
 
   source = "./modules"
 }

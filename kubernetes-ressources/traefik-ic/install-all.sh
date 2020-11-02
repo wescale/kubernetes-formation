@@ -11,5 +11,5 @@ do
         kubectl apply -f traefik-rbac.yaml
         #kubectl delete -f traefik-ds.yaml
         kubectl apply -f traefik-ds.yaml
-        kubectl apply -f ../../J3/exercice-monitoring/rbac.yaml
+        kubectl apply -f ../../J3/exercise-monitoring/rbac.yaml
 done

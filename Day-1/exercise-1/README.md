@@ -1,6 +1,6 @@
 ## Exercice n°1
 
-L'application utilisée pour ce permier exercice est une page web NodeJS qui mémorise le nombre d'affichages dans une base de données Redis.
+L'application utilisée pour ce permier exercise est une page web NodeJS qui mémorise le nombre d'affichages dans une base de données Redis.
 
 Cette application se compose donc :
 - d'une application NodeJS utilisant le framework [Express](http://expressjs.com/)

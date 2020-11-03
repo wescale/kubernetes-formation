@@ -11,7 +11,11 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 # Update the package list and install the Cloud SDK
 apt-get update && sudo apt-get install -y google-cloud-sdk kubectl nano unzip git
 
-apt install -y xsel nodejs npm jq
+# Install nodejs 10.X
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+apt-get install -y nodejs
+
+apt-get install -y xsel npm jq
 npm i -g create-react-app
 
 gcloud config set compute/zone europe-west1-b

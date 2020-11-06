@@ -1,26 +1,45 @@
-## Exercice n°1
+# exercise-1
 
-L'application utilisée pour ce permier exercise est une page web NodeJS qui mémorise le nombre d'affichages dans une base de données Redis.
+The application is a web server which counts each HTTP request and returns this count.
 
-Cette application se compose donc :
-- d'une application NodeJS utilisant le framework [Express](http://expressjs.com/)
-- d'un conteneur Docker embarquant la base NoSQL [Redis](http://redis.io/)
+The components are:
+- a NodeJS application which uses the [Express](http://expressjs.com/) framework
+- a [Redis](http://redis.io/) NoSQL database to persist the counter of requests
 
-L'ojectif de cette étape est de lancer les deux conteneurs et de les connecter ensemble via docker-cli :
+## Start the Redis container
 
-*  Récupération et démarrage du conteneur redis :
-```
+Pull then start the Redis server:
+```sh
   docker run -d --name redis redis
 ```
 
-* Construction de l'image :
-```
+## Build an image for the NodeJS app
+
+The aim of this step is to complete the given Dockerfile to build the NodeJS application.
+
+Once you completed the Dockerfile, build the image:
+```sh
   docker build -t myrepo/nodeapp .
 ```
 
-* Démarrage du conteneur de l'application sur le port 8000
+
+## Launch the application
+
+
+The aim of this step is to run a container with the correct options to:
+* link two containers
+* expose a port externally on a host
+
+You can now start the application container to listen on the exposed port.
+This container needs to connect to the Redis instance:
 ```
-  docker run -d --name nodeapp ##OptionPourLierCeConteneurARedis## ##OptionPourMapperLePortDuConteneur## mustard/nodeapp
+  docker run -d --name nodeapp ##OptionToLinkThisContainerToRedis## ##OptionToExposeThePort## colonel-mustard/nodeapp
 ```
 
-Pour tester si votre application web NodeJS est bien connectée à Redis, vous pouvez consulter la page à l'adresse suivante : [http://[IP BASTION]:8000](http://localhost:8000)
+To test if your application works well, you can consult this page: [http://[BASTION IP]:8000](http://localhost:8000)
+
+## Enhancements
+
+Are you satisfied with the solution to link the containers?
+
+What is your recommendation?

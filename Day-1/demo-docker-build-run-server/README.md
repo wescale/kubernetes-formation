@@ -1,14 +1,20 @@
 # Demo first build
 
-## Create a REACT app and build to get static files 
+## Create a React app and build to get static files 
 
 ```sh
 ./create-build.sh
 ```
 
-You get watch The Lord Of the Rings...
+You can watch The Lord Of the Rings...
 
-Then look at the `app-test/build` directory.
+Then look at the `app-test/build` directory to show what is a React application (static, js, ...).
+
+```sh
+cd app-test
+ls -la build/ && ls -la build/static/ && ls -la build/static/js/
+cd -
+```
 
 ## Build an image and run the container
 

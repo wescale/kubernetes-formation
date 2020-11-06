@@ -42,6 +42,7 @@ To try something more ambitious, you can run an Ubuntu container with:
 
 # Ask who has never gone to the DockerHub
 # Go to the DockerHub and mention the starred, tags, Docker files...
+# Open and comment the Dockerfile for Linux, Windows ...
 Share images, automate workflows, and more with a free Docker ID:
  https://hub.docker.com/
 

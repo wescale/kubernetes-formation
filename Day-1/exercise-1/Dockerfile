@@ -1,12 +1,17 @@
 FROM node:4
 
-MAINTAINER Wescale Formation <training@wescale.fr>
+LABEL maintainer="Wescale Formation <training@wescale.fr>"
 
-RUN mkdir /usr/src/my-app
-WORKDIR /usr/src/my-app
-COPY app.js .
-COPY package.json .
-RUN npm install
+# Create the directory /usr/src/my-app
+RUN ...
+# Change the current directory to /usr/src/my-app
+WORKDIR ...
+# Copy the file app.js to the current directory
+COPY ...
+# Copy the file package.json to to the current directory
+COPY ...
+# Execute the command: npm install
+RUN ...
 
 EXPOSE 8080
 

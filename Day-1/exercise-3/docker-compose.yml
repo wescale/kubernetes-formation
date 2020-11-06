@@ -1,6 +1,7 @@
 version: '2'
 services:
   chat:
+    replicas: 3
     build:
       context: .
     ports:

@@ -2,9 +2,9 @@
 
 ## Instructions
 
-The application here is a tchat based on Socker.io and NodeJS.
+The application here is a chat based on Socket.io and NodeJS.
 
-The tchat container must mount a volume which contains an HTML page (`client` directory). This will allow us to modify the HTML page without restarting the container.
+The chat container must mount a volume which contains an HTML page (`client` directory). This will allow us to modify the HTML page without restarting the container.
 
 To do that, you get a docker-compose skeleton file. You must complete the file with the correct instructions.
 

@@ -1,4 +1,4 @@
-# exercise-1
+# exercise-1: Build a Docker image
 
 The application is a web server which counts each HTTP request and returns this counter.
 
@@ -37,6 +37,13 @@ This container needs to connect to the Redis instance:
 ```
 
 To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)
+
+## Clean the containers
+
+```sh
+  docker rm -vf redis
+  docker rm -vf nodeapp
+```
 
 ## Enhancements
 

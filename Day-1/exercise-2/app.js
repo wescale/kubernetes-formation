@@ -11,7 +11,7 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 
 app.get('/', (req, res) => {
   client.incrAsync('hits').then((result) => {
-    res.send('Bonjour tout le monde ! Vous avez été vu ' + result + ' fois.\n');
+    res.send('Hello everyone! I have processed ' + result + ' requests.\n');
   })
 });
 

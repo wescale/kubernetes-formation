@@ -1,6 +1,6 @@
 # exercise-1
 
-The application is a web server which counts each HTTP request and returns this count.
+The application is a web server which counts each HTTP request and returns this counter.
 
 The components are:
 - a NodeJS application which uses the [Express](http://expressjs.com/) framework
@@ -36,7 +36,7 @@ This container needs to connect to the Redis instance:
   docker run -d --name nodeapp ##OptionToLinkThisContainerToRedis## ##OptionToExposeThePort## colonel-mustard/nodeapp
 ```
 
-To test if your application works well, you can consult this page: [http://[BASTION IP]:8000](http://localhost:8000)
+To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)
 
 ## Enhancements
 

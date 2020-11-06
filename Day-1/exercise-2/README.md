@@ -26,6 +26,10 @@ docker-compose up -d
 
 To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)
 
+## Question
+
+How is the adddress resolution performed from the NodeJS container?
+
 ## Clean
 
 You can stop all the containers started by docker-compose:

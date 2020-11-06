@@ -1,25 +1,34 @@
-## Exercice n°3 : Monte le volume !
+# exercice-3: volume up!
 
-L'application utilisée pour ce troisième exercise est une application chat developpé avec Socket.io et NodeJS.
+## Instructions
 
-L'ojectif de cette étape est de lancer le conteneur relatif à notre chat avec le montage d'un volume pour pouvoir accéder directement en local au code source de la page HTML (répertoire `client`) pour pouvoir y appliquer quelques modifications.
+The application here is a tchat based on Socker.io and NodeJS.
 
-Pour cela, nous mettons à votre disposition un fichier `docker-compose.yml` à remplir avec les bonnes instructions.
+The tchat container must mount a volume which contains an HTML page (`client` directory). This will allow us to modify the HTML page without restarting the container.
 
-Une fois votre `docker-compose.yml` finalisé, vous pouvez lancer la commande suivante pour démarrer tous les services :
-```
+To do that, you get a docker-compose skeleton file. You must complete the file with the correct instructions.
+
+## Launch the application
+
+Once your `docker-compose.yml` written, you can launch the following command to start all the services:
+```sh
 docker-compose up -d
 ```
 
-Pour vérifier que votre application web NodeJS est bien démarrée, consulter la page à l'adresse suivante : [http://localhost:8000](http://localhost:8000). Pour constater que le chat est bien fonctionnel, afficher cette page dans 2 navigateurs différents et saisir quelques phrases dans la partie basse de l'écran.
+To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)
 
-Pour vérifier que le volume a bien été monté, modifier le fichier `client/index.html` et recharger la page de l'application.
+You can open 2 tabs and check the text you entered is duplicated on the other tab.
 
-Pour stopper tous les conteneurs liés aux services décrits dans docker-compose, vous pouvez lancer la commande suivante :
-```
+To control the voluem is correctly mounted, edit the `client/index.html` and reload the application in your browser.
+
+## Clean
+
+You can stop all the containers started by docker-compose:
+```sh
 docker-compose stop
 ```
-Et pour les supprimer
-```
+
+Then delete all the containers:
+```sh
 docker-compose rm
 ```

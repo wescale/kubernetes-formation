@@ -1,6 +1,6 @@
 FROM node:4
 
-MAINTAINER Wescale Formation <training@wescale.fr>
+LABEL maintainer="Wescale Formation <training@wescale.fr>"
 
 RUN mkdir -p /usr/src/my-app
 RUN mkdir -p /usr/src/my-app/client

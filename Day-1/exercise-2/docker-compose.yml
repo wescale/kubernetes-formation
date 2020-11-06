@@ -2,9 +2,9 @@ version: '2'
 services:
   web:
     ###
-    # Inserer les actions concernant l'application web NodeJS
+    # Insert here instructions for the web NodeJS application
     ###
   redis:
     ###
-    # Inserer les actions concernant redis
+    # Insert here instructions for redis
     ###

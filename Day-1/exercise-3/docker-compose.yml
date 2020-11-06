@@ -6,5 +6,5 @@ services:
     ports:
       - 8000:8080
     ###
-    # Inserer l'instruction pour le montage de notre volume
+    # Insert here the instruction to mount the `client`volume
     ###

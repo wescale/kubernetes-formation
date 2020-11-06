@@ -28,10 +28,14 @@ Then build:
 
 ## Test
 
-You can connect on port 5000
+You can connect on port 5000.
+
+**N.B: if you use a web browser, HSTS can automatically redirects to HTTPS which will fail. Use IP for that.**
+
 ```sh
 curl http://PUBLIC_IP:5000/
 ```
+
 
 ## Clean
 

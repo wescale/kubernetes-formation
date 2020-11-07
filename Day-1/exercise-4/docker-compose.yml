@@ -4,12 +4,12 @@ services:
     image: mariadb:5
     volumes:
       ##
-      # Ajouter le montage d'un volume pour la persistance des données MariaDB (répertoire /var/lib/mysql)
+      # Add volume mount to persist MariaDB data (répertoire /var/lib/mysql)
       ##
     restart: always
     environment:
       ##
-      # Ajouer les variables d'environnement concernant les credentials pour MariaDB
+      # Add environment variables for the MariaDB credentials
       ##
   dbadmin:
     image: phpmyadmin/phpmyadmin
@@ -17,23 +17,23 @@ services:
       - "8080:80"
     environment:
       ##
-      # Ajouer les variables d'environnement concernant les credentials pour MariaDB
+      # Add environment variables for the MariaDB+PHPMyAdmin
       ##
     links:
       ##
-      # Ajouer la dépendance necessaire
+      # Add the dependency
       ##
 
   wordpress:
     image: wordpress:latest
     links:
       ##
-      # Ajouer les dépendance necessaires (mariadb + phpmyadmin)
+      # Add the dependency
       ##
     ports:
       - "8000:80"
     restart: always
     environment:
       ##
-      # Ajouer les variables d'environnement pour que WordPress puisse se connecter à MariaDB
+      # Add environment variables for the MariaDB credentials
       ##

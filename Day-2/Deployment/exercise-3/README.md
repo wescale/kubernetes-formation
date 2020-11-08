@@ -1,5 +1,4 @@
-
-# exercise-1: deployments to ensure pods are running
+# exercise-3: deployments to ensure pods are running
 
 In this exercise, you will deploy pods via deployment resources.
 You will see the interests of using deployment:

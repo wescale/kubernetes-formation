@@ -1,4 +1,10 @@
-# Créer un deployment hello-app
+# exercise-5: Load Balancer
+
+You will create a Load Balancer service and access it.
+
+## Create a Deployment
+
+Here is the deployment file:
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -23,7 +29,14 @@ spec:
         - name: "PORT"
           value: "50001"
 ```
-# Créer un service LoadBalancer
+
+```sh 
+kubectl apply -f my-deployment-50001.yaml
+```
+
+## Create a Cluster IP service
+
+Here is the service file:
 ```
 apiVersion: v1
 kind: Service
@@ -39,11 +52,19 @@ spec:
     port: 60000
     targetPort: 50001
 ```
-# Consulter le service
+
+```sh 
+kubectl apply -f service.yaml
 ```
-kubectl get service my-lb-service --output yaml
+
+## Test the service connectivity
+
+Get the LB external IP:
+```sh
+kubectl get service my-lb-service -o wide
 ```
-# Accéder au service (Attendez quelques minutes que GKE configure l'équilibreur de charge)
+
+Access the service (It may take minutes for the LB to be configured)
 ```
 [LOAD_BALANCER_ADDRESS]:60000
 ```

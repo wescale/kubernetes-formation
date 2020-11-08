@@ -6,7 +6,7 @@ spec:
   type: ClusterIP
   selector:
     app: metrics
-    department: sales
+    department: ingeneering
   ports:
   - protocol: TCP
     port: 80

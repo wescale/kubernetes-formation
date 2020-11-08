@@ -1,4 +1,10 @@
-# Créer un deployment hello-app
+# exercise-5: Cluster IP
+
+You will create a Cluster IP service and access it.
+
+## Create a Deployment
+
+Here is the deployment file:
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -21,7 +27,13 @@ spec:
         image: "gcr.io/google-samples/hello-app:2.0"
 ```
 
-# Créer un service de type ClusterIP
+```sh 
+kubectl apply -f deployment.yaml
+```
+
+## Create a Cluster IP service
+
+Here is the service file:
 ```
 apiVersion: v1
 kind: Service
@@ -31,22 +43,44 @@ spec:
   type: ClusterIP
   selector:
     app: metrics
-    department: sales
+    department: ingeneering
   ports:
   - protocol: TCP
     port: 80
     targetPort: 8080
 ```
-
-# Vérifier la création du deployment et le service
-
-# Determiner le CLUSTER IP ( attendre un certain temps )
+ 
+```sh 
+kubectl apply -f service.yaml
 ```
-kubectl get service my-cip-service --output yaml
+
+Ensure the service has entries in its `endpoints`... if not, correct the `service.yaml` because it may be incorrect!
+
+To see the endpoints:
+```sh
+kubectl describe svc my-cip-service
 ```
-# Accéder au service
-- Essayer d'accéder au service: [CLUSTER_IP]:80. Ceci ne répond pas, pourquoi ? Comment faire pour accéder au Service ?
-- Accéder à l'un des pods:
+
+## Test the service connectivity
+
+Determine the CLUSTER IP
+```sh
+kubectl get service my-cip-service -o wide
+```
+
+Access the service: try the [CLUSTER_IP]:80. This does not work. Why? How can you access the service?
+
+Execute a shell inside a pod of the service:
+```sh
 kubectl exec -it  my-deployment-7bc95fb476-q75rz /bin/sh
-- Installer curl : apk add --no-cache curl
-- Faire un curl sur [CLUSTER_IP]:80
+# Install curl
+apk add --no-cache curl
+```
+
+Try the curl on http://my-cip-service.default.svc.cluster.local:80
+
+## Clean all resources
+
+```sh
+kubectl  delete -f .
+```

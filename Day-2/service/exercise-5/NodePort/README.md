@@ -1,5 +1,10 @@
-# Créer un Deployment
+# exercise-5: Node Port
 
+You will create a Node Port service and access it.
+
+## Create a Deployment
+
+Here is the deployment file:
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -25,7 +30,11 @@ spec:
           value: "50000"
 ```
 
-# Créer un service de type NodePort
+```sh 
+kubectl apply -f my-deployment-50000.yaml
+```
+
+## Create a Node Port service
 
 ```
 apiVersion: v1
@@ -43,18 +52,23 @@ spec:
     targetPort: 50000
 ```
 
-# Vérifier la création du deployment et le service
-
-# Consulter le service
-```
-kubectl get service my-np-service --output yaml
+```sh 
+kubectl apply -f service.yaml
 ```
 
-# Récuperer l'adresse IP externe de votre noeuds
+Ensure the service has entries in its `endpoints`:
+```sh
+kubectl describe svc my-cip-service
+```
+
+## Test the service connectivity
+
+Determine the public IP of any worker node:
 ```
 kubectl get nodes --output wide
 ```
-# Accéder au service
+
+Access the service
 ```
 [NODE_IP_ADDRESS]:[NODE_PORT]
 ```

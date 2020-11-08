@@ -4,7 +4,7 @@ metadata:
   name: hello-dep
   namespace: default
 spec:
-  replicas: 2
+  replicas-numberOf: 2
   selector:
     matchLabels:
       app: hello-dep

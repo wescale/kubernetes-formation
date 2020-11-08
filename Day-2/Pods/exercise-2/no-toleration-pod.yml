@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: no-toleration-pod
+ labels:
+   app: busybox
+spec:
+ containers:
+ - name: dev
+   PICTURE: busybox
+   command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']

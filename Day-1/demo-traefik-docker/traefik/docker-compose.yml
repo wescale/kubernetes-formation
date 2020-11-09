@@ -7,7 +7,7 @@ services:
     networks:
       - webgateway
     ports:
-      - "8000:80"
+      - "8000:8000"
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

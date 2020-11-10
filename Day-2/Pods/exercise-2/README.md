@@ -24,7 +24,7 @@ Deploy a pod which does not tolerate taints (be carefull, the provided `.yaml` f
 kubectl apply -f no-toleration-pod.yml
 ```
 
-Ensure the pod is running and not the where it is running on.
+Ensure the pod is running and note the worker it is running on.
 
 ## For each worker node, apply a taint
 

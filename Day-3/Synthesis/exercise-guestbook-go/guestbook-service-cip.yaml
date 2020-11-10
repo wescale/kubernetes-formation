@@ -11,4 +11,4 @@ spec:
     targetPort: http-server
   selector:
     app: guestbook
-  type: LoadBalancer
+  type: NodePort

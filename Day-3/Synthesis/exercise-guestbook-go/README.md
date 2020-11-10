@@ -1,3 +1,4 @@
+# k8s training fundamentals - synthesis
 
 ##### Table of Contents
 
@@ -13,7 +14,7 @@
 
 ### Step One: Create the Redis master pod<a id="step-one"></a>
 
-Use the `redis-master-deploy.yaml` file to create a Deployment and Redis master . The pod runs a Redis key-value server in a container. Using a deployment is the preferred way to launch long-running pods, even for 1 replica, so that the pod benefits from the self-healing mechanism in Kubernetes (keeps the pods alive).
+Use the `redis-master-deploy.yaml` file to create a Deployment and Redis master. The pod runs a Redis key-value server in a container. Using a deployment is the preferred way to launch long-running pods, even for 1 replica, so that the pod benefits from the self-healing mechanism in Kubernetes (keeps the pods alive).
 
 1. Use the "redis-master-deploy.yaml" file to create the Redis master deployment in your Kubernetes cluster by running the `kubectl apply -f` *`filename`* command:
 
@@ -173,12 +174,12 @@ This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni
 
 ### Step Six: Create the guestbook service <a id="step-six"></a>
 
-Just like the others, we create a service to group the guestbook pods but this time, to make the guestbook front end externally visible, we specify `"type": "LoadBalancer"`.
+Just like the others, we create a service to group the guestbook pods.
 
 1. Use the "guestbook-service.yaml" file to create the guestbook service by running the `kubectl apply -f` *`filename`* command:
 
     ```console
-    $ kubectl apply -f guestbook-service.yaml
+    $ kubectl apply -f guestbook-service-cip.yaml
     ```
 
 
@@ -195,16 +196,31 @@ Just like the others, we create a service to group the guestbook pods but this t
 
     Result: The service is created with label `app=guestbook`.
 
-### Step Seven: View the guestbook <a id="step-seven"></a>
+### Step Seven: Use an Ingress to expose the service<a id="step-seven"></a>
+
+Write a YAML to create a basic Ingress to expose the guestbook service:
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: guestbook-ingress
+spec:
+  backend:
+    serviceName: guestbook
+    ...
+```
+-> solution ?
+
+### Step Eight: View the guestbook <a id="step-seven"></a>
 
 You can now play with the guestbook that you just created by opening it in a browser (it might take a few moments for the guestbook to come up).
 
  * **Remote Host:**
-    1. To view the guestbook on a remote host, locate the external IP of one node with `kubectl get nodes -o wide` output. 
+    * On GKE, see the IP Address of the created Ingress
+    * On OVHCLoud, see the NodePort of the Nginx ingress controller `kubectl get svc ingress-nginx-controller -n ingress-nginx` and use the public IP address of any worker node
+    
 
-    2. Append port get by `kubectl get svc` (xxx here) to the IP address (for example `http://146.148.81.8:xxx`), and then navigate to that address in your browser.
-
-### Step Eight: Cleanup
+### Step Nine: Cleanup
 
 After you're done playing with the guestbook, you can cleanup by deleting the guestbook service and removing the associated resources that were created, including load balancers, forwarding rules, target pools, and Kubernetes deployments and services.
 

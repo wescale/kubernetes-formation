@@ -51,7 +51,7 @@ Then open a browser on [http://front-infra:8000](http://front-infra:8000)
 ### Scale some services
 
 ```sh
-docker-compose scale webservice=2
+docker-compose up --scale webservice=2 -d
 ```
 
 You should see the additional containers in the Traefik admin UI.

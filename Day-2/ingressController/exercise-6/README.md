@@ -1,6 +1,6 @@
 # exercise-6: IngressRules
 
-In this exercise, you will create an application pod `/v1` and expose it thrgough an Ingress targetting a Service.
+In this exercise, you will create an application pod `/v1` and expose it through an Ingress targetting a Service.
 
 
 Then you will create a second version of the application (`/v2`) and manage the routing via another Ingress.

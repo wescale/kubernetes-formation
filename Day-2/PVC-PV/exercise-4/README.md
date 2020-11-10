@@ -74,7 +74,7 @@ kubectl apply -f pv-pod.yaml
 
 You should get a pv and a pod:
 ```
-kubectl get pv, pod -o wide
+kubectl get pv,pod -o wide
 ```
 
 Now, write content to the persistent volume:

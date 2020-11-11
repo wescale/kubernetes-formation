@@ -1,4 +1,4 @@
-# exercise-6: LimitRange and pod resources
+# exercise-6: Default limits and request with a LimitRange
 
 In this exercise, you will create a new namespace and set LimitRange for this namespace.
 

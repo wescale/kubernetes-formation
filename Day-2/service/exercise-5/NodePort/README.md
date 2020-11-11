@@ -50,6 +50,7 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 50000
+    # nodePort: 30007   # NOTE: we dont set the nodePort, it will be taken randomly by default
 ```
 
 ```sh 
@@ -71,4 +72,5 @@ kubectl get nodes --output wide
 Access the service
 ```
 [NODE_IP_ADDRESS]:[NODE_PORT]
+# NODE_PORT is the random port given by kube
 ```

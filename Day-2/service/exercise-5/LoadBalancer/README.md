@@ -34,7 +34,7 @@ spec:
 kubectl apply -f my-deployment-50001.yaml
 ```
 
-## Create a Cluster IP service
+## Create a LoadBalancer service
 
 Here is the service file:
 ```

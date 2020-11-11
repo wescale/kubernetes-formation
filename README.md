@@ -1,4 +1,4 @@
-This repository contains resources for the Docker and Kubernets training.
+This repository contains resources for the Docker and Kubernetes training.
 
 # Content
 

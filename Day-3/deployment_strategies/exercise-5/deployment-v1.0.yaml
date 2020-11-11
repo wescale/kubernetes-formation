@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion:	apps/v1
+metadata:
+  name: kdemo-dep
+spec:
+  replicas: 3
+  selector:
+   matchLabels:
+    name: kdemo
+# Set strategy here
+...
+  minReadySeconds: 20
+  template:
+    metadata:
+      labels:
+        name: kdemo
+    spec:
+      containers:
+      - name: kdemo
+        image: apprenda/kdemo:v1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+      terminationGracePeriodSeconds: 1

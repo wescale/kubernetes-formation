@@ -1,10 +1,16 @@
-# Création d'un namespace
+# exercise-6: LimitRange and pod resources
 
-```
+In this exercise, you will create a new namespace and set LimitRange for this namespace.
+
+Then, you will create 3 pods, each with or without requests and limits.
+
+## Create a namespace
+
+```sh
 kubectl create namespace default-resources-config
 ```
 
-# Création des limites cpu et memoire par défaut
+## Create a LimitRange to specifiy default limits and requests
 
 ```
 apiVersion: v1
@@ -21,12 +27,12 @@ spec:
       cpu: 0.4
     type: Container
 ```
-```
+
+```sh
 kubectl create -f limit-range-1.yaml --namespace=default-resources-config
 ```
 
-
-# Création d'un POD
+## Create a Pod without resource specifications
 
 ```
 apiVersion: v1
@@ -38,29 +44,35 @@ spec:
   - name: default-resources-cont
     image: httpd:2.4
 ```
-```
+
+```sh
 kubectl create -f default-resources-demo-pod.yaml --namespace default-resources-config
 ```
-# Consultation de l'output du POD
 
-```
+The Pod should be a `best effort`.
+
+Check its QoS class and resource requests/limits:
+```sh
 kubectl get pod default-resources-demo --output=yaml --namespace=default-resources-config
 ```
-=> Qu'est ce que vous remarquez ?
 
-Et si vous spécifiez uniquement les limits  ? 
+Are the values the ones we expected?
 
-```
+## Create a Pod with only limits
+
+```sh
 kubectl create -f default-resources-demo-pod-2.yaml --namespace default-resources-config
 ```
-```
+
+```sh
 kubectl get pod default-resources-demo-2 --output=yaml --namespace default-resources-config
 ```
 
-Qu'est ce que vous remarquez ?
+What do you see as QoS class?
 
+Why?
 
-Et si vous spécifiez uniquement les requests ?
+## Create a Pod with only requests
 
 ```
 kubectl create -f default-resources-demo-pod-3.yaml --namespace default-resources-config
@@ -70,9 +82,11 @@ kubectl create -f default-resources-demo-pod-3.yaml --namespace default-resource
 kubectl get pod default-resources-demo-3 --output=yaml --namespace default-resources-config
 ```
 
-Qu'est ce que vous remarquez ?
+What do you see as QoS class?
 
-# Nettoyage
+Why?
+
+## Clean
 ```
 kubectl delete namespace default-resources-config
 ```

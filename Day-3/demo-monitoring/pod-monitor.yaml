@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: demo-prom-pod
+  labels:
+    app: demo-prom-pod
+spec:
+  selector:
+    matchLabels:
+      monitoring: "true"
+      app: demo-prom-pod
+  podMetricsEndpoints:
+  - port: web

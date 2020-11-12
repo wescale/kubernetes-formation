@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-prom-pod
+  labels:
+    monitoring: "true"
+    app: "demo-prom-pod"
+spec:
+  containers:
+  - name: example-app
+    image: fabxc/instrumented_app
+    ports:
+    - name: web
+      containerPort: 8080

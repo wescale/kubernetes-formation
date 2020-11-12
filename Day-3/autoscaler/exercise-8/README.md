@@ -11,7 +11,7 @@ kubectl apply -f deployment.yml
 
 Ensure the deployment is correctly done.
 
-## Create an Hoorizontal Pod Autoscale
+## Create an Horizontal Pod Autoscaler
 
 This HPA must be bound to min 1 Pod and max 10 Pods.
 It must target a CPU usage of 50%.

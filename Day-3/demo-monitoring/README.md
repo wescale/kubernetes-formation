@@ -50,7 +50,7 @@ Create a pod which exposes metrics endpoints:
   * `app: "demo-prom-pod"`
 
 ```sh
-kubectl create -f pod.yml
+kubectl create -f pod.yaml
 ```
 
 Once the pod is created, view the returned metrics executng a `curl` command on localhost:8080.
@@ -78,7 +78,7 @@ spec:
 ```
 
 ```sh
-kubectl create -f pod-monitor.yml
+kubectl create -f pod-monitor.yaml
 ```
 
 Wait 1 minute and see the list of targets on Prometheus.
@@ -88,7 +88,7 @@ Do you see your pod ?
 
 Create the deployment and service:
 ```sh
-kubectl create -f deployment.yml
+kubectl create -f deployment.yaml
 ```
 
 Create the ServiceMonitor which targets the created abovce service:

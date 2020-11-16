@@ -21,9 +21,7 @@ Once your `docker-compose.yml` written, you can launch the following command to 
 docker-compose up -d
 ```
 
-To test if your application works well, you can consult this page: 
-
-To control if you Wordpress site is up and running, go to the[http://[BASTION IP]:8080](http://localhost:8080) page and start the initialization steps.
+To control if you Wordpress site is up and running, go to the [http://[BASTION IP]:8080](http://localhost:8080) page and start the initialization steps.
 You can now see the changes on the DB using the PhpMyAdmin container.
 
 You can use the standard docker-compose commands to stop and delete the containers.

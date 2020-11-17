@@ -19,7 +19,7 @@ To test if your application works well, you can consult this page: [http://[BAST
 
 You can open 2 tabs and check the text you entered is duplicated on the other tab.
 
-To control the voluem is correctly mounted, edit the `client/index.html` and reload the application in your browser.
+To control the volume is correctly mounted, edit the `client/index.html` and reload the application in your browser.
 
 ## Clean
 
@@ -31,4 +31,9 @@ docker-compose stop
 Then delete all the containers:
 ```sh
 docker-compose rm
+```
+
+To delete all the resources created (including network and volumes):
+```sh
+docker-compose down --volumes
 ```

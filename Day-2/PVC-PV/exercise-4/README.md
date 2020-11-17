@@ -97,11 +97,11 @@ Check the index.html file still exists.
 Note the worker node which hosts the pod.
 Then delete the task-pv-pod pod.
 
-Edit the `.yaml`file and use the `nodeName` field in the spec to indicate, another workder node.
+Edit the `.yaml` file and use the `nodeName` field in the spec to indicate another worker node.
 
 Apply the changes.
 
-Is it possible ?
+Is it possible?
 
 ## Clean
 ```

@@ -1,4 +1,4 @@
-FROM node:10.2.0-alpine
+FROM node:14.15.0-alpine
 RUN mkdir -p /usr/app
 WORKDIR /usr/app
 COPY build /usr/app

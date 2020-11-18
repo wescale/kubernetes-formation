@@ -13,7 +13,9 @@ until kubectl get servicemonitors --all-namespaces ; do date; sleep 1; echo ""; 
 kubectl create -f manifests/
 ````
 
-Take a look a the manifests. In particular the CustomResourceDefinition in the folder `manifests/setup`:
+Take a look a the manifests. 
+
+In particular the CustomResourceDefinition in the folder `manifests/setup`:
 * ServiceMonitor
 * PodeMonitor
 * ClusterRole
@@ -53,11 +55,11 @@ Create a pod which exposes metrics endpoints:
 kubectl create -f pod.yaml
 ```
 
-Once the pod is created, view the returned metrics executng a `curl` command on localhost:8080.
+Once the pod is created, view the returned metrics executing a `curl` command on localhost:8080.
 
-What is the data format exepected by Prometheus?
+What is the data format expected by Prometheus?
 
-By defining a `PodMonitor` resource, Prometheus will automatically add the targetted pods to its scrape configuration.
+By defining a `PodMonitor` resource, Prometheus will automatically add the targeted pods to its scrape configuration.
 Then, it will request the default `/metrics` endpoint of those pods.
 
 Create a `PodMonitor` resource:
@@ -113,3 +115,5 @@ kubectl create -f service-monitor.yml
 
 Wait 1 minute and see the list of targets on Prometheus.
 Do you see your pod attached to the `demo-prom-app` service?
+
+## Bonus: create a Grafana Dashboard to view the number of pods in demo-prom-app service

@@ -1,4 +1,4 @@
-FROM node:4
+FROM node:14
 
 LABEL maintainer="Wescale Formation <training@wescale.fr>"
 

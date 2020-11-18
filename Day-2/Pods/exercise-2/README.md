@@ -30,13 +30,13 @@ Ensure the pod is running and note the worker it is running on.
 
 *DO not add taint to a MASTER node!*:
 ```
-kubectl taint node WORKER-NODE-1 node-type=prod:NoExecute
-kubectl taint node WORKER-NODE-2 node-type=dev:NoExecute
+kubectl taint node <NODE1_NAME> node-type=prod:NoExecute
+kubectl taint node <NODE2_NAME> node-type=dev:NoExecute
 ```
 
 If your cluster has 3 worker nodes:
 ```sh
-kubectl taint node WORKER-NODE-2 node-type=iso:NoExecute
+kubectl taint node <NODE3_NAME> node-type=iso:NoExecute
 ```
 
 ## Verify the taints are ok
@@ -123,13 +123,13 @@ Is the prod pod running ? Why ?
 Remove Taint on all the worker nodes.
 For that, use the `taint node` subcommand and add *-*- at the end of the taint name:
 ```
-kubectl taint node WORKER-NODE-1 node-type-
-kubectl taint node WORKER-NODE-2 node-type-
+kubectl taint node <NODE1_NAME> node-type-
+kubectl taint node <NODE2_NAME> node-type-
 ```
 
 If your cluster has 3 worker nodes:
 ```sh
-kubectl taint node WORKER-NODE-2 node-type-
+kubectl taint node <NODE3_NAME> node-type-
 ```
 
 Delete all the created pods:

@@ -144,7 +144,7 @@ This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni
     $ kubectl apply -f guestbook-deploy.yaml
     ```
 
- Tip: If you want to modify the guestbook code open the `_src` of this example and read the README.md and the Makefile. If you have pushed your custom image be sure to update the `image` accordingly in the guestbook-controller.yaml.
+ Tip: If you want to modify the guestbook code open the `code-guestbook-go` of this example and read the Dockerfile. If you have pushed your custom image be sure to update the `image` accordingly in the guestbook-deploy.yaml.
 
 2. To verify that the guestbook deployment is running, run the `kubectl get deploy -o wide` command:
 
@@ -176,7 +176,7 @@ This is a simple Go `net/http` ([negroni](https://github.com/codegangsta/negroni
 
 Just like the others, we create a service to group the guestbook pods.
 
-1. Use the "guestbook-service.yaml" file to create the guestbook service by running the `kubectl apply -f` *`filename`* command:
+1. Use the "guestbook-service-cip.yaml" file to create the guestbook service by running the `kubectl apply -f` *`filename`* command:
 
     ```console
     $ kubectl apply -f guestbook-service-cip.yaml

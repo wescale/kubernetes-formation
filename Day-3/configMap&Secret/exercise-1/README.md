@@ -118,7 +118,7 @@ volumes:
 <...>
 
 ```
-## Create the deplpyment
+## Create the deployment
 
 ```sh 
 kubectl create -f mariadb-deployment.yaml
@@ -134,7 +134,7 @@ kubectl exec -it [pod-id] -- cat /etc/mysql/conf.d/max_allowed_packet.cnf
 
 ## Check if it works
 ```sh
-kubectl exec -it [pod-id] -- bin/sh
+kubectl exec -it [pod-id] -- /bin/sh
 
 mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e 'show databases;'
 mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "SHOW VARIABLES LIKE 'max_allowed_packet';"

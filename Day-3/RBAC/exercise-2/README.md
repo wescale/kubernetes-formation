@@ -5,7 +5,7 @@ In this exercise, you will create a configmap and try to get the config map from
 
 ## Create a pod using a service account
 ```sh
-kubectl create serviceaccount `myapp`
+kubectl create serviceaccount myapp
 ```
 
 Create a pod associated with the service account `myapp`:

@@ -50,6 +50,8 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
+See hello-world Dockerfile : https://github.com/docker-library/hello-world/blob/master/amd64/hello-world/Dockerfile
+
 # Inside the container
 
 ```sh
@@ -77,7 +79,7 @@ ubuntu@wescale-bastion:~$ docker inspect 794198f37efa|jq ''
 
 Interesting fields:    
 ```sh
-CONT_ID=$(docker ls -aq)
+CONT_ID=$(docker ps -aq)
 docker inspect "${CONT_ID}"|jq '.[].State'
 docker inspect "${CONT_ID}"|jq '.[].Config'
 # See Hostname
@@ -91,7 +93,7 @@ docker logs "${CONT_ID}"
 sudo cat $(docker inspect "${CONT_ID}"|jq -r '.[].LogPath')
 
 # In fact, container files are located in /var/lib/docker/containers
-sudo ls -la /var/lib/docker/containers/XXX
+sudo ls -la /var/lib/docker/containers/$(docker inspect "${CONT_ID}"|jq -r '.[].Id')
 ```
 
 # Inside the image

@@ -28,7 +28,7 @@ To test if your application works well, you can consult this page: [http://[BAST
 
 ## Question
 
-How is the adddress resolution performed from the NodeJS container?
+How is the address resolution performed from the NodeJS container?
 
 ## Clean
 

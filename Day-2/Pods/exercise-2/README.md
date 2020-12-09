@@ -8,7 +8,7 @@ Then, you will add taints to all the workers and see the effect.
 You will be responsible for splitting up the worker nodes and making:
 * one of the worker nodes a production (prod) environment node.
 * one of the worker nodes a development (dev) environment node.
-* ONLY if you have a threee workder node cluster: one of the worker nodes a pre-production (iso) environment node.
+* ONLY if you have a third worker node cluster: one of the worker nodes a pre-production (iso) environment node.
 
 The purpose of identifying the production type is to not accidentally deploy pods into the production environment. You will use taints and tolerations to achieve this, and then you will deploy two pods: One pod will be scheduled to the dev environment, and one pod will be scheduled to the prod environment.
 

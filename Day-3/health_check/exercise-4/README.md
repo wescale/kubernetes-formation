@@ -20,7 +20,7 @@ kubectl get pods -o wide
 ```
 ## Request the site
 
-Get the connexion information:
+Get the connection information:
 ```sh
 kubectl get services
 ```

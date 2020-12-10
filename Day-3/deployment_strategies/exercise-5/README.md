@@ -1,4 +1,4 @@
-# exercise-4: Rolling-update
+# exercise-5: Rolling-update
 
 In this exercise, you will deploy a version *v1* of you application.
 

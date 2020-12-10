@@ -45,7 +45,7 @@ And open the following URLs:
 ### Access the services using additional k8s resources
 
 Create new NodePort Services.
-Open you browser on the DNS for workers (aks the trainer).
+Open your browser on the DNS for workers (aks the trainer).
 
 ## Add dashboards on Grafana
 
@@ -101,7 +101,7 @@ Create the deployment and service:
 kubectl create -f deployment.yaml
 ```
 
-Create the ServiceMonitor which targets the created abovce service:
+Create the ServiceMonitor which targets the created above service:
 ```
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

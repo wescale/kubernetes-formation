@@ -1,12 +1,12 @@
 # exercise-5: Rolling-update
 
-In this exercise, you will deploy a version *v1* of you application.
+In this exercise, you will deploy a version *v1* of your application.
 
 After performing a rolling update to the version *v1.1*, you will do a rollback to *v1*.
 
 ## Deploy the version v1
 
-Complete the provided `deployment-v1.0.yaml` file to in dicate the deployment strategy:
+Complete the provided `deployment-v1.0.yaml` file to indicate the deployment strategy:
 ```
 strategy:
     type: RollingUpdate

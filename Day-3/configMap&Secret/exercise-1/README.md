@@ -1,6 +1,6 @@
 # exercise-1: A secret and a configmap for a database.
 
-In this exercise, you will create a k8s secret as well as a k8s configmap to correctly configure a MariaDB databse.
+In this exercise, you will create a k8s secret as well as a k8s configmap to correctly configure a MariaDB database.
 
 # Secrets
 
@@ -31,7 +31,7 @@ kubectl apply -f mysql-secret.yaml
 
 ```sh
 kubectl describe secret mariadb-root-password
-kubectl get secret mariadb-root-password -o jsonpath='{.data.password}'|base64 -d
+kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64 -d
 ```
 
 ## Create a secret for the db user - second way to create a secret

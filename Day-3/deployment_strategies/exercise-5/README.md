@@ -20,7 +20,7 @@ Then create the deployment:
 kubectl apply -f deployment-v1.0.yaml
 ```
 
-## Ensure everythin is fine
+## Ensure everything is fine
 
 ```sh
 kubectl get deployments
@@ -36,7 +36,7 @@ kubectl expose deployment kdemo-dep \
 --port=80 \
 --target-port=8080
 ```
-ou 
+or 
 ```
 kubectl create -f service.yaml
 ```

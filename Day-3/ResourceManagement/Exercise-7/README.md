@@ -1,7 +1,7 @@
 # exercise-7: Limits per container and inside a namespace
 
 In this exercise, you will see how to control the maximum resource used in a namspace:
-* LimitRange to defing limits per container
+* LimitRange to define limits per container
 * ResourceQuota to define limits inside the whole namespace
 
 ## Start by creating a namespace

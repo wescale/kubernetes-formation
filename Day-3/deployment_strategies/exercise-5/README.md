@@ -54,7 +54,7 @@ kubectl apply -f deployment-v1.1.yaml
 watch kubectl get pods -o wide
 ```
 
-Verify you get a new version of the website in your broser.
+Verify you get a new version of the website in your browser.
 
 ## RollBack to v1.0
 ```sh

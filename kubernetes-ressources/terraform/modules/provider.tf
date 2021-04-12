@@ -10,7 +10,6 @@ variable "MOD_PROJECT" {
 }
 
 provider "google" {
-  version = "~> 2.14.0"
   project     = var.MOD_PROJECT
   region      = var.MOD_REGION
 }

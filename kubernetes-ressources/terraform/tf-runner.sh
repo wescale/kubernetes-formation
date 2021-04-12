@@ -2,12 +2,15 @@
 
 set -e
 
-NB_PROJECTS=5 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=6 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 OPT=$1   # option
 
+ROOT_DIR=$(pwd)
+
 function provision(){
   local project_id=1
+  rm -rf "${ROOT_DIR}/config/ips"
   while [ $project_id -le $NB_PROJECTS ];do
     echo "Create content for project ${project_id}"
     set +e
@@ -15,6 +18,9 @@ function provision(){
     set -e
     terraform workspace select "wsc-kubernetes-training-${project_id}"
     terraform apply
+
+    mkdir -p "${ROOT_DIR}/config/${w}"   
+    terraform output -json bastion_ip |jq -r . >> "${ROOT_DIR}/config/ips"
     project_id=$[$project_id+1]
   done
 }

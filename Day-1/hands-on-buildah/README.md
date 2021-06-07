@@ -2,7 +2,7 @@
 
 ## Prerequisistes: installation of Buildah
 
-Read the [Installation](https://podman.io/getting-started/installation/) documentation (Very similar to Podman).
+Read the [Installation](https://github.com/containers/buildah/blob/master/install.md) documentation (Very similar to Podman).
 
 Check if everything works (no need of `sudo`):
 
@@ -17,8 +17,7 @@ buildah version
 newcontainer=$(buildah from alpine)
 
 # Update packages and Install bash
-buildah run $newcontainer -- apk update
-buildah run $newcontainer -- apk add bash
+buildah run $newcontainer -- apk -u add bash
 
 # Add a sample script as entrypoint
 buildah copy $newcontainer ./runecho.sh /usr/bin

@@ -25,7 +25,6 @@ services:
     image: wordpress:latest
     links:
       - db
-      - dbadmin
     ports:
       - "8000:80"
     restart: always

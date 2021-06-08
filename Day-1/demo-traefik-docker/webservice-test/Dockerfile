@@ -1,7 +1,7 @@
 FROM golang:alpine AS build-env
 RUN apk add --no-cache git
 ADD . /src
-RUN cd /src && go get -v -d && go build -o goapp
+RUN cd /src && go env -w GO111MODULE=auto && go get -v -d && go build -o goapp
 
 # final stage
 FROM alpine

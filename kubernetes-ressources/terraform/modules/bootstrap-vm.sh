@@ -7,7 +7,7 @@ echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/ap
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 # Update the package list and install the Cloud SDK
-apt-get update && sudo apt-get install -y nano unzip git
+apt-get update && sudo apt-get install -y kubectl nano unzip git
 
 # Install nodejs 10.X
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -

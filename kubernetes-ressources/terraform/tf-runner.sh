@@ -2,22 +2,22 @@
 
 set -e
 
-NB_PROJECTS=6 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=12 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 OPT=$1   # option
 
 ROOT_DIR=$(pwd)
 
 function provision(){
-  local project_id=1
+  local project_id=0
   rm -rf "${ROOT_DIR}/config/ips"
-  while [ $project_id -le $NB_PROJECTS ];do
+  while [ $project_id -lt $NB_PROJECTS ];do
     echo "Create content for project ${project_id}"
     set +e
     terraform workspace new "wsc-kubernetes-training-${project_id}"
     set -e
     terraform workspace select "wsc-kubernetes-training-${project_id}"
-    terraform apply
+    terraform apply -auto-approve
 
     mkdir -p "${ROOT_DIR}/config/${w}"   
     terraform output -json bastion_ip |jq -r . >> "${ROOT_DIR}/config/ips"
@@ -26,14 +26,14 @@ function provision(){
 }
 
 function clean() {
-  local project_id=1
-  while [ $project_id -le $NB_PROJECTS ];do
+  local project_id=0
+  while [ $project_id -lt $NB_PROJECTS ];do
     echo "Destroy content of project ${project_id}"
     set +e
     terraform workspace new "wsc-kubernetes-training-${project_id}"
     set -e
     terraform workspace select "wsc-kubernetes-training-${project_id}"
-    terraform destroy
+    terraform destroy -auto-approve
     terraform workspace select "default"
     terraform workspace delete "wsc-kubernetes-training-${project_id}"
     project_id=$[$project_id+1]

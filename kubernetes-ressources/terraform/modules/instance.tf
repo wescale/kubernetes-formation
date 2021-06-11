@@ -6,9 +6,9 @@ resource "google_compute_instance" "training-instance" {
 
   boot_disk {
     initialize_params {
-      image = "projects/ubuntu-os-cloud/global/images/ubuntu-1804-bionic-v20200923"
+      image = "projects/ubuntu-os-cloud/global/images/ubuntu-2010-groovy-v20210511a"
       type = "pd-standard"
-      size = "10" # ie 10GB
+      size = "15" # ie 15GB
     }
     auto_delete = true
   }

@@ -2,7 +2,7 @@
 
 set -e
 
-NB_PROJECTS=12 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=11 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 OPT=$1   # option
 

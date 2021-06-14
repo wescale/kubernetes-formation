@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:14.15.0-alpine
 
 LABEL maintainer="Wescale Formation <training@wescale.fr>"
 

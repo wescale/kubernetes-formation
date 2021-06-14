@@ -1,8 +1,8 @@
-FROM node:14
+FROM node:14.15.0-alpine
 
 LABEL maintainer="Wescale Formation <training@wescale.fr>"
 
-RUN mkdir /usr/src/my-app
+RUN mkdir -p /usr/src/my-app
 WORKDIR /usr/src/my-app
 COPY app.js .
 COPY package.json .

@@ -2,7 +2,7 @@
 
 ## Prerequisistes: installation of Podman
 
-Read the doc : [Installation](https://podman.io/getting-started/installation/)
+Read the doc : [Installation](https://podman.io/getting-started/installation)
 
 Check if everything works (no need of `sudo`):
 

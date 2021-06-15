@@ -1,9 +1,6 @@
 version: '3'
 services:
   chat:
-    deploy:
-      mode: replicated
-      replicas: 2
     build:
       context: .
     ports:

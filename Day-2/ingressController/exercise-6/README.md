@@ -22,14 +22,16 @@ kubectl get service web
 
 Here is the Ingress definition file:
 ```
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: basic-ingress
 spec:
-  backend:
-    serviceName: oueb
-    servicePort: 666
+  defaultBackend:
+    service:
+      name: oueb
+      port:
+        number: 666
 ```
 
 Create the ingress. Be carefull, it may be incorrect regarding the service we want to target...
@@ -56,7 +58,7 @@ kubectl expose pod web2 --target-port=8080 --type=NodePort
 
 Create a new Ingress with the routing rules:
 ```
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: fanout-ingress
@@ -66,12 +68,16 @@ spec:
       paths:
       - path: /v1
         backend:
-          serviceName: web
-          servicePort: 8080
+          service:
+            name: web
+            port:
+              number: 8080
       - path: /v2
         backend:
-          serviceName: web2
-          servicePort: 8080
+          service:
+            name: web2
+            port:
+              number: 8080
 ```
 
 ```sh

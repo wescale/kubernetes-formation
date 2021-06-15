@@ -5,6 +5,6 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: oueb
+      name: web
       port:
-        number: 666
+        number: 80

@@ -52,8 +52,8 @@ Test the connectivity - what is the URL to connect on ?
 
 Create the Pod and service for the version 2:
 ```sh
-kubectl run web2  --generator=deployment/apps.v1 --image=gcr.io/google-samples/hello-app:2.0 --port=8080
-kubectl expose pod web2 --target-port=8080 --type=NodePort
+kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0 --port=8080
+kubectl expose deployment web2 --target-port=8080 --type=NodePort
 ```
 
 Create a new Ingress with the routing rules:
@@ -67,12 +67,14 @@ spec:
   - http:
       paths:
       - path: /v1
+        pathType: Exact
         backend:
           service:
             name: web
             port:
               number: 8080
       - path: /v2
+        pathType: Exact
         backend:
           service:
             name: web2
@@ -98,6 +100,7 @@ Test URLs `/v1` and `/v2`.
 ```
 kubectl delete ingress basic-ingress
 kubectl delete ingress fanout-ingress
-kubectl delete pod web web2
+kubectl delete pod web
+kubectl delete deployment web2
 kubectl delete service web web2
 ```

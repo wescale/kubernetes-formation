@@ -13,7 +13,7 @@ kubectl get storageClass
 kubectl describe storageClass [name storageClass]
 ```
 
-## Create a Persistent Volume Claim to ask a 2Gi R/W storage
+## Create a Persistent Volume Claim to ask a 1Gi R/W storage
 
 Here is the claim declaration:
 ```
@@ -26,7 +26,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 1Gi
 ```
 
 Declare the claim (be carefull, the provided `.yaml` file may be incorrect....)

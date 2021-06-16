@@ -7,12 +7,14 @@ spec:
   - http:
       paths:
       - path: /v1
+        pathType: Exact
         backend:
           service:
             name: web
             port:
               number: 8080
       - path: /v2
+        pathType: Exact
         backend:
           service:
             name: web2

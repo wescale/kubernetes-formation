@@ -2,7 +2,7 @@
 
 ## Prerequisistes: installation of Buildah & podman
 
-Read the [Buildah Installation](https://github.com/containers/buildah/blob/master/install.md) documentation (May be already installed, as coming as part of to Podman) and [Pdman Installation (https://podman.io/getting-started/installation)
+Read the [Buildah Installation](https://github.com/containers/buildah/blob/master/install.md) documentation (May be already installed, as coming as part of to Podman) and Pdman Installation (https://podman.io/getting-started/installation)
       
 Check if everything works (no need of `sudo`):
 

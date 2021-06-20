@@ -80,20 +80,20 @@ ubuntu@wescale-bastion:~$ docker inspect 794198f37efa|jq ''
 Interesting fields:    
 ```sh
 CONT_ID=$(docker ps -aq)
-docker inspect "${CONT_ID}"|jq '.[].State'
-docker inspect "${CONT_ID}"|jq '.[].Config'
+docker inspect ${CONT_ID}|jq '.[].State'
+docker inspect ${CONT_ID}|jq '.[].Config'
 # See Hostname
 
-$ docker inspect "${CONT_ID}"|jq '.[].HostConfig'
+$ docker inspect ${CONT_ID}|jq '.[].HostConfig'
 # See Memory, CpuQuota, CpuPeriod ...
 
 # Retrieve the logs
-docker logs "${CONT_ID}"
+docker logs ${CONT_ID}
 # Stored here:
-sudo cat $(docker inspect "${CONT_ID}"|jq -r '.[].LogPath')
+sudo cat $(docker inspect ${CONT_ID}|jq -r '.[].LogPath')
 
 # In fact, container files are located in /var/lib/docker/containers
-sudo ls -la /var/lib/docker/containers/$(docker inspect "${CONT_ID}"|jq -r '.[].Id')
+sudo ls -la /var/lib/docker/containers/$(docker inspect ${CONT_ID}|jq -r '.[].Id')
 ```
 
 # Inside the image

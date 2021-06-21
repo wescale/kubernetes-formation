@@ -59,7 +59,7 @@ kubectl apply -f service.yaml
 
 Ensure the service has entries in its `endpoints`:
 ```sh
-kubectl describe svc my-cip-service
+kubectl describe svc my-np-service
 ```
 
 ## Test the service connectivity

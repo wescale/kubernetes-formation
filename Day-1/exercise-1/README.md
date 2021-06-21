@@ -33,7 +33,7 @@ The aim of this step is to run a container with the correct options to:
 You can now start the application container to listen on the exposed port.
 This container needs to connect to the Redis instance:
 ```
-  docker run -d --name nodeapp ##OptionToLinkThisContainerToRedis## ##OptionToExposeThePort## colonel-mustard/nodeapp
+  docker run -d --name nodeapp ##OptionToLinkThisContainerToRedis## ##OptionToExposeThePort## myrepo/nodeapp
 ```
 
 To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)

@@ -74,3 +74,8 @@ Access the service
 [NODE_IP_ADDRESS]:[NODE_PORT]
 # NODE_PORT is the random port given by kube
 ```
+## Clean all resources
+
+```sh
+kubectl  delete -f .
+```

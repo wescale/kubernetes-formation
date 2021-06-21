@@ -69,4 +69,9 @@ Access the service (It may take minutes for the LB to be configured)
 [LOAD_BALANCER_ADDRESS]:60000
 ```
 
+## Clean all resources
+
+```sh
+kubectl  delete -f .
+
 

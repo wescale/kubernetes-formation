@@ -28,7 +28,7 @@ Ensure the pod is running and note the worker it is running on.
 
 ## For each worker node, apply a taint
 
-*DO not add taint to a MASTER node!*:
+*DO not add taint to a Worker nodes!*:
 ```
 kubectl taint node <NODE1_NAME> node-type=prod:NoExecute
 kubectl taint node <NODE3_NAME> node-type=dev:NoExecute

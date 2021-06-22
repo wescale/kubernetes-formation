@@ -31,7 +31,7 @@ Ensure the pod is running and note the worker it is running on.
 *DO not add taint to a Worker nodes!*:
 ```
 kubectl taint node <NODE1_NAME> node-type=prod:NoExecute
-kubectl taint node <NODE3_NAME> node-type=dev:NoExecute
+kubectl taint node <NODE2_NAME> node-type=dev:NoExecute
 ```
 
 If your cluster has 3 worker nodes:

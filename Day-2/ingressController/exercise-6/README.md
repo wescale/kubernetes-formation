@@ -67,14 +67,14 @@ spec:
   - http:
       paths:
       - path: /v1
-        pathType: Exact
+        pathType: ImplementationSpecific
         backend:
           service:
             name: web
             port:
               number: 8080
       - path: /v2
-        pathType: Exact
+        pathType: ImplementationSpecific
         backend:
           service:
             name: web2

@@ -20,3 +20,4 @@ kubernetes-ressources/terraform/terraform.tfstate.backup
 *.iml
 .gitsecret/keys/random_seed
 !*.secret
+kubernetes-ressources/terraform/config/*

@@ -27,3 +27,8 @@ module "bootstrap-training" {
 output bastion_ip {
   value = module.bootstrap-training.bastion_ip
 }
+
+output password {
+  value = module.bootstrap-training.password
+  sensitive = true
+}

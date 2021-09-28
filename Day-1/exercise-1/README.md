@@ -6,11 +6,22 @@ The components are:
 - a NodeJS application which uses the [Express](http://expressjs.com/) framework
 - a [Redis](http://redis.io/) NoSQL database to persist the counter of requests
 
+
 ## Start the Redis container
 
 Pull then start the Redis server:
 ```sh
   docker run -d --name redis redis
+```
+## Create a user-defined bridge network
+
+```sh
+  docker network create my-net
+```
+## Connect redis to your user-defined bridge network
+
+```sh
+  docker network connect my-net redis
 ```
 
 ## Build an image for the NodeJS app
@@ -43,10 +54,6 @@ To test if your application works well, you can consult this page: [http://[BAST
 ```sh
   docker rm -vf redis
   docker rm -vf nodeapp
+  docker network rm my-net
 ```
 
-## Enhancements
-
-Are you satisfied with the solution to link the containers?
-
-What is your recommendation?

@@ -2,11 +2,12 @@
 
 set -e
 
-NB_PROJECTS=13 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=1 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 OPT=$1   # option
 
 ROOT_DIR=$(pwd)
+mkdir -p  "${ROOT_DIR}/config"
 
 function provision(){
   local project_id=0

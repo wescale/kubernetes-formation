@@ -21,3 +21,13 @@ kubernetes-ressources/terraform/terraform.tfstate.backup
 .gitsecret/keys/random_seed
 !*.secret
 kubernetes-ressources/terraform/config/*
+
+# Created by https://www.toptal.com/developers/gitignore/api/direnv
+# Edit at https://www.toptal.com/developers/gitignore?templates=direnv
+
+### direnv ###
+.direnv
+.envrc
+
+# End of https://www.toptal.com/developers/gitignore/api/direnv
+

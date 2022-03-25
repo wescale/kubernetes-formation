@@ -3,12 +3,12 @@
 In this hands-on lab, you will get familiar with taints and tolerations.
 
 On your multi worker cluster, you will deploy a pod which does not tolerate taints.
-Then, you will add taints to all the workers and see the effect.
+Then, you will add taints to all the workers and see their effect.
 
 You will be responsible for splitting up the worker nodes and making:
-* one of the worker nodes a production (prod) environment node.
-* one of the worker nodes a development (dev) environment node.
-* ONLY if you have a third worker node cluster: one of the worker nodes a pre-production (iso) environment node.
+* one of the worker nodes a production (`prod`) environment node.
+* one of the worker nodes a development (`dev`) environment node.
+* one of the worker nodes a pre-production (`iso`) environment node.
 
 The purpose of identifying the production type is to not accidentally deploy pods into the production environment. You will use taints and tolerations to achieve this, and then you will deploy two pods: One pod will be scheduled to the dev environment, and one pod will be scheduled to the prod environment.
 
@@ -32,11 +32,7 @@ Ensure the pod is running and note the worker it is running on.
 ```
 kubectl taint node <NODE1_NAME> node-type=prod:NoExecute
 kubectl taint node <NODE2_NAME> node-type=dev:NoExecute
-```
-
-If your cluster has 3 worker nodes:
-```sh
-kubectl taint node <NODE3_NAME> node-type=ppd:NoExecute
+kubectl taint node <NODE3_NAME> node-type=iso:NoExecute
 ```
 
 ## Verify the taints are ok
@@ -83,7 +79,7 @@ On which node is it running ? Why ?
 
 ## Allow a pod to be scheduled to the prod environment.
 
-Create a yaml file containing the pod spec and a Production Taint Tolerance:
+Create a yaml file containing the pod spec and a Production Taint toleration:
 ```
 apiVersion: v1
 kind: Pod

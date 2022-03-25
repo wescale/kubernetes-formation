@@ -1,6 +1,6 @@
 # exercise-1: Create a pod, execute commands inside then delete it
 
-In this exercise, you will create an Nginx and modify the served content.
+In this exercise, you will create an Nginx and modify it to serve specific content.
 Then you will connect to it.
 
 ## Start the pod
@@ -30,7 +30,7 @@ Then create the pod:
 kubectl create -f nginx.yml
 ```
 
-## List all the pods and see their status
+## List all the pods and see their statuses
 
 ```sh
 kubectl get pods -o wide

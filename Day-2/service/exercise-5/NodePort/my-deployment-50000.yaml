@@ -20,3 +20,9 @@ spec:
         env:
         - name: "PORT"
           value: "50000"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 10

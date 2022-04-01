@@ -45,8 +45,6 @@ kubectl get ingress basic-ingress
 ```
 
 Test the connectivity - what is the URL to connect on ?
-* On GKE, see the External IP
-* On OVHCLoud, see the NodePort of the Nginx ingress controller `kubectl get svc ingress-nginx-controller -n ingress-nginx`
 
 ## Deploy a second version of the application
 

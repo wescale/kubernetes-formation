@@ -28,6 +28,12 @@ spec:
         env:
         - name: "PORT"
           value: "50000"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
 ```
 
 ```sh 
@@ -57,11 +63,6 @@ spec:
 kubectl apply -f service.yaml
 ```
 
-Ensure the service has entries in its `endpoints`:
-```sh
-kubectl describe svc my-np-service
-```
-
 ## Test the service connectivity
 
 Determine the public IP of any worker node:
@@ -74,6 +75,17 @@ Access the service
 [NODE_IP_ADDRESS]:[NODE_PORT]
 # NODE_PORT is the random port given by kube
 ```
+
+Is everything OK? Ensure the service has entries in its `endpoints`:
+```sh
+kubectl describe svc my-np-service
+```
+
+Are the pods running?
+If yes, debug the situation. Hint: command `kubectl describe pod NAME_OF_YOUR_POD` could help.
+
+Once the deployment fixed, try again to access the service.
+
 ## Clean all resources
 
 ```sh

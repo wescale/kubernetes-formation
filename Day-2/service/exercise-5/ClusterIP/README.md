@@ -72,7 +72,7 @@ Access the service: try the [CLUSTER_IP]:80. This does not work. Why? How can yo
 
 Execute a shell inside a pod of the service:
 ```sh
-kubectl exec -it  my-deployment-7bc95fb476-q75rz /bin/sh
+kubectl exec -it  my-deployment-7bc95fb476-q75rz -- /bin/sh
 # Install curl
 apk add --no-cache curl
 ```

@@ -55,4 +55,4 @@ kubectl delete -f binding.yaml
 kubectl delete -f role.yaml
 kubectl delete cm/myconfig
 kubectl delete sa/myapp
-```
+```ck

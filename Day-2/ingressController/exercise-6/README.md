@@ -44,7 +44,7 @@ Ensure the ingress is correctly created (it can take some time):
 kubectl get ingress basic-ingress
 ```
 
-Test the connectivity - what is the URL to connect on ?
+Test the connectivity - what is the IP to connect on ?
 
 ## Deploy a second version of the application
 

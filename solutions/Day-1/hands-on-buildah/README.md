@@ -7,7 +7,7 @@
 2. Run the container using Docker
 
 ```sh
-podman push demo-wescale-training docker-daemon:demo-wescale-training:latest
+podman run --rm demo-wescale-training:latest
 docker run --rm demo-wescale-training:latest
 ```
 

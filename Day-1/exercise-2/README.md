@@ -21,7 +21,7 @@ The expected directives are:
 
 Once your `docker-compose.yml` written, you can launch the following command to start all the services:
 ```sh
-docker-compose up -d
+docker compose up -d
 ```
 
 To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)
@@ -34,10 +34,10 @@ How is the address resolution performed from the NodeJS container?
 
 You can stop all the containers started by docker-compose:
 ```sh
-docker-compose stop
+docker compose stop
 ```
 
 Then delete all the containers:
 ```sh
-docker-compose rm
+docker compose rm
 ```

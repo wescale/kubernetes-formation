@@ -18,8 +18,9 @@ Add a custom /usr/share/nginx/html/index.html using a volume
 podman run --name nginx -d -p 8080:80 ##OptionToUseAVolume## nginx
 ```
 
-## Latest flag
+## See logs
 
+See the logs of the created container.
 Use the special flag `--latest`
 
 ## Podman is not Docker ...

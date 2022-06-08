@@ -12,7 +12,7 @@ To do that, you get a docker-compose skeleton file. You must complete the file w
 
 Once your `docker-compose.yml` written, you can launch the following command to start all the services:
 ```sh
-docker-compose up -d
+docker compose up -d
 ```
 
 To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)
@@ -25,15 +25,15 @@ To control the volume is correctly mounted, edit the `client/index.html` and rel
 
 You can stop all the containers started by docker-compose:
 ```sh
-docker-compose stop
+docker compose stop
 ```
 
 Then delete all the containers:
 ```sh
-docker-compose rm
+docker compose rm
 ```
 
 To delete all the resources created (including network and volumes):
 ```sh
-docker-compose down --volumes
+docker compose down --volumes
 ```

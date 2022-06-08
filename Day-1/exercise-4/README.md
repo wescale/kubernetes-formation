@@ -18,7 +18,7 @@ To do that, you get a docker-compose skeleton file. You must complete the file w
 
 Once your `docker-compose.yml` written, you can launch the following command to start all the services:
 ```sh
-docker-compose up -d
+docker compose up -d
 ```
 
 To control if you Wordpress site is up and running, go to the [http://[BASTION IP]:8080](http://localhost:8080) page and start the initialization steps.

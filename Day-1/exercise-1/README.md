@@ -9,16 +9,13 @@ The components are:
 
 ## Start the Redis container
 
-Pull then start the Redis server:
-```sh
-  docker run -d --name redis redis
-```
+Start a container named `redis` from the `redis:latest` image.
 ## Create a user-defined bridge network
 
 ```sh
   docker network create my-net
 ```
-## Connect redis to your user-defined bridge network
+## Connect the redis container to your user-defined bridge network
 
 ```sh
   docker network connect my-net redis

@@ -19,14 +19,14 @@ services:
       ##
       # Add environment variables for the MariaDB+PHPMyAdmin
       ##
-    links:
+    depends_on:
       ##
       # Add the dependency
       ##
 
   wordpress:
     image: wordpress:latest
-    links:
+    depends_on:
       ##
       # Add the dependency
       ##

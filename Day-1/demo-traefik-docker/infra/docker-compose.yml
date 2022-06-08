@@ -17,7 +17,7 @@ services:
     networks:
       - web
     expose:
-      - "5000"
+      - "3000"
     labels:
       - "traefik.backend=front"
       - "traefik.frontend.rule=Host:front.docker.localhost"

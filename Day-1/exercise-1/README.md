@@ -11,6 +11,17 @@ The components are:
 
 Start a container named `redis` from the `redis:latest` image.
 
+## Create a user-defined bridge network
+
+```sh
+  docker network create my-net
+```
+## Connect the redis container to your user-defined bridge network
+
+```sh
+  docker network connect my-net redis
+```
+
 ## Build an image for the NodeJS app
 
 The aim of this step is to complete the given Dockerfile to build the NodeJS application.
@@ -25,13 +36,13 @@ Once you completed the Dockerfile, build the image:
 
 
 The aim of this step is to run a container with the correct options to:
-* link two containers
+* connect it to the `my-net` network
 * expose a port externally on a host
 
 You can now start the application container to listen on the exposed port.
 This container needs to connect to the Redis instance:
 ```
-  docker run -d --name nodeapp ##OptionToLinkThisContainerToRedis## ##OptionToExposeThePort## myrepo/nodeapp
+  docker run -d --name nodeapp ##OptionToConnectThisContainerToMy-Net## ##OptionToExposeThePort## myrepo/nodeapp
 ```
 
 To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)

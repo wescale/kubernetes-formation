@@ -10,16 +10,6 @@ The components are:
 ## Start the Redis container
 
 Start a container named `redis` from the `redis:latest` image.
-## Create a user-defined bridge network
-
-```sh
-  docker network create my-net
-```
-## Connect the redis container to your user-defined bridge network
-
-```sh
-  docker network connect my-net redis
-```
 
 ## Build an image for the NodeJS app
 
@@ -45,6 +35,10 @@ This container needs to connect to the Redis instance:
 ```
 
 To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)
+
+## Question
+
+How is the resolution of `redis` done inside the `nodeapp` container?
 
 ## Clean the containers
 

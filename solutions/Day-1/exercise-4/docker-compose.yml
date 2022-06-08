@@ -18,12 +18,12 @@ services:
     environment:
       MYSQL_USERNAME: wordpress
       MYSQL_PASSWORD: wordpress
-    links:
+    depends_on:
       - db
 
   wordpress:
     image: wordpress:latest
-    links:
+    depends_on:
       - db
     ports:
       - "8000:80"

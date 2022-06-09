@@ -5,8 +5,8 @@ metadata:
 spec:
   volumes:
     - name: task-pv-storage
-      # Complete volume declaration here
-      ...
+      persistentVolumeClaim:
+       claimName: task-pv-claim
   containers:
     - name: task-pv-container
       image: nginx
@@ -16,3 +16,5 @@ spec:
       volumeMounts:
         - mountPath: "/usr/share/nginx/html"
           name: task-pv-storage
+
+

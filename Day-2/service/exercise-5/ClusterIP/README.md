@@ -54,27 +54,19 @@ spec:
 kubectl apply -f service.yaml
 ```
 
-Ensure the service has entries in its `endpoints`... if not, correct the `service.yaml` because it may be incorrect!
-
-To see the endpoints:
-```sh
-kubectl describe svc my-cip-service
-```
+Describe the service and ensure the service has entries in its `endpoints`... if not, correct the `service.yaml` because it may be incorrect!
 
 ## Test the service connectivity
 
-Determine the CLUSTER IP
-```sh
-kubectl get service my-cip-service -o wide
-```
+Determine the CLUSTER IP.
 
 Access the service: try the [CLUSTER_IP]:80. This does not work. Why? How can you access the service?
 
 Execute a shell inside a pod of the service:
 ```sh
-kubectl exec -it  my-deployment-7bc95fb476-q75rz -- /bin/sh
+kubectl exec # FIND the other arguments
 # Install curl
-apk add --no-cache curl
+apk update && apk add --no-cache curl
 ```
 
 Try the curl on http://my-cip-service.default.svc.cluster.local:80

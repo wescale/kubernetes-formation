@@ -8,7 +8,9 @@ In this exercise, you will create a configmap and try to get the config map from
 kubectl create serviceaccount myapp
 ```
 
-Create a pod associated with the service account `myapp`:
+Modify the `pod-sa.yaml` file to have the pod using the `myapp` service account.
+
+Then create the pod:
 ```sh
 kubectl create -f pod-sa.yaml
 ```
@@ -31,9 +33,16 @@ Can you explain what happened ?
 
 ## Create a Role and a RoleBinding for the service account
 
-Create a Role:
-```sh
-kubectl create -f role.yaml
+Complete the `role.yaml` file to allow read access to configmaps:
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: configmap-reader
+rules:
+- apiGroups: [""] 
+  # Complete the file
+  ...
 ```
 
 Create a RoleBinding:
@@ -55,4 +64,4 @@ kubectl delete -f binding.yaml
 kubectl delete -f role.yaml
 kubectl delete cm/myconfig
 kubectl delete sa/myapp
-```ck
+```

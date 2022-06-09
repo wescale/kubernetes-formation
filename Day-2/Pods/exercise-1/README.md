@@ -5,25 +5,12 @@ Then you will connect to it.
 
 ## Start the pod
 
-Create a `nginx.yaml` file to declare the nginx pod:
-
-```
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx
-  labels:
-    env: development
-
-spec:
-  containers:
-  - name: nginx
-    image: nginx
-    command: ["nginx"]
-    args: ["-g", "daemon off;", "-q"]
-    ports:
-    - containerPort: 80
-```
+Complete the `nginx.yaml` file to declare a `nginx` pod with the following characteristics:
+* name: nginx
+* image: <nginx:latest>
+* entrypoint: "nginx"
+* entrypoint options: "-g", "daemon off;", "-q"
+* exposed port : 80
 
 Then create the pod:
 ```sh

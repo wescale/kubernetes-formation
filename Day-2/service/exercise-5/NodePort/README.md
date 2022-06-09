@@ -28,12 +28,6 @@ spec:
         env:
         - name: "PORT"
           value: "50000"
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 30
-          timeoutSeconds: 10
 ```
 
 ```sh 
@@ -42,6 +36,8 @@ kubectl apply -f my-deployment-50000.yaml
 
 ## Create a Node Port service
 
+Complete the given `service.yaml` file to expose the pods created from the deployment above.
+
 ```
 apiVersion: v1
 kind: Service
@@ -49,14 +45,7 @@ metadata:
   name: my-np-service
 spec:
   type: NodePort
-  selector:
-    app: metrics
-    department: engineering
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 50000
-    # nodePort: 30007   # NOTE: we dont set the nodePort, it will be taken randomly by default
+  ...
 ```
 
 ```sh 

@@ -14,7 +14,7 @@ The purpose of identifying the production type is to not accidentally deploy pod
 
 ## Deploy a pod which does not tolerate taints
 
-Get list nodes with current taints:
+Get the list of nodes with current taints:
 ```sh
 kubectl get nodes  -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 ```
@@ -28,7 +28,7 @@ Ensure the pod is running and note the worker it is running on.
 
 ## For each worker node, apply a taint
 
-*DO not add taint to a Worker nodes!*:
+*DO not add taint to a Master nodes!*:
 ```
 kubectl taint node <NODE1_NAME> node-type=prod:NoExecute
 kubectl taint node <NODE2_NAME> node-type=dev:NoExecute
@@ -45,25 +45,7 @@ Is the no-toleration-pod still running ? Why?
 
 ## Schedule a pod to the dev environment.
 
-Here is the pod spec:
-```
-apiVersion: v1
-kind: Pod
-metadata:
- name: dev-pod
- labels:
-   app: busybox
-spec:
- containers:
- - name: dev
-   image: busybox
-   command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
- tolerations:
- - key: node-type
-   operator: Equal
-   value: dev
-   effect: NoExecute
-```
+Complete the given `dev-pod-busybox.yml` file to tolerate the taint `node-type` with value `dev` and effect `no-execute`.
 
 Create the pod:
 ```sh

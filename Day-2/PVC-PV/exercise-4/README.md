@@ -23,27 +23,21 @@ metadata:
   name: task-pv-claim
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOneRingToRuleThemAll
   resources:
     requests:
-      storage: 1Gi
+      storage: 1GOCTETS
 ```
 
-Declare the claim (be carefull, the provided `.yaml` file may be incorrect....)
-```sh
-kubectl apply -f pv-claim.yaml
-```
+Declare the claim (be carefull, the provided `.yaml` file may be incorrect....).
 
-Do you see a persistent volume automatically created ?
-```sh
-kubectl get pv
-```
+Do you see a persistent volume automatically created?
 
 Why?
 
 ## Create a pod which references the Persistent Volume Claim
 
-Here is the pod spec:
+Complete the given `pv-pod.yaml` file to mount the volume created from the `task-pv-claim`:
 ```
 kind: Pod
 apiVersion: v1
@@ -52,8 +46,8 @@ metadata:
 spec:
   volumes:
     - name: task-pv-storage
-      persistentVolumeClaim:
-       claimName: task-pv-claim
+      # Complete volume declaration here
+      ...
   containers:
     - name: task-pv-container
       image: nginx
@@ -65,17 +59,14 @@ spec:
           name: task-pv-storage
 ```
 
-Create the pod:
-```sh
-kubectl apply -f pv-pod.yaml
-```
-
-## Write content to the persistent volume
+Create the pod.
 
 You should get a pv and a pod:
 ```
 kubectl get pv,pod -o wide
 ```
+## Write content to the persistent volume
+
 
 Now, write content to the persistent volume:
 ```

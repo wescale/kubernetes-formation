@@ -13,5 +13,10 @@ spec:
             name: web
             port:
               number: 8080
-      # Add /v2 path
-      ...
+      - path: /v2
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: web2
+            port:
+              number: 8080

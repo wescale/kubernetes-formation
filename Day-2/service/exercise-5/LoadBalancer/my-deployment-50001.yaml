@@ -20,3 +20,5 @@ spec:
         env:
         - name: "PORT"
           value: "50001"
+        readinessProbe:
+        ...

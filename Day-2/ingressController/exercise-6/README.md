@@ -7,16 +7,14 @@ Then you will create a second version of the application (`/v2`) and manage the 
 
 ## Deploy version /v1 of the application
 
-Create the pod:
-```sh
-kubectl run web --image=gcr.io/google-samples/hello-app:1.0 --port=8080
-```
+Instead of creating a YAML file, use the imperative command `kubectl run` to create a pod with:
+* name: `web`
+* image: `gcr.io/google-samples/hello-app:1.0`
+* declared port: 8080
 
-Expose the pod as a service:
-```sh
-kubectl expose pod web --target-port=8080 --type=NodePort
-kubectl get service web
-```
+Instead of creating a YAML file, use the imperative command `kubectl expose` to create a NodePort service targetting the pod above.
+
+Ensure the pod and the service are OK.
 
 ## Create an Ingress resource without path based routing rules
 
@@ -54,7 +52,7 @@ kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0 --por
 kubectl expose deployment web2 --target-port=8080 --type=NodePort
 ```
 
-Create a new Ingress with the routing rules:
+Complete the given `fanout-ingress.yaml` file to add a `/v2` path which targets the web2 service:
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -71,13 +69,8 @@ spec:
             name: web
             port:
               number: 8080
-      - path: /v2
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: web2
-            port:
-              number: 8080
+      # Add /v2 path
+      ...
 ```
 
 ```sh

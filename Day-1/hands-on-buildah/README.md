@@ -38,6 +38,10 @@ buildah images
 1. Run the container using Podman
 2. Run the container using Docker
     1. Do you see your image when typing `docker images`?
+    2. Push the image to the local Docker repository using docker-daemon
+    ```sh
+    podman push demo-wescale-training docker-daemon:demo-wescale-training:latest
+    ```
 
 ## Build with a Dockerfile
 

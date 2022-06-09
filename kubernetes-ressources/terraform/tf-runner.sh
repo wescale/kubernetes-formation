@@ -2,7 +2,7 @@
 
 set -e
 
-NB_PROJECTS=11 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=12 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 OPT=$1   # option
 
@@ -29,7 +29,7 @@ function provision(){
   done
 }
 
-function copy(){
+function refresh_git_repo(){
   local project_id=0
   while [ $project_id -lt $NB_PROJECTS ];do
     echo "Copy content for project ${project_id}"
@@ -68,10 +68,10 @@ terraform init -get
 case $OPT in
    "provision") provision;;
    "clean") clean;;
-   "copy") copy;;
+   "refresh_git_repo") refresh_git_repo;;
    *)
     echo "Bad argument!"
-    echo "Usage: \`$0 provision\` or \`$0 clean\`"
+    echo "Usage: \`$0 provision\` or \`$0 clean\` or \`$0  refresh_git_repo\`"
     exit 1
     ;;
 esac

@@ -16,7 +16,7 @@ Ensure the deployment is correctly done.
 This HPA must be bound to min 1 Pod and max 10 Pods.
 It must target a CPU usage of 50%.
 
-Create the horizontal autoscaler:
+Create the horizontal autoscaler with the `kubectl autoscale` command:
 ```
 kubectl autoscale deployment php-apache ...
 ````

@@ -67,14 +67,12 @@ kubectl get pv,pod -o wide
 ```
 ## Write content to the persistent volume
 
-
 Now, write content to the persistent volume:
 ```
 kubectl exec -it task-pv-pod -- bash
 echo 'K8s rules!' > /usr/share/nginx/html/index.html
 curl http://localhost
 ```
-
 
 ## Delete the pod and recreate it
 

@@ -34,3 +34,15 @@ spec:
   - port: 80
   selector:
     run: php-apache
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-apache2
+  labels:
+    run: php-apache
+spec:
+  ports:
+  - port: 80
+  selector:
+    run: php-apache

@@ -29,6 +29,25 @@ function provision(){
   done
 }
 
+function copy(){
+  local project_id=0
+  while [ $project_id -lt $NB_PROJECTS ];do
+    echo "Copy content for project ${project_id}"
+    set +e
+    w="wsc-kubernetes-adv-training-${project_id}"
+    set -e
+    # Clear bastion fingerprint that may have changed
+    ssh-keygen -R bastion.fund-${project_id}.wescaletraining.fr
+    
+    ssh -i kubernetes-formation -o "StrictHostKeyChecking no" training@bastion.fund-${project_id}.wescaletraining.fr sudo rm -rf /home/training/kubernetes-formation
+    ssh -i kubernetes-formation -o "StrictHostKeyChecking no" training@bastion.fund-${project_id}.wescaletraining.fr git clone https://github.com/WeScale/kubernetes-formation/
+
+    #ssh -F "${ROOT_DIR}/config/${w}/provided_ssh_config" bastion "cd creds && rke up"
+    # Kubeconfig, storage class
+    project_id=$[$project_id+1]
+  done
+}
+
 function clean() {
   local project_id=0
   while [ $project_id -lt $NB_PROJECTS ];do
@@ -49,6 +68,7 @@ terraform init -get
 case $OPT in
    "provision") provision;;
    "clean") clean;;
+   "copy") copy;;
    *)
     echo "Bad argument!"
     echo "Usage: \`$0 provision\` or \`$0 clean\`"

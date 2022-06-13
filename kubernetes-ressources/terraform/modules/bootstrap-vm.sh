@@ -7,14 +7,16 @@ echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/ap
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
 # Update the package list and install the Cloud SDK
-apt-get update && sudo apt-get install -y kubectl nano unzip git
+apt-get update && sudo apt-get install -y kubectl nano unzip git google-cloud-sdk-gke-gcloud-auth-plugin
 
-# Install nodejs 10.X
+# Install nodejs 14.X
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get install -y nodejs
 
 apt-get install -y xsel jq
 npm i -g create-react-app
+
+echo "export USE_GKE_GCLOUD_AUTH_PLUGIN=True" >> ~/.bashrc
 
 gcloud config set compute/zone europe-west1-b
 

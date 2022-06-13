@@ -14,12 +14,17 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 Get the password of the `admin` user:
 ```sh
-kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
-Then run port-forward to reach the service of `argocd server` on local port 8080. Something like `kubectl port-forward -n argocd svc/SERVICE_NAME LOCALPORT:SERVICE_PORT`
+Then run port-forward to reach the service of `argocd server` on the bastion instance on  port 8080. 
+```sh
+PRIVATE_IP=$(ip -f inet addr show ens4 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
 
-Open a browser on localhost:8080, then login.
+kubectl port-forward --address $PRIVATE_IP -n argocd svc/SERVICE_NAME LOCALPORT:SERVICE_PORT
+```
+
+Open a browser on <BASTION_IP>:8080, then login.
 
 What is the default cluster URL?
 

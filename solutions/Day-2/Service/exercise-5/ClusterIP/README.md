@@ -61,10 +61,11 @@ Describe the service and ensure the service has entries in its `endpoints`... if
 Determine the CLUSTER IP.
 
 Access the service: try the [CLUSTER_IP]:80. This does not work. Why? How can you access the service?
+>> It doesn't work because CLUSTER IP Service can be only reached inside the cluster IP
 
 Execute a shell inside a pod of the service:
 ```sh
-kubectl exec # FIND the other arguments
+kubectl exec -it <pod name> /bin/sh
 # Install curl
 apk update && apk add --no-cache curl
 ```

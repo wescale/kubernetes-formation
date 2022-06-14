@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment-50001
+spec:
+  selector:
+    matchLabels:
+      app: products
+      department: sales
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: products
+        department: sales
+    spec:
+      containers:
+      - name: hello
+        image: "gcr.io/google-samples/hello-app:2.0"
+        env:
+        - name: "PORT"
+          value: "50001"

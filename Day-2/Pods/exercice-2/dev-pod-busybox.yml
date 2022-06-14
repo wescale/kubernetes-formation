@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: dev-pod
+ labels:
+   app: busybox
+spec:
+ containers:
+ - name: dev
+   image: busybox
+   command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
+ tolerations:
+ - key: node-type
+   operator: Equal
+   value: dev
+   effect: NoExecute

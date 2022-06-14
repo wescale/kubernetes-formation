@@ -80,14 +80,14 @@ spec:
 
 Apply the changes:
 ```
-kubectl apply -f hello-v2.yml
+kubectl apply -f hello-v2.yml & kubectl get po -w
 ```
 
 ## "Scale up" the application
 
 You will change the number of replicas:
 ```sh
-kubectl scale deployment hello-dep --replicas=3
+kubectl scale deployment hello-dep --replicas=3 & kubectl get po -w
 ```
 
 ## Clean all the resources

@@ -9,8 +9,3 @@ spec:
  - name: dev
    image: busybox
    command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
- tolerations:
- - key: node-type
-   operator: Equal
-   value: dev
-   effect: NoExecute

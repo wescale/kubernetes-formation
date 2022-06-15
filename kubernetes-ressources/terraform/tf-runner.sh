@@ -2,7 +2,7 @@
 
 set -e
 
-NB_PROJECTS=12 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=5 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 OPT=$1   # option
 
@@ -25,6 +25,34 @@ function provision(){
     terraform output -json bastion_ip |jq -r . >> "${ROOT_DIR}/config/ips"
     gcloud_password=$(terraform output -raw password)
     echo "k8s-fund-trainee-${project_id},k8s-fund-trainee-${project_id},k8s-fund-trainee-${project_id}@wecontrol.cloud,${gcloud_password},,/kube-niv1-trainee,,,,,,,,,,,,,,,,,,,,,," >> "${ROOT_DIR}/config/users.csv"
+    project_id=$[$project_id+1]
+  done
+}
+
+function prepare_troubleshooting(){
+  local project_id=0
+  while [ $project_id -lt $NB_PROJECTS ];do
+    echo "Create troubleshooting application for project ${project_id}"
+    # Clear bastion fingerprint that may have changed
+    ssh-keygen -R bastion.fund-${project_id}.wescaletraining.fr
+    
+    scp -i kubernetes-formation -o StrictHostKeyChecking=no k8s-troubleshooting.yml training@bastion.fund-${project_id}.wescaletraining.fr:/tmp/k8s-troubleshooting.yml
+    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr /tmp/get-credential-cluster-0.sh
+    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr "kubectl apply -f /tmp/k8s-troubleshooting.yml"
+
+    project_id=$[$project_id+1]
+  done
+}
+
+function clean_troubleshooting(){
+  local project_id=0
+  while [ $project_id -lt $NB_PROJECTS ];do
+    echo "Clean troubleshooting application for project ${project_id}"
+    # Clear bastion fingerprint that may have changed
+    ssh-keygen -R bastion.fund-${project_id}.wescaletraining.fr
+    
+    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr "kubectl delete ns application"
+
     project_id=$[$project_id+1]
   done
 }
@@ -69,9 +97,11 @@ case $OPT in
    "provision") provision;;
    "clean") clean;;
    "refresh_git_repo") refresh_git_repo;;
+   "prepare_troubleshooting") prepare_troubleshooting;;
+   "clean_troubleshooting") clean_troubleshooting;;
    *)
     echo "Bad argument!"
-    echo "Usage: \`$0 provision\` or \`$0 clean\` or \`$0  refresh_git_repo\`"
+    echo "Usage: \`$0 provision\` or \`$0 clean\` or \`$0  refresh_git_repo\` or \`$0  prepare_troubleshooting\` or \`$0  clean_troubleshooting\`"
     exit 1
     ;;
 esac

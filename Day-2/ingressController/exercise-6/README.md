@@ -68,7 +68,7 @@ spec:
           service:
             name: web
             port:
-              number: 8080
+              number: 80
       # Add /v2 path
       ...
 ```

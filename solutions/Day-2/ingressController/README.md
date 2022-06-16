@@ -75,7 +75,7 @@ spec:
           service:
             name: web
             port:
-              number: 8080
+              number: 80
       - path: /v2
         pathType: ImplementationSpecific
         backend:

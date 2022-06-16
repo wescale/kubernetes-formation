@@ -8,10 +8,10 @@ spec:
    matchLabels:
     name: kdemo
   strategy:
-    type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
+    type: RollingUpdate
   minReadySeconds: 20
   template:
     metadata:
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: kdemo
-        image: apprenda/kdemo:v1
+        image: apprenda/kdemo:v2
         resources:
           requests:
             cpu: 100m

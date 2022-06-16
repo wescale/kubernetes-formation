@@ -49,7 +49,7 @@ Test the connectivity - what is the IP to connect on ?
 Create the Pod and service for the version 2:
 ```sh
 kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0 --port=8080
-kubectl expose deployment web2 --target-port=8080 --type=NodePort
+kubectl expose deployment web2 --target-port=8080 --port=8080 --type=NodePort
 ```
 
 Complete the given `fanout-ingress.yaml` file to add a `/v2` path which targets the web2 service:

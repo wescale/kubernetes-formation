@@ -62,6 +62,10 @@ kubectl create configmap # Complete arguments
 
 Edit the configMap to change the value 32M to `max_allowed_packet`.
 
+```sh
+kubectl edit configmap mariadb-config
+```
+
 # Use the secrets and configMap
 
 ## Add 2 secrets as environment variables to the Deployment:

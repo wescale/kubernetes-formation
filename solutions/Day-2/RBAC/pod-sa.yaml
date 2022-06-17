@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: pod-sa
 spec:
-  serviceAccountName: myapp-to-rule-the-world
+  serviceAccountName: myapp
   containers:
    - image: roffe/kubectl
      imagePullPolicy: Always

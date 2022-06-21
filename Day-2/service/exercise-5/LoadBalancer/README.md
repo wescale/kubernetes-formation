@@ -4,7 +4,8 @@ You will create a Load Balancer service and access it.
 
 ## Create a Deployment
 
-Complete the given deployment file to add a `readinessProbe`. Note the container serves traffic on port 50001.
+Complete the given deployment file to add a `readinessProbe`. 
+Note the container serves traffic on port 50001 and on the path "/".
 
 ```
 apiVersion: apps/v1

@@ -17,9 +17,12 @@ spec:
       containers:
       - name: hello
         image: "gcr.io/google-samples/hello-app:2.0"
+        env:
+        - name: "PORT"
+          value: "50001"
         readinessProbe:
           httpGet:
             path: /
-            port: 8080
+            port: 50001
           initialDelaySeconds: 30
           timeoutSeconds: 10

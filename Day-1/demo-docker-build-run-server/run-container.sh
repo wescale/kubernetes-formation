@@ -2,7 +2,7 @@
 
 set -e
 
-cp Dockerfile app-test/
+cp Dockerfile .dockerignore app-test/
 cd app-test
 
 docker build -t app-test:v1 .

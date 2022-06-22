@@ -14,7 +14,7 @@ resource "google_compute_instance" "training-instance" {
 
   boot_disk {
     initialize_params {
-      image = "projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20220308"
+      image = "projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20220622"
       type = "pd-standard"
       size = "15" # ie 15GB
     }

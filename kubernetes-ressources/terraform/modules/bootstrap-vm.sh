@@ -10,8 +10,8 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share
 apt-get update && sudo apt-get install -y kubectl nano unzip git xsel jq google-cloud-sdk-gke-gcloud-auth-plugin
 
 # Remove nodejs 12.X
-apt-get remove nodejs
-apt autoremove
+apt-get remove -y nodejs
+apt autoremove -y
 
 # Install nodejs 14.X
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -

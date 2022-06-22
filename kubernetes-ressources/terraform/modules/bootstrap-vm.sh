@@ -16,8 +16,6 @@ apt-get install -y nodejs
 apt-get install -y xsel jq
 npm i -g create-react-app
 
-echo "export USE_GKE_GCLOUD_AUTH_PLUGIN=True" >> ~/.bashrc
-
 gcloud config set compute/zone europe-west1-b
 
 cat <<EOF > /tmp/get-credential-cluster-$1.sh
@@ -29,7 +27,7 @@ do
     sleep 1
 done
 
-gcloud container clusters get-credentials "training-cluster-$1" --zone europe-west1-b
+USE_GKE_GCLOUD_AUTH_PLUGIN=True gcloud container clusters get-credentials "training-cluster-$1" --zone europe-west1-b
 
 #kubectl proxy --address="0.0.0.0" --accept-hosts='.*' &
 

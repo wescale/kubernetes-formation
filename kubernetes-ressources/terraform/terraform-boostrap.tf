@@ -44,6 +44,10 @@ output bastion_ip {
   value = module.bootstrap-training.bastion_ip
 }
 
+output bastion_dns {
+  value = module.bootstrap-training.dns_record
+}
+
 output password {
   value = module.bootstrap-training.password
   sensitive = true

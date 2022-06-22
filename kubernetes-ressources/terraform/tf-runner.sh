@@ -2,7 +2,7 @@
 
 set -e
 
-NB_PROJECTS=5 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=1 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 OPT=$1   # option
 
@@ -11,7 +11,7 @@ mkdir -p  "${ROOT_DIR}/config"
 
 function provision(){
   local project_id=0
-  rm -rf "${ROOT_DIR}/config/ips"
+  rm -rf "${ROOT_DIR}/config/ips" "${ROOT_DIR}/config/adresses"
   echo "First Name [Required],Last Name [Required],Email Address [Required],Password [Required],Password Hash Function [UPLOAD ONLY],Org Unit Path [Required],New Primary Email [UPLOAD ONLY],Recovery Email,Home Secondary Email,Work Secondary Email,Recovery Phone [MUST BE IN THE E.164 FORMAT],Work Phone,Home Phone,Mobile Phone,Work Address,Home Address,Employee ID,Employee Type,Employee Title,Manager Email,Department,Cost Center,Building ID,Floor Name,Floor Section,Change Password at Next Sign-In,New Status [UPLOAD ONLY],Advanced Protection Program enrollment" > "${ROOT_DIR}/config/users.csv"
   while [ $project_id -lt $NB_PROJECTS ];do
     echo "Create content for project ${project_id}"
@@ -23,6 +23,7 @@ function provision(){
 
     mkdir -p "${ROOT_DIR}/config/${w}"   
     terraform output -json bastion_ip |jq -r . >> "${ROOT_DIR}/config/ips"
+    terraform output -json bastion_dns |jq -r . >> "${ROOT_DIR}/config/adresses"
     gcloud_password=$(terraform output -raw password)
     echo "k8s-fund-trainee-${project_id},k8s-fund-trainee-${project_id},k8s-fund-trainee-${project_id}@wecontrol.cloud,${gcloud_password},,/kube-niv1-trainee,,,,,,,,,,,,,,,,,,,,,," >> "${ROOT_DIR}/config/users.csv"
     project_id=$[$project_id+1]
@@ -37,7 +38,7 @@ function prepare_troubleshooting(){
     ssh-keygen -R bastion.fund-${project_id}.wescaletraining.fr
     
     scp -i kubernetes-formation -o StrictHostKeyChecking=no k8s-troubleshooting.yml training@bastion.fund-${project_id}.wescaletraining.fr:/tmp/k8s-troubleshooting.yml
-    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr /tmp/get-credential-cluster-0.sh
+    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr "USE_GKE_GCLOUD_AUTH_PLUGIN=True /tmp/get-credential-cluster-0.sh"
     ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr "kubectl apply -f /tmp/k8s-troubleshooting.yml"
 
     project_id=$[$project_id+1]

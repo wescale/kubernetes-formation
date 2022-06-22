@@ -40,6 +40,11 @@ Then:
 bash tf-runner.sh provision
 ```
 
+Outputs:
+- config/ips : IP list of bastion machines
+- config/adresses : DNS entries list of bastion machines
+- config/users.csv : List of GCP users to create (optional: only if the GCP console has to be used)
+
 ## At the end of training, clean the GKE clusters
 
 

@@ -1,6 +1,6 @@
 # List of errors
 
-Look for `# HERE` inside [k8s-troubleshooting.yml](../kubernetes-resources/terraform/k8s-troubleshooting.yml):
+Look for `# HERE` inside [k8s-troubleshooting.yml](../../../kubernetes-ressources/terraform/k8s-troubleshooting.yml):
 * invalid selector in service wordpress
 * invalid env var MARIA_DB_HOST in wordpress deployment
 * invalid registry name for mariadb depl: should be `docker.io/bitnami/mariadb:10.5.15-debian-10-r40`

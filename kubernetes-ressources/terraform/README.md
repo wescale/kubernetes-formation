@@ -35,9 +35,14 @@ Ask an admin to be set in the correct GSuite group.
 
 Check the number of projects to be used in *tf-runner.sh* script.
 
+If running for CND Kube training, add CND=true env variable.
+
 Then:
 ```
 bash tf-runner.sh provision
+
+# If running for CND Kube training, add CND=true env variable.
+bash CND=true tf-runner.sh provision
 ```
 
 Outputs:

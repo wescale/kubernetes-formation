@@ -15,13 +15,19 @@ provider "aws" {
   region = "eu-west-1"
 }
 
+variable "dns_prefix" {
+  type = string
+  default = "fund"
+  description = "Prefix des URLs Route53. Ex: 'fund' dans fund-1.wescaletraining.fr"
+}
+
 data "aws_route53_zone" "main" {
  name = "wescaletraining.fr"
 }
 
 locals{
-  training_number = trimprefix(terraform.workspace, "wsc-kubernetes-training-")
-  dns_zone_domain =  "fund-${local.training_number}.${data.aws_route53_zone.main.name}"
+  training_number = regex("^.*-(\\d+)$", terraform.workspace) # Récupère le nombre à la fin du workspace
+  dns_zone_domain = "${var.dns_prefix}-${local.training_number[0]}.${data.aws_route53_zone.main.name}"
 }
 
 module "bootstrap-training" {

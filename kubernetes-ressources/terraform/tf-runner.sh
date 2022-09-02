@@ -4,7 +4,16 @@ set -e
 
 NB_PROJECTS=1 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
-OPT=$1   # option
+ACTION=$1   # Action à lancer, passée en option
+
+if [ "$CND" = true ]
+then
+  workspace_prefix=wsc-cnd-dev-k8s
+  dns_prefix=cnd
+else
+  workspace_prefix=wsc-kubernetes-training
+  dns_prefix=fund
+fi
 
 ROOT_DIR=$(pwd)
 mkdir -p  "${ROOT_DIR}/config"
@@ -16,10 +25,10 @@ function provision(){
   while [ $project_id -lt $NB_PROJECTS ];do
     echo "Create content for project ${project_id}"
     set +e
-    terraform workspace new "wsc-kubernetes-training-${project_id}"
+    terraform workspace new "${workspace_prefix}-${project_id}"
     set -e
-    terraform workspace select "wsc-kubernetes-training-${project_id}"
-    terraform apply -auto-approve
+    terraform workspace select "${workspace_prefix}-${project_id}"
+    terraform apply -auto-approve -var "dns_prefix=${dns_prefix}"
 
     mkdir -p "${ROOT_DIR}/config/${w}"   
     terraform output -json bastion_ip |jq -r . >> "${ROOT_DIR}/config/ips"
@@ -35,11 +44,11 @@ function prepare_troubleshooting(){
   while [ $project_id -lt $NB_PROJECTS ];do
     echo "Create troubleshooting application for project ${project_id}"
     # Clear bastion fingerprint that may have changed
-    ssh-keygen -R bastion.fund-${project_id}.wescaletraining.fr
+    ssh-keygen -R bastion.${dns_prefix}-${project_id}.wescaletraining.fr
     
-    scp -i kubernetes-formation -o StrictHostKeyChecking=no k8s-troubleshooting.yml training@bastion.fund-${project_id}.wescaletraining.fr:/tmp/k8s-troubleshooting.yml
-    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr "USE_GKE_GCLOUD_AUTH_PLUGIN=True /tmp/get-credential-cluster-0.sh"
-    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr "kubectl apply -f /tmp/k8s-troubleshooting.yml"
+    scp -i kubernetes-formation -o StrictHostKeyChecking=no k8s-troubleshooting.yml training@bastion.${dns_prefix}-${project_id}.wescaletraining.fr:/tmp/k8s-troubleshooting.yml
+    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.${dns_prefix}-${project_id}.wescaletraining.fr "USE_GKE_GCLOUD_AUTH_PLUGIN=True /tmp/get-credential-cluster-0.sh"
+    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.${dns_prefix}-${project_id}.wescaletraining.fr "kubectl apply -f /tmp/k8s-troubleshooting.yml"
 
     project_id=$[$project_id+1]
   done
@@ -50,9 +59,9 @@ function clean_troubleshooting(){
   while [ $project_id -lt $NB_PROJECTS ];do
     echo "Clean troubleshooting application for project ${project_id}"
     # Clear bastion fingerprint that may have changed
-    ssh-keygen -R bastion.fund-${project_id}.wescaletraining.fr
+    ssh-keygen -R bastion.${dns_prefix}-${project_id}.wescaletraining.fr
     
-    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.fund-${project_id}.wescaletraining.fr "kubectl delete ns application"
+    ssh -i kubernetes-formation -o StrictHostKeyChecking=no training@bastion.${dns_prefix}-${project_id}.wescaletraining.fr "kubectl delete ns application"
 
     project_id=$[$project_id+1]
   done
@@ -66,10 +75,10 @@ function refresh_git_repo(){
     w="wsc-kubernetes-adv-training-${project_id}"
     set -e
     # Clear bastion fingerprint that may have changed
-    ssh-keygen -R bastion.fund-${project_id}.wescaletraining.fr
+    ssh-keygen -R bastion.${dns_prefix}-${project_id}.wescaletraining.fr
     
-    ssh -i kubernetes-formation -o "StrictHostKeyChecking no" training@bastion.fund-${project_id}.wescaletraining.fr sudo rm -rf /home/training/kubernetes-formation
-    ssh -i kubernetes-formation -o "StrictHostKeyChecking no" training@bastion.fund-${project_id}.wescaletraining.fr git clone https://github.com/WeScale/kubernetes-formation/
+    ssh -i kubernetes-formation -o "StrictHostKeyChecking no" training@bastion.${dns_prefix}-${project_id}.wescaletraining.fr sudo rm -rf /home/training/kubernetes-formation
+    ssh -i kubernetes-formation -o "StrictHostKeyChecking no" training@bastion.${dns_prefix}-${project_id}.wescaletraining.fr git clone https://github.com/WeScale/kubernetes-formation/
 
     #ssh -F "${ROOT_DIR}/config/${w}/provided_ssh_config" bastion "cd creds && rke up"
     # Kubeconfig, storage class
@@ -82,19 +91,19 @@ function clean() {
   while [ $project_id -lt $NB_PROJECTS ];do
     echo "Destroy content of project ${project_id}"
     set +e
-    terraform workspace new "wsc-kubernetes-training-${project_id}"
+    terraform workspace new "${workspace_prefix}-${project_id}"
     set -e
-    terraform workspace select "wsc-kubernetes-training-${project_id}"
+    terraform workspace select "${workspace_prefix}-${project_id}"
     terraform destroy -auto-approve
     terraform workspace select "default"
-    terraform workspace delete "wsc-kubernetes-training-${project_id}"
+    terraform workspace delete "${workspace_prefix}-${project_id}"
     project_id=$[$project_id+1]
   done
 }
 
 terraform init -get
 
-case $OPT in
+case $ACTION in
    "provision") provision;;
    "clean") clean;;
    "refresh_git_repo") refresh_git_repo;;

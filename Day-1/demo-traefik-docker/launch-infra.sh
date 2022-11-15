@@ -2,7 +2,7 @@
 
 cd traefik
 
-docker-compose up -d
+docker compose up -d
 
 cd ../front-test
 npm install
@@ -10,9 +10,9 @@ npm run build
 
 cd ../infra
 
-docker-compose up -d
+docker compose up -d
 
-docker-compose scale webservice=2
+docker compose scale webservice=2
 
 cd ..
 

@@ -2,9 +2,9 @@
 
 cd infra
 
-docker-compose down
+docker compose down
 
 
 cd ../traefik
 
-docker-compose down
+docker compose down

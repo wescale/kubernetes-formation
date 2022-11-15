@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: mariadb:10
+    image: mariadb:10.9
     volumes:
       ##
       # Add volume mount to persist MariaDB data (répertoire /var/lib/mysql)

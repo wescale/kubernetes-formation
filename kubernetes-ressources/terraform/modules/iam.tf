@@ -21,3 +21,4 @@ resource "google_project_iam_member" "project-viewer" {
   role               = "roles/viewer"
   member             = "serviceAccount:${google_service_account.k8s_fundamentals.email}"
 }
+

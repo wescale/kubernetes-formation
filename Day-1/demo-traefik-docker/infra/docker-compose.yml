@@ -24,5 +24,4 @@ services:
 
 networks:
   web:
-    external:
-      name: traefik_webgateway
+    name: traefik_webgateway

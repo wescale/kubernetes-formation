@@ -2,7 +2,7 @@
 
 set -e
 
-NB_PROJECTS=1 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
+NB_PROJECTS=11 # can go to the value defined in https://gitlab.com/wescalefr/bootstrap-gcp-kube-training
 
 ACTION=$1   # Action à lancer, passée en option
 

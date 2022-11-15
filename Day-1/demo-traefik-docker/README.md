@@ -9,7 +9,7 @@ You will use traefik to show what a service discovery does.
 ```sh
 cd traefik
 
-docker-compose up -d
+docker compose up -d
 cd -
 ```
 
@@ -30,7 +30,7 @@ npm run build
 
 cd ../infra
 # Start the application
-docker-compose up -d
+docker compose up -d
 ```
 
 Now, if you consult the Traefik HTTP services[http://BASTION_IP:8080/dashboard/#/http/services](http://BASTION_IP:8080/dashboard/#/http/services), you should see two more entries: **front-infra** and **webservice-infra**.
@@ -51,7 +51,7 @@ Then open a browser on [http://front-infra:8000](http://front-infra:8000)
 ### Scale some services
 
 ```sh
-docker-compose up --scale webservice=2 -d
+docker compose up --scale webservice=2 -d
 ```
 
 You should see the additional containers in the Traefik admin UI.

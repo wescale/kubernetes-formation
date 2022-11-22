@@ -39,7 +39,7 @@ kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64
 ```sh
 kubectl create secret generic mariadb-user-creds \
       --from-literal=MYSQL_USER=kubeuser\
-      --from-literal=MYSQL_ROOT_PASSWORD=KubernetesTraining
+      --from-literal=MYSQL_PASSWORD=KubernetesTraining
 ```
 
 ## View the secret:

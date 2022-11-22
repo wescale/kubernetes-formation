@@ -23,8 +23,8 @@ spec:
         department: sales
     spec:
       containers:
-      - name: hello
-        image: "gcr.io/google-samples/hello-app:2.0"
+      - name: nginx
+        image: nginx:alpine
 ```
 
 ```sh 
@@ -47,7 +47,7 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 80
 ```
  
 ```sh 
@@ -65,8 +65,6 @@ Access the service: try the [CLUSTER_IP]:80. This does not work. Why? How can yo
 Execute a shell inside a pod of the service:
 ```sh
 kubectl exec # FIND the other arguments
-# Install curl
-apk update && apk add --no-cache curl
 ```
 
 Try the curl on http://my-cip-service.default.svc.cluster.local:80
@@ -74,5 +72,5 @@ Try the curl on http://my-cip-service.default.svc.cluster.local:80
 ## Clean all resources
 
 ```sh
-kubectl  delete -f .
+kubectl delete -f .
 ```

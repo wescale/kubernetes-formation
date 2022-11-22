@@ -15,7 +15,7 @@ podman ps -a
 Add a custom /usr/share/nginx/html/index.html using a volume
 
 ```
-podman run --name nginx -d -p 8080:80 ##OptionToUseAVolume## nginx
+podman run --name nginx -d -p 8080:80 ##OptionToUseAVolume## docker.io/nginx
 ```
 
 ## See logs

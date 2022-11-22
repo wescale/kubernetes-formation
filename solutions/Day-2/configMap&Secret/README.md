@@ -47,19 +47,23 @@ kubectl create secret generic mariadb-user-creds \
 You are a k8s ninja!
 You know how to do that.
 
+```sh
+kubectl get secret mariadb-user-creds -o jsonpath='{.data.MYSQL_PASSWORD}' | base64 -d
+```
+
 # ConfigMap
 
 ## Create a configMap to configure the mariadb application
 
+Create the config map `mariadb-config` from the `max_allowed_packet.cnf` file.
 ```sh
-kubectl create configmap mariadb-config --from-file=max_allowed_packet.cnf
+kubectl create configmap # Complete arguments
 ```
 
 Edit the configMap to change the value 32M to `max_allowed_packet`.
 
-View the configmap:
 ```sh
-kubectl get configmap mariadb-config -o yaml
+kubectl edit configmap mariadb-config
 ```
 
 # Use the secrets and configMap
@@ -90,34 +94,12 @@ envFrom:
 
 ## Add your configMap to the deployment
 
-Add your ConfigMap as source, adding it to `volumes` entry of the pod spec. Then add a `volumeMount` to the container definition.
+Add your ConfigMap as source into the `volumes` entry of the pod spec. Then add a `volumeMount` to the container definition.
 
 Use the configMap as a `volumeMount` to `/etc/mysql/conf.d` 
 
-```
-<...>
+See the documentation for help.
 
-  volumeMounts:
-  - mountPath: /var/lib/mysql
-    name: mariadb-volume-1
-  - mountPath: /etc/mysql/conf.d
-    name: mariadb-config-volume
-
-<...>
-
-volumes:
-- emptyDir: {}
-  name: mariadb-volume-1
-- configMap:
-    name: mariadb-config
-    items:
-      - key: max_allowed_packet.cnf
-        path: max_allowed_packet.cnf
-  name: mariadb-config-volume
-
-<...>
-
-```
 ## Create the deployment
 
 ```sh 

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: declarative-gitops-chart
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/wescale/k8s-advanced-training.git'
+    targetRevision: HEAD
+    path: 'Correction/Helm/exercice 2/sample-demo'
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: 'declarative-gitops'

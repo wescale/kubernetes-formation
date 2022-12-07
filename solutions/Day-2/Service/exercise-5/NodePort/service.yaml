@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-cip-service
+  name: my-np-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: metrics
-    department: sales
+    department: engineering
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 80
+    targetPort: 50000

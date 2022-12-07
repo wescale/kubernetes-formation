@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - 8080
+    depends_on:
+      - redis
+  redis:
+    image: redis

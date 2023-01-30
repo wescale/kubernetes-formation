@@ -27,9 +27,22 @@ In version "~> 0.12"
 
 ## Get GCP credentials
 
-Terraform needs to runs actions on GCP in folder *folders/795997944654* (belonging to wescale.fr domain).
+Terraform needs to runs actions on GCP in folder XXX.
 
 Ask an admin to be set in the correct GSuite group.
+
+Then run:
+
+```sh
+gcloud auth application-default login
+```
+
+## Get AWS credentials
+
+Terraform needs to runs create DNS records in the `wescaletraining.fr` route53 domain (belonging to AWS wescale organization).
+
+Ask an AWS admin to put you in the correct AWS IAM group.
+Export your AWS Profile.
 
 ## Run the wrapper script
 

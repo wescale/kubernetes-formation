@@ -7,10 +7,10 @@ services:
       # Add volume mount to persist MariaDB data (répertoire /var/lib/mysql)
       ##
     restart: always
+    volumes:
+      - mariadb-data:/var/lib/mysql
     environment:
-      ##
-      # Add environment variables for the MariaDB credentials
-      ##
+      MYSQL_ROOT_PASSWORD: password
   dbadmin:
     image: phpmyadmin/phpmyadmin:5
     ports:
@@ -24,16 +24,11 @@ services:
       # Add environment variables for the MariaDB+PHPMyAdmin
       ##
     depends_on:
-      ##
-      # Add the dependency
-      ##
-
+      - db
   wordpress:
     image: wordpress:6
     depends_on:
-      ##
-      # Add the dependency
-      ##
+      - db
     ports:
       - "8080:80"
     restart: always

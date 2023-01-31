@@ -10,6 +10,10 @@ The components are:
 ## Start the Redis container
 
 Start a container named `redis` from the `redis:latest` image.
+```sh
+  docker run -d --name redis redis:latest
+```
+
 
 ## Create a user-defined bridge network
 
@@ -42,7 +46,7 @@ The aim of this step is to run a container with the correct options to:
 You can now start the application container to listen on the exposed port.
 This container needs to connect to the Redis instance:
 ```
-  docker run -d --name nodeapp ##OptionToConnectThisContainerToMy-Net## ##OptionToExposeThePort## myrepo/nodeapp
+  docker run -d --name nodeapp --network=my-net -p 8080:8080 myrepo/nodeapp
 ```
 
 To test if your application works well, you can consult this page: [http://[BASTION IP]:8080](http://localhost:8080)

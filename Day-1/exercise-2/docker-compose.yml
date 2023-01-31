@@ -1,12 +1,10 @@
 version: '3'
 services:
   web:
-    build:
-      context: .
-    ports:
-      - 8000:8080
-    links:
-      - redis
+    ###
+    # Insert here instructions for the web NodeJS application
+    ###
   redis:
-    image: redis
-
+    ###
+    # Insert here instructions for redis
+    ###

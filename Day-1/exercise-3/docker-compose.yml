@@ -4,7 +4,7 @@ services:
     build:
       context: .
     ports:
-      - 8000:8080
+      - 8080:8080
     ###
     # Insert here the instruction to mount the `client`volume
     ###

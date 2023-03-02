@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: mariadb:10.9
+    image: mariadb:10
     volumes:
       ##
       # Add volume mount to persist MariaDB data (répertoire /var/lib/mysql)
@@ -12,10 +12,14 @@ services:
       # Add environment variables for the MariaDB credentials
       ##
   dbadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:5
     ports:
-      - "8080:80"
+      - "8000:80"
     environment:
+      # To get a working Web preview with Cloud Shell, need to indicate the Cloud Shell proxy public access
+      #
+      # WEB_HOST is populated for each Cloud Shell instance
+      PMA_ABSOLUTE_URI: "https://8000-${WEB_HOST}"
       ##
       # Add environment variables for the MariaDB+PHPMyAdmin
       ##
@@ -25,15 +29,23 @@ services:
       ##
 
   wordpress:
-    image: wordpress:latest
+    image: wordpress:6
     depends_on:
       ##
       # Add the dependency
       ##
     ports:
-      - "8000:80"
+      - "8080:80"
     restart: always
     environment:
-      ##
+      # To get a working Web preview with Cloud Shell, need to indicate the Cloud Shell proxy public access
+      #
+      # WEB_HOST is populated for each Cloud Shell instance
+      WORDPRESS_CONFIG_EXTRA: |
+        define('FORCE_SSL_ADMIN', true);
+        define('WP_SITEURL', 'https://8080-${WEB_HOST}' );
+        define('DOMAIN_CURRENT_SITE', '8080-${WEB_HOST}' );
+        define('WP_HOME', 'https://8080-${WEB_HOST}');
+        $$_SERVER['HTTPS'] = 'on';
       # Add environment variables for the MariaDB credentials
       ##

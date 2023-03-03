@@ -8,7 +8,7 @@ In this exercise, you will create a k8s secret as well as a k8s configmap to cor
 
 Generate a base-64 encoded string:
 ```
-echo -n 'KubernetesTraining!' | base64
+echo -n 'KubernetesTraining' | base64
 ```
 
 Note the value and put it in the secret definition:

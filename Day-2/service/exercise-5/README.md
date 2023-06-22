@@ -1,12 +1,5 @@
-# exercise-5: services
+# Services
 
-You will explore the different types of services proposed by kubernetes:
+Click the button below to start the exercise.
 
-1. Create a CLUSTER IP service
-2. Create NodePort service
-3. Create a LoadBalancer service
-4. Clean the resources:
-```sh
-kubectl delete services my-cip-service my-np-service my-lb-service
-kubectl delete deployments my-deployment my-deployment-50000 my-deployment-50001
-```
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/open?cloudshell_git_repo=https://github.com/WeScale/kubernetes-formation&cloudshell_tutorial=tutorial.md&show=ide%2Cterminal&ephemeral=true&cloudshell_git_branch=feature/gcloud-tutorial&cloudshell_workspace=Day-2/service/exercise-5/)

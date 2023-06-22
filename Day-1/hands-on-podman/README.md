@@ -1,50 +1,5 @@
 # Hands-on : from Docker to Podman
 
-## Prerequisistes: installation of Podman
+Click the button below to start the demonstration.
 
-Read the doc : [Installation](https://podman.io/getting-started/installation)
-
-Check if everything works (no need of `sudo`):
-
-```
-podman ps -a
-```
-
-## Launch a web server
-
-Add a custom /usr/share/nginx/html/index.html using a volume
-
-```
-podman run --name nginx -d -p 8080:80 ##OptionToUseAVolume## docker.io/nginx
-```
-
-## See logs
-
-See the logs of the created container.
-Use the special flag `--latest`
-
-## Podman is not Docker ...
-
-Watch running docker containers. Do you see `nginx`?
-
-## ... but Podman looks very like Docker
-
-`podman` cli has same commands and options as `docker`. Just put an entry in your _.bash_aliases_ can do the trick:
-
-```sh
-echo "alias docker=podman" >> .bash_aliases
-```
-
-Can you see a running container using `docker` keyword now? Don't forget to start a new Bash terminal.
-
-## Clean
-
-You can stop the container and remove it:
-```sh
-podman stop --latest
-podman ps -a
-podman rm --latest
-podman ps -a
-```
-
-
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/open?cloudshell_git_repo=https://github.com/WeScale/kubernetes-formation&cloudshell_tutorial=tutorial.md&show=ide%2Cterminal&ephemeral=true&cloudshell_git_branch=feature/gcloud-tutorial&cloudshell_workspace=Day-1/hands-on-podman/)

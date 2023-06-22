@@ -18,7 +18,9 @@ Instead of creating a YAML file, use the imperative command `kubectl expose` to 
 
 Ensure the pod and the service are OK.
 >> kubectl get pod web
+
 >> kubectl get service web
+
 >> kubectl describe service web
 
 

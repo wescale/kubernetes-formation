@@ -20,6 +20,8 @@ Now, you must retrieve the credentials of the kubernetes cluster:
 
 ```sh
 gcloud container clusters get-credentials training-cluster --project ${GOOGLE_CLOUD_PROJECT} --zone europe-west1-b
+# Ensure you see 3 nodes running:
+kubectl get nodes
 ```
 
 ## Start the pod

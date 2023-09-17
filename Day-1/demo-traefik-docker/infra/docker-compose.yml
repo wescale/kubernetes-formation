@@ -25,3 +25,4 @@ services:
 networks:
   web:
     name: traefik_webgateway
+    external: true

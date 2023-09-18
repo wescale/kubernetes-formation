@@ -4,7 +4,7 @@
 
 ## Description
 
-In this demo you will get familiar with the build and of run of docker images.
+In this demo you will get familiar with the build and the run of docker images.
 
 ## Create a React app and build to get static files
 

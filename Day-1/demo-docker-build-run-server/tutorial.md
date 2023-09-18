@@ -1,6 +1,6 @@
 # Demo docker build and run server
 
-<walkthrough-tutorial-duration duration="10.0"></walkthrough-tutorial-duration>
+<walkthrough-tutorial-duration duration="15.0"></walkthrough-tutorial-duration>
 
 ## Description
 

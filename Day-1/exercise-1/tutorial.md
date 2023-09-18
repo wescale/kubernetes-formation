@@ -1,6 +1,6 @@
 # Exercise 1 - Build and run an app
 
-<walkthrough-tutorial-duration duration="25.0"></walkthrough-tutorial-duration>
+<walkthrough-tutorial-duration duration="40.0"></walkthrough-tutorial-duration>
 
 ## Description
 

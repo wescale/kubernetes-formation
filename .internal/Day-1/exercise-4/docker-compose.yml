@@ -26,7 +26,7 @@ services:
       - db
 
   wordpress:
-    image: wordpress:latest
+    image: wordpress:6
     depends_on:
       - db
     ports:

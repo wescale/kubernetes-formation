@@ -45,7 +45,7 @@ Is the no-toleration-pod still running ? Why?
 
 ## Schedule a pod to the dev environment.
 
-Complete the given `dev-pod-busybox.yml` file to tolerate the taint `node-type` with value `dev` and effect `no-execute`.
+Complete the given `dev-pod-busybox.yml` file to tolerate the taint `node-type` with value `dev` and effect `NoExecute`.
 
 Create the pod:
 ```sh

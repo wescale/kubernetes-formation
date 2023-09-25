@@ -6,35 +6,17 @@
 
 In this demo you will get familiar with the build and the run of docker images.
 
-## Create a React app and build to get static files
+## See the existing application
 
-Install create-react-app module:
+The Python Flask application is very simple. See the only code file: <walkthrough-editor-open-file filePath="python-code/app.py">python-code/app.py</walkthrough-editor-open-file>.
 
-```sh
-npm i -g create-react-app
-```
-
-Create a new React application:
-
-```sh
-./create-build.sh
-```
-
-You can watch The Lord Of the Rings...
-
-Then look at the `app-test/build` directory to show what is a React application (static, js, ...).
-
-```sh
-cd app-test
-ls -la build/ && ls -la build/static/ && ls -la build/static/js/
-cd -
-```
+To manage the dependencies, see the <walkthrough-editor-open-file filePath="python-code/requirements.txt">python-code/requirements.txt</walkthrough-editor-open-file> file.
 
 ## Build an image and run the container
 
 Look at the `./DockerFile``. ; **Explain it.**
 
-Then build:
+Then build an image and start a container from this image:
 
 ```sh
 ./run-container.sh

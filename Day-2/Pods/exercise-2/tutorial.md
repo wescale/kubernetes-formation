@@ -64,7 +64,7 @@ kubectl get nodes  -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 
 ## Schedule a pod to the dev environment
 
-Complete the given <walkthrough-editor-open-file filePath="dev-pod-busybox.yml">dev-pod-busybox.yml</walkthrough-editor-open-file> file to tolerate the taint `node-type` with value `dev` and effect `no-execute`.
+Complete the given <walkthrough-editor-open-file filePath="dev-pod-busybox.yml">dev-pod-busybox.yml</walkthrough-editor-open-file> file to tolerate the taint `node-type` with value `dev` and effect `NoExecute`.
 
 Create the pod:
 

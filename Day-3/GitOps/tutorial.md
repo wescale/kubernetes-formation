@@ -96,7 +96,6 @@ This can be dangerous on production :-)
 kubectl delete ns argocd
 kubectl delete ns ui-gitops
 kubectl delete ns declarative-gitops
-kubectl delete ns declarative-gitops
 ```
 
 ## Congratulations

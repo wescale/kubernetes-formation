@@ -14,7 +14,9 @@ To manage the dependencies, see the <walkthrough-editor-open-file filePath="pyth
 
 ## Build an image and run the container
 
-Look at the `./DockerFile``. ; **Explain it.**
+Look at the <walkthrough-editor-open-file filePath="Dockerfile">Dockerfile</walkthrough-editor-open-file>.
+
+**Explain it.**
 
 Then build an image and start a container from this image:
 
@@ -24,7 +26,7 @@ Then build an image and start a container from this image:
 
 ## Test
 
-To test if your application works well, you can click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon. Open, port 3000
+To test if your application works well, you can click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon. Open, port 8080
 
 ## Clean
 

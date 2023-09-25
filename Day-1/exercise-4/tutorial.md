@@ -20,6 +20,8 @@ To know how to configure the containers, read the documentation on the Docker Hu
 * a [PhpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/) interface to be connected to MariaDB
 * a PHP Wordpress application [Wordpress](https://hub.docker.com/_/wordpress/)
 
+Please consult the [Docker Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) if you need help.
+
 You can launch the following command to start all the services:
 
 ```sh

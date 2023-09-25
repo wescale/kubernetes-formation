@@ -14,6 +14,8 @@ Complete the <walkthrough-editor-open-file filePath="docker-compose.yml">docker-
 
 The chat container must mount a volume which contains an HTML page (`client` directory). This will allow us to modify the HTML page without restarting the container.
 
+Please consult the [Docker Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) if you need help.
+
 You can launch the following command to start all the services:
 
 ```sh

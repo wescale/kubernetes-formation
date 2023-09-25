@@ -26,6 +26,8 @@ The expected directives are:
 * The `web` application will be connected to the `redis` service.
 * The `redis` service simply starts the official image from [Dockerhub](https://hub.docker.com/).
 
+Please consult the [Docker Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) if you need help.
+
 You can launch the following command to start all the services:
 
 ```sh

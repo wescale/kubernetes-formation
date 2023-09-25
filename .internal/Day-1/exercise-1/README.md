@@ -7,14 +7,11 @@ Pull then start the Redis server:
 
 La commande à lancer est la suivante :
 ```
-  docker run -d --name pythonapp --network my-net -p 8080:8080 myrepo/pythonapp
+  docker run -d --name pythonapp --network my-net -p 8080:5000 myrepo/pythonapp
 ```
 
 Enter the pythonapp container and show the /etc/hosts file.
 Enter the pythonapp container and show the /etc/resolv.conf file.
 
-If needed, start a ubuntu container connected to the network, then run `dig`to illustrate the DNS resolution.
-
-```sh
-apk add bind-tools
-```
+-> DNS server on 127.0.0.11 provided once a container is in Docker network.
+See <https://docs.docker.com/network/#dns-services>

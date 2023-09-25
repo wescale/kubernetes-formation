@@ -7,11 +7,6 @@ services:
       # Add volume mount to persist MariaDB data (répertoire /var/lib/mysql)
       ##
     restart: always
-    volumes:
-      ##
-      # Add volume mount to persist MariaDB data (répertoire /var/lib/mysql)
-      ##
-    restart: always
     environment:
       ##
       # Add environment variables for the MariaDB credentials

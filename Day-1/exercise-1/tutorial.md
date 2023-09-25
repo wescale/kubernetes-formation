@@ -62,8 +62,6 @@ To test if your application works well, you can click on the <walkthrough-web-pr
 
 How is the resolution of `redis` done inside the `pythonapp` container?
 
-**Tips**: You can execute a `shell` inside the `pythonapp` container running a `docker exec -ti CONTAINER_ID sh` command. Then install dig with `apk add --update bind-tools`
-
 ## Clean the containers
 
 ```sh

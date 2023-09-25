@@ -1,13 +1,20 @@
-FROM node:14.15.0-alpine
+FROM python:3.11-alpine
 
+# A LABEL is just metadata
 LABEL maintainer="Wescale Formation <training@wescale.fr>"
 
-RUN mkdir -p /usr/src/my-app
-WORKDIR /usr/src/my-app
-COPY app.js .
-COPY package.json .
-RUN npm install
 
-EXPOSE 8080
+# We create the `worker` user with an Alpine command
+RUN addgroup -S worker && adduser -S worker -G worker
+# Change the default user for following RUN commands to `worker`
+USER worker
+# Change the current directory to /code
+WORKDIR /code
+# Copy the directory python-code to the current directory. 
+# Leave the --chown option to ensure `worker` user can access the files.
+COPY --chown=worker:worker python-code /code
+# Execute the command: pip install
+RUN pip install -r requirements.txt --no-cache-dir
 
-CMD ["node", "app.js"]
+CMD python app.py
+EXPOSE 5000

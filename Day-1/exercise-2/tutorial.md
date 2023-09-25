@@ -4,7 +4,7 @@
 
 ## Description
 
-We use the same NodeJS as the one of the previous exercise.
+We use the same Python Flask application as the one of the previous exercise.
 
 The aim is to run 2 containers and connect them without running docker cli but a `docker-compose.yml` file.
 

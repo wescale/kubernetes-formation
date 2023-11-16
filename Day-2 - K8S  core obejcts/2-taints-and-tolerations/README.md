@@ -1,3 +1,5 @@
+YPO => utiliser redis
+
 # Taints and tolerations
 
 Click the button below to start the exercise.

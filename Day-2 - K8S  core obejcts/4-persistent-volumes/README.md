@@ -1,3 +1,5 @@
+YPO => redis avec un volume persistant
+
 # Persistent volume claims
 
 Click the button below to start the exercise.

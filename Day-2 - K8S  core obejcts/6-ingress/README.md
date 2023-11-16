@@ -1,3 +1,4 @@
+YPO => Redis + sa Gui ? Il y a du 0.9 et du 1.17... a voir si c'est suffisament différent
 # Ingress rules
 
 Click the button below to start the exercise.

@@ -1,3 +1,5 @@
+YPO => remplacer par redis
+
 # Hands-on : from Docker to Podman
 
 Click the button below to start the demonstration.

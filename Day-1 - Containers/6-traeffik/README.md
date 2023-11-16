@@ -1,3 +1,5 @@
+YPO => je pense qu'on peut trouver notre bonheur avec 2 services frontend et productcatalog
+
 # Demo service discovery with Traefik
 
 Click the button below to start the demonstration.

@@ -1,3 +1,6 @@
+YPO => on peut faire une stack redis + cart + redisinsight 
+https://hub.docker.com/r/redislabs/redisinsight
+
 # Exercice-4: Multiple services
 
 Click the button below to start the exercise.

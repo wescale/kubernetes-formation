@@ -1,3 +1,5 @@
+YPO => utiliser redis
+
 # Create a pod, execute commands inside then delete it
 
 Click the button below to start the exercise.

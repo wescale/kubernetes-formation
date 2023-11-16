@@ -1,3 +1,6 @@
+YPO => utiliser Redis container + cartservice
+Il faut peut etre adapter cartservice pour que l'exercice reste parlant
+
 # Exercise 1 - Build and run an app
 
 Click the button below to start the exercise.

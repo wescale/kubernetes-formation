@@ -1,3 +1,5 @@
+YPO => changer pour le container Redis
+
 # first-commands
 
 Click the button below to start the exercise.

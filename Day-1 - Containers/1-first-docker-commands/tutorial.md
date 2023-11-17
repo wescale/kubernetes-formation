@@ -14,7 +14,7 @@ On classical server, you would need to [install it](https://docs.docker.com/engi
 
 ### Get engine and client information
 
-Run **docker info** to get variious information about the client and engine configuration.
+Run **docker info** to get various information about the client and engine configuration.
 
 ```sh
 docker info
@@ -25,36 +25,38 @@ What are the number of CPU and the memory capacity of or host?
 ## Launch your first container
 
 ```sh
-docker run hello-world
+docker run redis
 ```
 
 Observe the produced output and answer to the following questions:
 
-* Container image format is IMAGE:TAG. What is the tag used in our case?
+* Container image format is `IMAGE:TAG`. What is the tag used in our case?
 * What is the SHA1 used in our case?
-* What is the source of the hello-world image?
+* What is the source of the `redis` image?
+
+> You can stop the running container with **Ctrl+C**.
 
 **docker run** has a huge amount of options.
 
 ```sh
-docker run --help
+docker help run
 ```
 
-Look at the  options applicable to limit CPU and memory when a container is started.
+Look at the options applicable to limit CPU and memory when a container is started.
 
 ## Other Docker commands
 
 Docker has many commands that you can view with:
 
 ```sh
-docker --help
+docker help
 ```
 
 Among those commands, we will look at **ps**, **images**, **inspect**, **history** and **logs**.
 
 ### List containers
 
-Determine the status of your hello-world container with:
+Determine the status of your `redis` container with:
 
 ```sh
 docker ps -a
@@ -63,7 +65,7 @@ docker ps -a
 We will retrieve the CONTAINER ID for later use.
 
 ```sh
-CONTAINER_ID=$(docker ps -al --format json|jq -r '.ID')
+CONTAINER_ID=$(docker ps -al --format json | jq -r '.ID')
 ```
 
 ### Inspect Docker objects
@@ -73,7 +75,7 @@ CONTAINER_ID=$(docker ps -al --format json|jq -r '.ID')
 For example, you can inspect the created container:
 
 ```sh
-docker inspect ${CONTAINER_ID}|jq ''
+docker inspect ${CONTAINER_ID} | jq .
 ```
 
 Observe the result to determine:
@@ -92,7 +94,7 @@ docker logs ${CONTAINER_ID}
 But you can also access the logs with:
 
 ```sh
-sudo cat $(docker inspect ${CONTAINER_ID}|jq -r '.[].LogPath')
+sudo cat $(docker inspect ${CONTAINER_ID} | jq -r '.[].LogPath')
 ```
 
 Why are the log formatted in json?
@@ -112,13 +114,13 @@ docker images
 Get the image id:
 
 ```sh
-IMAGE_ID=$(docker images --format json|jq -r '.ID')
+IMAGE_ID=$(docker images --format json | jq -r '.ID')
 ```
 
 Then inspect it:
 
 ```sh
-docker inspect ${IMAGE_ID}|jq ''
+docker inspect ${IMAGE_ID} | jq ''
 ```
 
 Observe the result to determine:
@@ -134,34 +136,46 @@ You can view the history of command which have been used to create the image.
 docker history ${IMAGE_ID}
 ```
 
-hello-world image comes from the default registry, called  the [DockerHub](https://hub.docker.com/). This hub serves many images. Some of them are officially maintained, some others are community provided with potential security issues...
+The `redis` image comes from the default registry, called the [DockerHub](https://hub.docker.com/). This hub
+serves many images. Some of them are officially maintained, some others are community provided
+with potential security issues...
 
-Open the [DockerHub](https://hub.docker.com/) and search for the hello-world image.
+Open the [DockerHub](https://hub.docker.com/) and search for the `redis` image.
 
 You can see the list of tags and additional information about the image usage.
 
-To see the related Dockerfile, you must consult the [GitHub repository](https://github.com/docker-library/hello-world/blob/master/amd64/hello-world/Dockerfile)
+To see the related Dockerfile, you must consult the [GitHub repository](https://github.com/docker-library/redis/blob/master/7.2/bookworm/Dockerfile)
 
-```none
-FROM scratch
-COPY hello /
-CMD ["/hello"]
+```Dockerfile
+FROM debian:bookworm-slim
+RUN groupadd -r -g 999 redis && useradd -r -g redis -u 999 redis
+ENV GOSU_VERSION 1.16
+RUN set -eux; # (...)
+ENV REDIS_VERSION 7.2.3
+ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-7.2.3.tar.gz
+ENV REDIS_DOWNLOAD_SHA 3e2b196d6eb4ddb9e743088bfc2915ccbb42d40f5a8a3edd8cb69c716ec34be7
+RUN set -eux; # (...)
+RUN mkdir /data && chown redis:redis /data
+VOLUME /data
+WORKDIR /data
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
+EXPOSE 6379
+CMD ["redis-server"]
 ```
 
-Do you retrieve the instructions printed with **docker history** command ?
+Do you retrieve the instructions printed with `docker history` command ?
 
-What does the **FROM scratch** directive mean?
+What does the `FROM debian:bookworm-slim` directive mean?
 
 ## Clean
 
 Clean the container:
-
 ```sh
 docker rm -vf ${CONTAINER_ID}
 ```
 
-Thhen the image:
-
+Then the image:
 ```sh
 docker rmi ${IMAGE_ID}
 ```

@@ -14,7 +14,7 @@ For now, we'll only use the "cart store" service, and connect it to a redis data
 
 ## Start the Redis container
 
-Enter the commands to start a container named `redis` from the `redis:latest` image.
+First, enter the commands to start a container named `redis` from the `redis:latest` image.
 
 Then, you will create a new docker network named `my-net`:
 
@@ -38,18 +38,20 @@ git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
 ```
 
 Once the clone done, you can check the related 
-<walkthrough-editor-open-file filePath="microservice-demo/src/cartservice/src/Dockerfile">Dockerfile</walkthrough-editor-open-file> 
-used to build the microservice.
+<walkthrough-editor-open-file filePath="microservices-demo/src/cartservice/src/Dockerfile">Dockerfile</walkthrough-editor-open-file> 
+used to build the microservice. 
 
-See the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/) for help.
+> The cart service code is in the `microservices-demo/src/cartservice/src/` folder.
+>
+> See the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/) for help.
 
-Once you have read the Dockerfile, build the image:
-
+Navigate to the source folder:
 ```sh
-# Go the the correct folder
-cd microservice-demo/src/cartservice/src/
+cd microservices-demo/src/cartservice/src/
+```
 
-# Then, build the dockerfile
+Then, build the image:
+```sh
 docker build -t cartservice:latest .
 ```
 
@@ -71,6 +73,14 @@ docker run \
 ```
 
 To test if your application works well, you can check the logs of the `cartservice` container.
+
+```sh
+docker logs cartservice
+```
+
+> If you see the following line:
+> `Redis cache host(hostname+port) was not specified. Starting a cart service using in memory store`
+> this means you didn't specify the redis endpoint correctly.
 
 ## Question
 

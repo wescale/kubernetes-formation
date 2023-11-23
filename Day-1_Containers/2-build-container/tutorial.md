@@ -85,14 +85,6 @@ One the image build, run it. It should crash after a few seconds by displaying s
 
 > We'll fix this problem in the next exercise.
 
-## Clean the containers
-
-```sh
-docker rm -vf redis
-docker rm -vf cartservice
-docker network rm my-net
-```
-
 ## Congratulations
 
 You have finished this exercise!

@@ -6,49 +6,12 @@
 
 In this exercise you will get familiar with the build of docker images.
 
-We'll use a basic golang program and will see how to build a docker image from it.
+We'll use the [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo) project from Google.
 
-## The GoLang application
+For now, we'll only use the "cart store" service, and connect it to a redis database. To summary, we'll have : 
+* The "cart store" microservice
+* a [Redis](http://redis.io/) NoSQL database to persist the store cache
 
-The application is a simple program that write a message in the standard output.
-
-You can take a look at the <walkthrough-editor-open-file filePath="go-app/main.go">main.go</walkthrough-editor-open-file> file.
-
-### Build the application
-
-To build the file, you just need to go to the `go-app` folder:
-
-```bash
-cd go-app
-```
-
-And run the following command:
-```sh
-go build -o main .
-```
-> This command will build an executable named `main` in the current folder.
-
-Then, you can run the application to test it:
-```sh
-./main
-```
-
-### Build the containerized application
-
-To build the containerized application, we need to specify the commands to build the image in the 
-<walkthrough-editor-open-file filePath="Dockerfile">Dockerfile</walkthrough-editor-open-file> file.
-
-```sh
-docker build -t go-app:latest .
-```
-
-Then, you can test the containerized application:
-```sh
-docker run go-app:latest
-```
-
-
----
 ## Start the Redis container
 
 First, enter the commands to start a container named `redis` from the `redis:latest` image.

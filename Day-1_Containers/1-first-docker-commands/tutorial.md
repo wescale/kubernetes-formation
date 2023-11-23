@@ -25,16 +25,14 @@ What are the number of CPU and the memory capacity of or host?
 ## Launch your first container
 
 ```sh
-docker run redis
+docker run hello-world
 ```
 
 Observe the produced output and answer to the following questions:
 
-* Container image format is `IMAGE:TAG`. What is the tag used in our case?
+* Container image format is IMAGE:TAG. What is the tag used in our case?
 * What is the SHA1 used in our case?
-* What is the source of the `redis` image?
-
-> You can stop the running container with **Ctrl+C**.
+* What is the source of the hello-world image?
 
 **docker run** has a huge amount of options.
 
@@ -42,7 +40,7 @@ Observe the produced output and answer to the following questions:
 docker help run
 ```
 
-Look at the options applicable to limit CPU and memory when a container is started.
+Look at the  options applicable to limit CPU and memory when a container is started.
 
 ## Other Docker commands
 
@@ -56,13 +54,13 @@ Among those commands, we will look at **ps**, **images**, **inspect**, **history
 
 ### List containers
 
-Determine the status of your `redis` container with:
+Determine the status of your hello-world container with:
 
 ```sh
 docker ps -a
 ```
 
-We will retrieve the CONTAINER ID for later use.
+We will retrieve the `CONTAINER ID` for later use.
 
 ```sh
 CONTAINER_ID=$(docker ps -al --format json | jq -r '.ID')
@@ -79,7 +77,6 @@ docker inspect ${CONTAINER_ID} | jq .
 ```
 
 Observe the result to determine:
-
 * What is the executed command?
 * What is the hostname saw inside the container?
 
@@ -124,7 +121,6 @@ docker inspect ${IMAGE_ID} | jq ''
 ```
 
 Observe the result to determine:
-
 * What is the value of the **PATH** environment variable?
 * What is the default executed command in this image?
 
@@ -136,37 +132,26 @@ You can view the history of command which have been used to create the image.
 docker history ${IMAGE_ID}
 ```
 
-The `redis` image comes from the default registry, called the [DockerHub](https://hub.docker.com/). This hub
-serves many images. Some of them are officially maintained, some others are community provided
+`hello-world` image comes from the default registry, called  the [DockerHub](https://hub.docker.com/). 
+This hub serves many images. Some of them are officially maintained, some others are community provided 
 with potential security issues...
 
-Open the [DockerHub](https://hub.docker.com/) and search for the `redis` image.
+Open the [DockerHub](https://hub.docker.com/) and search for the `hello-world` image.
 
 You can see the list of tags and additional information about the image usage.
 
-To see the related Dockerfile, you must consult the [GitHub repository](https://github.com/docker-library/redis/blob/master/7.2/bookworm/Dockerfile)
+To see the related `Dockerfile`, you must consult the 
+[GitHub repository](https://github.com/docker-library/hello-world/blob/master/amd64/hello-world/Dockerfile)
 
 ```Dockerfile
-FROM debian:bookworm-slim
-RUN groupadd -r -g 999 redis && useradd -r -g redis -u 999 redis
-ENV GOSU_VERSION 1.16
-RUN set -eux; # (...)
-ENV REDIS_VERSION 7.2.3
-ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-7.2.3.tar.gz
-ENV REDIS_DOWNLOAD_SHA 3e2b196d6eb4ddb9e743088bfc2915ccbb42d40f5a8a3edd8cb69c716ec34be7
-RUN set -eux; # (...)
-RUN mkdir /data && chown redis:redis /data
-VOLUME /data
-WORKDIR /data
-COPY docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
-EXPOSE 6379
-CMD ["redis-server"]
+FROM scratch
+COPY hello /
+CMD ["/hello"]
 ```
 
-Do you retrieve the instructions printed with `docker history` command ?
+Do you retrieve the instructions printed with **docker history** command ?
 
-What does the `FROM debian:bookworm-slim` directive mean?
+What does the **FROM scratch** directive mean ?
 
 ## Clean
 
@@ -180,6 +165,14 @@ Then the image:
 ```sh
 docker rmi ${IMAGE_ID}
 ```
+
+## Dig a little deeper
+
+Find the official mongodb image on [Docker hub](https://hub.docker.com/search?q=mongodb), and run it.
+
+> You can press `<ctrl+c>` to stop the running container.
+
+How could you launch the `mongo` image to avoid the terminal to be lock on the logs ?
 
 ## Congratulations
 

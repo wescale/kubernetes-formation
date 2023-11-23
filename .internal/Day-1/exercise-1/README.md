@@ -2,12 +2,12 @@
 
 Pull then start the Redis server:
 ```sh
-  docker run -d --name redis redis
+docker run -d --name redis redis
 ```
 
 La commande à lancer est la suivante :
-```
-  docker run -d --name pythonapp --network my-net -p 8080:5000 myrepo/pythonapp
+```sh
+docker run -d --name pythonapp --network my-net -p 8080:5000 myrepo/pythonapp
 ```
 
 Enter the pythonapp container and show the /etc/hosts file.

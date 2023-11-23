@@ -1,6 +1,5 @@
-YPO => reprendre les 2 containers précédents (exo 2) et adapter avec du compose
 
-# Exercise-2: Manage multiple containers with docker-compose
+# Exercise 4: Manage multiple containers with docker-compose
 
 Click the button below to start the exercise.
 

@@ -55,10 +55,10 @@ How is the address resolution performed from the article-service container?
 
 ## Add a frontend
 
-In order to add a frontend, you can use the `alphayax/microservice-demo-frontend-admin:latest` image:
-- Add a new service named `frontend-admin`
-- Remove the port mapping for the `article-svc` service
-- Add the following port mapping for the `frontend-admin` service: `8080:80`
+Add a new service named `frontend-admin`
+- use the `alphayax/microservice-demo-frontend-admin:latest` image. 
+- Remove the port mapping for the `article-svc` service.
+- Add the following port mapping for the `frontend-admin` service: `8080:80`.
 
 Once it's done, you can restart your new stack with your 3 services.
 

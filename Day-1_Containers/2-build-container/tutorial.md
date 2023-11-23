@@ -16,7 +16,7 @@ You can take a look at the <walkthrough-editor-open-file filePath="go-app/main.g
 
 You can edit this file to change the message, or add more features to the application (But stay basic, we don't want to spend too much time on this part)
 
-### Build the application
+## Build the application
 
 To build the application, you just need to run the following command:
 ```sh
@@ -30,7 +30,7 @@ Then, you can run the application to test it:
 ./main
 ```
 
-### Containerize the application
+## Containerize the application
 
 To build the containerized application, we need to specify the commands to build the image in the 
 <walkthrough-editor-open-file filePath="Dockerfile">Dockerfile</walkthrough-editor-open-file> file.
@@ -42,6 +42,11 @@ The dockerfile will do these main steps :
 - Then, we'll copy the `go-app` folder inside the container.
 - Finally, we'll build the application inside the container.
 
+To build a docker image from a `Dockerfile`, you can use the following command: `docker build -t <image-name>:<image-tag> <path-to-context>`.
+- The `image-name` is the name of the image you want to build.
+- The `image-tag` is the tag of the image you want to build.
+- The `path-to-context` is the relative folder where the `COPY` and `ADD` command will be resolved.
+
 ```sh
 docker build -t go-app:latest .
 ```
@@ -52,7 +57,7 @@ docker run go-app:latest
 ```
 
 
-## A true golang application
+## A more complex golang application
 
 Now, we'll use a more complex golang application.
 
@@ -67,85 +72,18 @@ git clone https://github.com/alphayax/microservices-demo.git
 Then, you can take a look at the <walkthrough-editor-open-file filePath="microservices-demo/article-service/Dockerfile">Dockerfile</walkthrough-editor-open-file> file.
 You'll see a [multi-stage](https://docs.docker.com/build/building/multi-stage/) build.
 
-### Containerize the application
+## Containerize the application
 
-Build the image, and run it.
+### Build the image
 
-> What do you see ?
+Navigate to the `microservices-demo/article-service` folder, then build the image. You can tag the image with the `article-service:latest` tag.
 
----
 
-First, enter the commands to start a container named `redis` from the `redis:latest` image.
+### Run the container
 
-Then, you will create a new docker network named `my-net`:
+One the image build, run it. It should crash after a few seconds by displaying some error messages regarding a missing configuration.
 
-```sh
-docker network create my-net
-```
-
-Finally, you will connect the `redis` container to the `my-net` network:
-
-```sh
-docker network connect my-net redis
-```
-
-## Build an image for the cart microservice
-
-First of all, you need to get the microservice code. You can checkout it from the GitHub repository with the 
-following command:
-
-```sh
-git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
-```
-
-Once the clone done, you can check the related 
-<walkthrough-editor-open-file filePath="microservices-demo/src/cartservice/src/Dockerfile">Dockerfile</walkthrough-editor-open-file> 
-used to build the microservice. 
-
-> The cart service code is in the `microservices-demo/src/cartservice/src/` folder.
->
-> See the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/) for help.
-
-Navigate to the source folder:
-```sh
-cd microservices-demo/src/cartservice/src/
-```
-
-Then, build the image:
-```sh
-docker build -t cartservice:latest .
-```
-
-## Launch the cart microservice
-
-The aim of this step is to run a `cartservice` container with the correct options to:
-* connect it to the `my-net` network
-* specify the redis endpoint with the `REDIS_ADDR` environment variable
-
-Complete the following command line to add the correct options:
-
-```sh
-docker run \
-  -d \
-  --name cartservice \
-  OPTION_TO_CONNECT_THIS_CONTAINER_TO_MY-NET \ 
-  OPTION_TO_ADD_REDIS_ADDR_ENVIRONEMENT_VARIABLE \
-  cartservice:latest
-```
-
-To test if your application works well, you can check the logs of the `cartservice` container.
-
-```sh
-docker logs cartservice
-```
-
-> If you see the following line:
-> `Redis cache host(hostname+port) was not specified. Starting a cart service using in memory store`
-> this means you didn't specify the redis endpoint correctly.
-
-## Question
-
-How is the resolution of `redis` done inside the `cartservice` container?
+> We'll fix this problem in the next exercise.
 
 ## Clean the containers
 

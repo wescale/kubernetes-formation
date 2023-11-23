@@ -8,14 +8,16 @@ In this exercise you will get familiar with the docker networks.
 
 We'll use this [Microservice demo project](https://github.com/alphayax/microservices-demo) as example.
 
-In the previous lab, we build the `article-service` image. Hopefully, we'll not have to rebuild it because it's already 
-built and pushed to dockerhub. You can retrieve the image with the following command:
+In the previous lab, we build the `article-service` image. Hopefully, we'll not have to rebuild it because I already 
+built-it and push-it to dockerhub. 
+
+You can retrieve the image with the following command:
 
 ```bash
 docker pull alphayax/microservice-demo-article-service
 ```
 
-The goal of this exercise will be to add the missing configuration to the article-service and connect it to a mongodb instance.
+The goal of this exercise will be to add the missing configuration to the **article-service** and connect it to a **mongodb** instance.
 
 ## The mongodb container
 
@@ -32,17 +34,23 @@ Create a new docker network named `my-net`:
 docker network create my-net
 ```
 
+
 Finally, connect the `mongo` container to the `my-net` network:
 ```sh
 docker network connect my-net mongo
 ```
 
+
+> You can check the **my-net** network by using the `docker network inpsect my-net` command. For more help about docker 
+network commands, use `docker help network`.
+
 ## The article-service container
 
-The aim of this step is to `run` an **article-svc** container with the correct options to:
+Now, `run` an **article-svc** container with the correct options to:
+- Use the image `alphayax/microservice-demo-article-service:latest`
 - Give him the name **article-service**
 - Connect it to the **my-net** network (`--network`)
-- Specify the mongodb endpoint with the `MONGODB_URI` environment (`-e`) variable
+- Specify the mongodb endpoint (`mongodb://mongo:27017`) with the `MONGODB_URI` environment variable (`-e`)
 
 If you detached the article-service container, you can follow the logs with the command:
 ```sh
@@ -60,6 +68,8 @@ How is the resolution of `mongo` done inside the `article-svc` container?
 ```sh
 docker rm -vf mongo
 docker rm -vf article-svc
+docker rmi mongo
+docker rmi alphayax/microservice-demo-article-service:latest
 docker network rm my-net
 ```
 

@@ -1,6 +1,20 @@
 version: '3'
 services:
 
+  nginx:
+    image: nginx
+    volumes:
+      - "./nginx:/etc/nginx/conf.d"
+    ports:
+      - "8080:80"
+
+  frontend-admin:
+    image: "alphayax/microservice-demo-frontend-admin:latest"
+    depends_on:
+      - "article-svc"
+    # TODO [1]: Frontend configuration (specify backend location)
+    #volumes:
+
   article-svc:
     image: "alphayax/microservice-demo-article-service:latest"
     environment:
@@ -8,21 +22,7 @@ services:
     depends_on:
       - "mongo"
 
-  nginx:
-    image: nginx
-    volumes:
-      - ./nginx:/etc/nginx/templates
-    ports:
-      - "8080:80"
-
   mongo:
     image: "mongo:4"
-    # Add persistence
-
-  frontend-admin:
-    image: "alphayax/microservice-demo-frontend-admin:latest"
-    depends_on:
-      - "article-svc"
-    # Frontend configuration (specify backend location)
-    volumes:
-      - "./frontend-admin:/usr/share/nginx/html/config"
+    # TODO [2]: Add persistence
+    #volumes:

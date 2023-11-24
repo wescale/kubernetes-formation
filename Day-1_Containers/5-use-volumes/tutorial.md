@@ -4,11 +4,30 @@
 
 ## Description
 
-The application here is a chat based on Socket.io and NodeJS.
+We use the same application as the one of the previous exercises. The goal here is to add a configuration file inside the 
+frontend container to overwrite the default configuration.
 
 To do that, you get a docker-compose skeleton file. You must complete the file with the correct instructions.
 
+---
+
 ## Launch the application
+
+- Laucn app
+- Check the app is working
+- Get the app url
+- Update config file
+- mount volume
+- check the app is working
+- check the config file is updated
+- compose down
+- compose up
+- Check data is lost
+- Add persistence to mongo
+- Compose down
+- compose up
+- Check data is still here
+- Clean
 
 Complete the <walkthrough-editor-open-file filePath="docker-compose.yml">docker-compose.yml</walkthrough-editor-open-file> file.
 

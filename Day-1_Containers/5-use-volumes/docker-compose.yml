@@ -7,6 +7,9 @@ services:
       - "./nginx:/etc/nginx/conf.d"
     ports:
       - "8080:80"
+    depends_on:
+      - "article-svc"
+      - "frontend-admin"
 
   frontend-admin:
     image: "alphayax/microservice-demo-frontend-admin:latest"

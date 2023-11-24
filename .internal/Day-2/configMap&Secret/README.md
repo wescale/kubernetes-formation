@@ -57,7 +57,7 @@ kubectl get secret mariadb-user-creds -o jsonpath='{.data.MYSQL_PASSWORD}' | bas
 
 Create the config map `mariadb-config` from the `max_allowed_packet.cnf` file.
 ```sh
-kubectl create configmap # Complete arguments
+kubectl create configmap mariadb-config --from-file=max_allowed_packet.cnf
 ```
 
 Edit the configMap to change the value 32M to `max_allowed_packet`.

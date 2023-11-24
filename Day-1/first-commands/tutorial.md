@@ -14,7 +14,7 @@ On classical server, you would need to [install it](https://docs.docker.com/engi
 
 ### Get engine and client information
 
-Run **docker info** to get variious information about the client and engine configuration.
+Run **docker info** to get various information about the client and engine configuration.
 
 ```sh
 docker info
@@ -160,7 +160,7 @@ Clean the container:
 docker rm -vf ${CONTAINER_ID}
 ```
 
-Thhen the image:
+Then the image:
 
 ```sh
 docker rmi ${IMAGE_ID}

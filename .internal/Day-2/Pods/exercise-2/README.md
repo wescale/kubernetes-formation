@@ -79,9 +79,9 @@ spec:
    command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
  tolerations:
     - key: node-type
-       operator: Equal
-       value: prod
-       effect: NoSchedule
+      operator: Equal
+      value: prod
+      effect: NoSchedule
 ```
 
 Create a yaml file containing the pod spec:

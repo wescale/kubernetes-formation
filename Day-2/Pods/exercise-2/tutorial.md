@@ -101,9 +101,9 @@ spec:
    command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
  tolerations:
     - key: node-type
-       operator: Equal
-       value: prod
-       effect: NoSchedule
+      operator: Equal
+      value: prod
+      effect: NoSchedule
 ```
 
 Create a yaml file containing the pod spec:
@@ -128,11 +128,6 @@ For that, use the `taint node` subcommand and add *-*- at the end of the taint n
 ```sh
 kubectl taint node <NODE1_NAME> node-type-
 kubectl taint node <NODE2_NAME> node-type-
-```
-
-If your cluster has 3 worker nodes:
-
-```sh
 kubectl taint node <NODE3_NAME> node-type-
 ```
 

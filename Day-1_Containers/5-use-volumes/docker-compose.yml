@@ -1,23 +1,28 @@
 version: '3'
 services:
+
   article-svc:
     image: "alphayax/microservice-demo-article-service:latest"
     environment:
       MONGODB_URI: "mongodb://mongo:27017"
-    ports:
-      - "8080:8080"
     depends_on:
       - "mongo"
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx:/etc/nginx/templates
+    ports:
+      - "8080:80"
+
   mongo:
     image: "mongo:4"
     # Add persistence
+
   frontend-admin:
     image: "alphayax/microservice-demo-frontend-admin:latest"
-    ports:
-      - "8090:80"
     depends_on:
       - "article-svc"
-    #volumes:
-    #  - "./config:/usr/share/nginx/html/config"
-      ## Volumes
-    # Insert here the code to mount the volume inside the container
+    # Frontend configuration (specify backend location)
+    volumes:
+      - "./frontend-admin:/usr/share/nginx/html/config"

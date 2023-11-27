@@ -56,7 +56,7 @@ Check that the application is working:
 ```sh
 docker compose restart
 ```
-Return the the application and check that the cart is still the same.
+Return the application and check that the cart is still the same.
 
 ## Bonus
 

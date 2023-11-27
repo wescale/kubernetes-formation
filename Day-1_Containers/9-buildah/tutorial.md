@@ -12,7 +12,7 @@ You will see in the opposite of docker, buildah does not need a Dockerfile.
 
 Inspired from: <https://github.com/containers/buildah/blob/master/demos/>
 
-## Prerequisistes: installation of Buildah & podman
+## Prerequisites: installation of Buildah & podman
 
 Buildah is already installed with Podman.
 
@@ -52,7 +52,7 @@ buildah images
 1. Run the container using Podman
 2. Run the container using Docker
     1. Do you see your image when typing `docker images`?
-    2. podman provides an helper to push images to the local Docker registry:
+    2. podman provides a helper to push images to the local Docker registry:
 
     ```sh
     podman push demo-wescale-training docker-daemon:demo-wescale-training:latest

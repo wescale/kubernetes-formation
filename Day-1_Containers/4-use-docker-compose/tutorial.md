@@ -63,7 +63,7 @@ Add a new service named `frontend-admin`
 Once it's done, you can restart your new stack with your 3 services.
 
 To test if your application works well, you can click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon>
-icon: You should see the admin frontend page... Unfortunatly, it's broken... The frontend cannot contact the API.
+icon: You should see the admin frontend page... Unfortunately, it's broken... The frontend cannot contact the API.
 We'll need to do some more work to fix it. And we'll do in the next chapter :)
 
 ## Clean

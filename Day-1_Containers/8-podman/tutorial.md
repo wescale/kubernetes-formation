@@ -49,7 +49,7 @@ podman run \
   --name nginx \
   -d \
   -p 8080:80 \
-  <OptionToUseAVolume>  \
+  -v ./src:/usr/share/nginx/html:ro \
   docker.io/nginx
 ```
 

@@ -1,0 +1,4 @@
+{
+  "apiArticlesEndpoint": "http://article-svc:8080",
+  "apiCartEndpoint": "http://cart-svc:8081"
+}

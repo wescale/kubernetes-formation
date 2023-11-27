@@ -58,7 +58,11 @@ What are the containers IP behind those services?
 ## Scale some services
 
 ```sh
-docker compose up --scale test=4 -d
+docker compose \
+  --project-directory infra \
+  up \
+  --scale test=4 \
+  -d
 ```
 
 You should see the additional containers in the Traefik admin UI.
@@ -77,7 +81,7 @@ docker exec -ti infra-test-1 touch /tmp/health_KO
 Wait 10 seconds and see the status of the webservice containers:
 
 ```sh
-docker ps -a
+docker ps -a | grep infra-test
 ```
 
 What happened in Traefik ?
@@ -85,7 +89,7 @@ What happened in Traefik ?
 ## Clean
 
 ```sh
-./terminate-infra.sh
+./infra-terminate.sh
 ```
 
 ## Congratulations

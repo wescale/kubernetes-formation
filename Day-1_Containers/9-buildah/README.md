@@ -1,5 +1,5 @@
 
-# Hands-on : build images with Buildah
+# Exercise 9: build images with Buildah
 
 Click the button below to start the demonstration.
 

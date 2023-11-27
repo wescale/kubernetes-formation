@@ -1,5 +1,5 @@
 
-# Hands-on : from Docker to Podman
+# Exercise 8: from Docker to Podman
 
 Click the button below to start the demonstration.
 

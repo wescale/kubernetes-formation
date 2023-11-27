@@ -32,6 +32,8 @@ Then, you can run the application to test it:
 
 ## Containerize the application
 
+### The Dockerfile
+
 To build the containerized application, we need to specify the commands to build the image in the 
 <walkthrough-editor-open-file filePath="Dockerfile">Dockerfile</walkthrough-editor-open-file> file.
 
@@ -41,6 +43,8 @@ The dockerfile will do these main steps :
 - We'll use the `golang:1.20` image as base image.
 - Then, we'll copy the `go-app` folder inside the container.
 - Finally, we'll build the application inside the container.
+
+### Create the image
 
 To build a docker image from a `Dockerfile`, you can use the following command: `docker build -t <image-name>:<image-tag> <path-to-context>`.
 - The `image-name` is the name of the image you want to build.
@@ -70,7 +74,7 @@ git clone https://github.com/alphayax/microservices-demo.git
 > A new folder named **microservices-demo** will be created.
 
 Then, you can take a look at the <walkthrough-editor-open-file filePath="microservices-demo/article-service/Dockerfile">Dockerfile</walkthrough-editor-open-file> file.
-You'll see a [multi-stage](https://docs.docker.com/build/building/multi-stage/) build.
+You'll see a [multi-stage](https://docs.docker.com/build/building/multi-stage/) build (With 2 `FROM` instructions).
 
 ## Containerize the application
 

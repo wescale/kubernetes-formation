@@ -4,11 +4,11 @@
 
 ## Description
 
-In this exercise, you will [install  Podman](https://podman.io/getting-started/installation).
+In this exercise, you will [install Podman](https://podman.io/getting-started/installation).
 
 Then, you will launch podman commands and see they are similar to docker ones.
 
-## Prerequisistes: installation of Podman
+## Prerequisites: installation of Podman
 
 Running the following will generate a warning message because of the ephemeral mode of your Cloud Shell instance:
 
@@ -37,14 +37,20 @@ podman ps -a
 
 ## Launch a web server
 
-You will start an nginx container mounting the <walkthrough-editor-open-file filePath="./src/index.html">src/index.html</walkthrough-editor-open-file> file as a volume towards `/usr/share/nginx/html/index.html`.
+You will start a nginx container mounting the <walkthrough-editor-open-file filePath="./src/index.html">src/index.html</walkthrough-editor-open-file> 
+file as a volume towards `/usr/share/nginx/html/index.html`.
 
-Because the default registry with podman is quay.io and not docker.io, you must indicate the registry.
+Because the default registry with podman is **quay.io** and not **docker.io**, you must indicate the registry.
 
 Complete the command line:
 
 ```sh
-podman run --name nginx -d -p 8080:80 ##OptionToUseAVolume## docker.io/nginx
+podman run \
+  --name nginx \
+  -d \
+  -p 8080:80 \
+  <OptionToUseAVolume>  \
+  docker.io/nginx
 ```
 
 Then preview the web page by clicking on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon.
@@ -60,7 +66,8 @@ Watch running `docker` containers. Do you see `nginx`?
 
 ## ... but Podman looks very like Docker
 
-`podman` cli has same commands and options as `docker`. Just put an entry in your _.bash_aliases_ can do the trick:
+`podman` cli has same commands and options as `docker`. Just put an entry in 
+your _.bash_aliases_ can do the trick:
 
 ```sh
 echo "alias docker=podman" >> .bash_aliases

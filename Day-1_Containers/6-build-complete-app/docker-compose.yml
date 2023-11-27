@@ -41,9 +41,9 @@ services:
   ingress:
     image: nginx:1.19
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./config/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - api-cart
       - api-article

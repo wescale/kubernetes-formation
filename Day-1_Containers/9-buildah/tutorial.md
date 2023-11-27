@@ -26,24 +26,34 @@ If you need to install Buildah, read the [Buildah Installation](https://github.c
 
 ## Build a simple image
 
+Create a new container on disk from alpine
 ```sh
-# Create a new container on disk from alpine
 newcontainer=$(buildah from alpine)
+```
 
-# Update packages and Install bash
+Update packages and Install bash
+```sh
 buildah run $newcontainer -- apk -U add bash
+```
 
-# Add a sample script as entrypoint
+Add a sample script as entrypoint
+```bash
 buildah copy $newcontainer ./runecho.sh /usr/bin
 buildah config --entrypoint /usr/bin/runecho.sh $newcontainer
+```
 
-# Inspect the container image meta data
+Inspect the container image metadata
+```bash
 buildah inspect $newcontainer
+```
 
-# Commit the container to an OCI image called demo-wescale-training
+Commit the container to an OCI image called `demo-wescale-training`
+```bash
 buildah commit $newcontainer demo-wescale-training
+```
 
-# List the images we have
+List the images we have
+```bash
 buildah images
 ```
 
@@ -61,17 +71,6 @@ buildah images
 ## Build with a Dockerfile
 
 See the <walkthrough-editor-open-file filePath="./Dockerfile">Dockerfile</walkthrough-editor-open-file>:
-
-```sh
-FROM alpine
-
-RUN apk -U add bash &&\
-    echo '#!/usr/bin/env bash' > /usr/bin/entrypoint.sh &&\
-    echo 'echo "Hi from Bud!"' >> /usr/bin/entrypoint.sh &&\
-    chmod +x /usr/bin/entrypoint.sh
-
-ENTRYPOINT /usr/bin/entrypoint.sh
-```
 
 How to build it with `buildah`?
 

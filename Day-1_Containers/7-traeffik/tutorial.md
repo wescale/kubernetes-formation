@@ -12,12 +12,11 @@ You will use traefik to illustrate service discovery:
 
 ## Launch traefik
 
-Inspect the  <walkthrough-editor-open-file filePath="./traefik/docker-compose.yml">docker compose file for traefik</walkthrough-editor-open-file>.
+Inspect the <walkthrough-editor-open-file filePath="./traefik/docker-compose.yml">docker-compose file for traefik</walkthrough-editor-open-file>.
 
 In particular, the mount of `/var/run/docker.sock` and the `--docker` option.
 
 Then, launch this stack:
-
 ```sh
 docker compose \
   --project-directory traefik \

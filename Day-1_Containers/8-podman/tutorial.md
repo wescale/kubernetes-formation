@@ -18,8 +18,7 @@ sudo apt-get install -y podman
 ```
 
 Now, configure podman:
-
-```sh
+```
 mkdir -p ${HOME}/.config/containers/
 
 cat <<EOF > ${HOME}/.config/containers/containers.conf
@@ -43,13 +42,12 @@ file as a volume towards `/usr/share/nginx/html/index.html`.
 Because the default registry with podman is **quay.io** and not **docker.io**, you must indicate the registry.
 
 Complete the command line:
-
-```sh
+```
 podman run \
   --name nginx \
   -d \
   -p 8080:80 \
-  -v ./src:/usr/share/nginx/html:ro \
+  <OPTION_TO_MOUNT_VOLUME> \
   docker.io/nginx
 ```
 

@@ -1,4 +1,4 @@
-# Exercise 1 - Build and run an app
+# Exercise 3 - Use network
 
 <walkthrough-tutorial-duration duration="40.0"></walkthrough-tutorial-duration>
 
@@ -41,8 +41,9 @@ docker network connect my-net mongo
 ```
 
 
-> You can check the **my-net** network by using the `docker network inpsect my-net` command. For more help about docker 
-network commands, use `docker help network`.
+> You can check the **my-net** network by using the `docker network inspect my-net` command. 
+
+> For more help about docker network commands, use `docker help network`.
 
 ## The article-service container
 
@@ -52,9 +53,9 @@ Now, `run` an **article-svc** container with the correct options to:
 - Connect it to the **my-net** network (`--network`)
 - Specify the mongodb endpoint (`mongodb://mongo:27017`) with the `MONGODB_URI` environment variable (`-e`)
 
-If you detached the article-service container, you can follow the logs with the command:
+If you detach (`-d`) the article-service container, you can follow the logs with the command:
 ```sh
-docker logs -f article-svc
+docker logs -f article-service
 ```
 
 If you've done the job correctly, the service will not crash and will wait incoming connections on port 8080
@@ -65,11 +66,18 @@ How is the resolution of `mongo` done inside the `article-svc` container?
 
 ## Clean the containers
 
+Remove the `mongo` and the `article-service` container:
 ```sh
-docker rm -vf mongo
-docker rm -vf article-svc
-docker rmi mongo
-docker rmi alphayax/microservice-demo-article-service:latest
+docker rm -vf mongo article-service
+```
+
+Remove the `mongo` and the `article-service` image:
+```sh
+docker rmi mongo alphayax/microservice-demo-article-service:latest
+```
+
+Remove the `my-net` network:
+```sh
 docker network rm my-net
 ```
 

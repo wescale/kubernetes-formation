@@ -1,5 +1,4 @@
-
-Exercise 7 - Solution
+# Exercise 6: Run a complete app with multiple services
 
 ## Generate the config
 

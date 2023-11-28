@@ -47,15 +47,34 @@ docker compose up -d
 
 Open a tab to the frontend user page by clicking on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon.
 
-Check that the application is working: 
-- Access to the admin front by adding `/admin` to the URL
-- Create some articles
-- Return to the user front and add/remove some articles to the cart
-- Enter the `docker compose` command to restart the containers :
+Check that the application is working by Add new articles.
+
+Once it's done, stop your docker compose stack:
+```sh
+docker compose stop
+```
+
+Update the <walkthrough-editor-open-file filePath="config/default.conf">nginx config file</walkthrough-editor-open-file>
+and update the `proxy_pass` value for the location `/` to `http://front-client/;`: The goal here is to replace the admin
+frontend we use to add article by the user frontend.
+
+Then restart the stack:
+```sh
+docker compose up -d
+```
+
+Once again, open a tab to the frontend user page by clicking on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> 
+icon, and access the application (You can need to refresh the page).
+
+If everything is working, you should see the articles you added previously in another interface, and you'll be able to 
+add them to your cart.
+
+You can check persistence of your cart (redis) by restarting the stack:
 
 ```sh
 docker compose restart
 ```
+
 Return the application and check that the cart is still the same.
 
 ## Bonus

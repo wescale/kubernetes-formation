@@ -20,7 +20,7 @@ Run **docker info** to get various information about the client and engine confi
 docker info
 ```
 
-What are the number of CPU and the memory capacity of or host?
+What are the number of CPU and the memory capacity of the host?
 
 ## Launch your first container
 

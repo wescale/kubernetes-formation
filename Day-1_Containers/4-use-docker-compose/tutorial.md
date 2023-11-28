@@ -22,8 +22,9 @@ Complete the <walkthrough-editor-open-file filePath="docker-compose.yml">docker-
 
 The expected directives are:
 * The `article-svc` application:
-  * use the `alphayax/microservice-demo-article-service:latest` image 
-  * specify the `MONGODB_URI` environment variable with the value `mongodb://mongo:27017`
+  * use the `alphayax/microservice-demo-article-service:latest` [image](https://github.com/compose-spec/compose-spec/blob/master/spec.md#image) 
+  * Specify the `MONGODB_URI` [environment](https://github.com/compose-spec/compose-spec/blob/master/spec.md#environment) variable with the value `mongodb://mongo:27017`
+  * [Bind](https://github.com/compose-spec/compose-spec/blob/master/spec.md#ports) the port **8080** inside the container to the port **8080** on the Docker host
 * The `mongo` service simply starts the official image from [Dockerhub](https://hub.docker.com/).
 
 Please consult the [Docker Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) if you need help.
@@ -51,7 +52,7 @@ docker compose down
 
 ## Question
 
-How is the address resolution performed from the article-service container?
+How is the address resolution performed from the `article-service` container?
 
 ## Add a frontend
 

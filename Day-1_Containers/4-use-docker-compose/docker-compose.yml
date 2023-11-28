@@ -1,11 +1,14 @@
 version: '3'
 services:
+
+  # Article Service
   article-svc:
-    image: "alphayax/microservice-demo-article-service:latest"
-    environment: []
-    ports:
-      - "8080:8080"
+    image: ""       # TODO: Define the image and tag
+    environment: [] # TODO: Add the environment variable
+    ports: []       # TODO: Bind the port 8080 inside the container to the port 8080 on the Docker host
     depends_on:
       - "mongo"
+
+  # MongoDb
   mongo:
     image: "mongo"

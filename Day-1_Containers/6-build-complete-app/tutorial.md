@@ -25,16 +25,21 @@ We want to use:
   - specify the `MONGODB_URI` environment variable to connect to the mongo database
 - a [user frontend](https://hub.docker.com/repository/docker/alphayax/microservice-demo-frontend-user) to serve the user application
   - use the `1.0` tag image
-  - update the <walkthrough-editor-open-file filePath="config/frontend-user.json">frontend user config</walkthrough-editor-open-file> file.
+  - update the frontend user config file.
 - an [admin frontend](https://hub.docker.com/repository/docker/alphayax/microservice-demo-frontend-admin) to serve the admin application
   - use the `1.0` tag image
-  - update the <walkthrough-editor-open-file filePath="config/frontend-admin.json">frontend admin config</walkthrough-editor-open-file> file.
+  - update the frontend admin config file.
 
-Note that a nginx container have been set up in order to handle all the incoming connections. You don't need to modify it.
+In order to define the frontend configuration, you can run the following script:
+
+```sh
+./define-config.sh
+```
+
+Note that a nginx container have been set up in order to handle all the incoming connections. 
+You don't need to modify it in this step.
 
 Please consult the [Docker Compose specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) if you need help.
-
-If you had trouble to define frontend config, you can run the `define-config.sh` script to generate the config files.
 
 
 ## Test the application
@@ -47,12 +52,14 @@ docker compose up -d
 
 Open a tab to the frontend user page by clicking on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon.
 
-Check that the application is working by Add new articles.
+Check that the application is working by adding new articles.
 
 Once it's done, stop your docker compose stack:
 ```sh
 docker compose stop
 ```
+
+## Swipe the frontend
 
 Update the <walkthrough-editor-open-file filePath="config/default.conf">nginx config file</walkthrough-editor-open-file>
 and update the `proxy_pass` value for the location `/` to `http://front-client/;`: The goal here is to replace the admin

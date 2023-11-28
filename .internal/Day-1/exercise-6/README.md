@@ -15,10 +15,13 @@ services:
   ## Databases
   mongo:
     image: "mongo"
+    volumes:
+      - mongo-data:/data/db
 
   redis:
     image: "redis"
-
+    volumes:
+      - redis-data:/data
 
   ## APIs
   api-cart:
@@ -60,4 +63,8 @@ services:
       - api-article
       - front-admin
       - front-client
+  
+volumes:
+  mongo-data:
+  redis-data:
 ```

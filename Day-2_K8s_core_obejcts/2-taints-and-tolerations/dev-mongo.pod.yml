@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dev-pod
+  labels:
+    app: mongo
+
+spec:
+  containers:
+  - name: dev
+    image: "mongo:7"
+
+  tolerations:
+    - key: node-type
+      operator: Equal
+      value: dev
+      effect: NoExecute

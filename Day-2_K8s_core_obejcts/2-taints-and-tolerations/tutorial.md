@@ -42,7 +42,7 @@ Edit the <walkthrough-editor-open-file filePath="no-toleration.pod.yml">no-toler
 to get a pod which does not tolerate taints. Be carefully, the provided file may be incorrect...
 
 ```sh
-kubectl apply -f no-toleration-pod.yml
+kubectl apply -f no-toleration.pod.yml
 ```
 
 Ensure the pod is running and note the worker it is running on.
@@ -73,7 +73,7 @@ file to tolerate the taint `node-type` with value `dev` and effect `NoExecute`.
 
 Create the pod:
 ```sh
-kubectl create -f dev-pod-mongo.yml
+kubectl create -f dev-mongo.pod.yml
 ```
 
 Verify it is running:
@@ -122,8 +122,9 @@ kubectl get pods -o wide
 
 ## Clean
 
-Remove Taint on all the worker nodes.
-For that, use the `taint node` subcommand and add *-*- at the end of the taint name:
+### Remove Taint on all the worker nodes
+
+For that, use the `taint node` subcommand and add `-` at the end of the taint name:
 
 ```sh
 kubectl taint node <NODE1_NAME> node-type-
@@ -131,7 +132,13 @@ kubectl taint node <NODE2_NAME> node-type-
 kubectl taint node <NODE3_NAME> node-type-
 ```
 
-Delete all the created pods:
+Or more simply:
+```sh
+kubectl taint node node-type- --all
+```
+
+### Delete all the created pods
+
 ```sh
 kubectl delete -f .
 ```

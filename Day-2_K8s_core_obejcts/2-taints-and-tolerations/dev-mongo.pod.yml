@@ -9,9 +9,3 @@ spec:
   containers:
   - name: dev
     image: "mongo:7"
-
-  tolerations:
-    - key: node-type
-      operator: Equal
-      value: dev
-      effect: NoExecute

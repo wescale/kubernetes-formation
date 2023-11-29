@@ -4,19 +4,15 @@
 
 ## Description
 
-In this exercise, you will create a persistent volume claim and reference that claim in an nginx pod.
+In this exercise, you will create a persistent volume claim and reference that claim in a MongoDb pod.
 
 You will write content to the persistent volume, then delete the pod.
 
-Finally, you will check you retrieve the written content if you create an other pod with the same reference to the PVC.
+Finally, you will check you retrieve the written content if you create another pod with the same reference to the PVC.
 
 ## Project selection and credentials
 
-Please ensure your Google Cloud project is the one given by the trainer:
-
-```sh
-gcloud config set project XXX 
-```
+Please ensure your Google Cloud project is the one given by the trainer: <walkthrough-project-setup></walkthrough-project-setup>
 
 Now, you must retrieve the credentials of the kubernetes cluster:
 
@@ -26,93 +22,107 @@ gcloud container clusters get-credentials training-cluster --project ${GOOGLE_CL
 
 ## See the storage Classes
 
+To get the list of all the available storage classes on the cluster:
 ```sh
-kubectl get storageClass
-kubectl describe storageClass [name storageClass]
+kubectl get storageclass
 ```
 
-## Create a Persistent Volume Claim to ask a 1Gi R/W storage
+Then, to get specific information about a storage class:
+```sh
+kubectl describe storageclass <STORAGE_CLASS_NAME>
+```
 
-Here is the claim declaration:
+## Create a Persistent Volume Claim
 
+Here is a declaration for claiming **1 Gio** storage in **Read/Write** mode (for only one replica):
 ```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: task-pv-claim
+  name: mongo-pvc
+
 spec:
   accessModes:
     - ReadWriteOneRingToRuleThemAll
   resources:
     requests:
-      storage: 1GOCTETS
+      storage: 1GIBIOTETS
 ```
 
-Edit the <walkthrough-editor-open-file filePath="pv-claim.yaml">pv-claim.yaml</walkthrough-editor-open-file> file to fix it.
-
+Fix the <walkthrough-editor-open-file filePath="mongo.pvc.yaml">mongo.pvc.yaml</walkthrough-editor-open-file> file. 
 Then, create the PVC.
 
 Questions:
-
 * Do you see a persistent volume automatically created?
 * Why?
 
 ## Create a pod which references the Persistent Volume Claim
 
-Complete the given <walkthrough-editor-open-file filePath="pv-pod.yaml">pv-pod.yaml</walkthrough-editor-open-file> file to mount the volume created from the `task-pv-claim` pvc:
+Complete the given <walkthrough-editor-open-file filePath="mongo.pod">mongo.pod</walkthrough-editor-open-file> file to 
+mount the volume created from the `mongo-pcv` pvc:
 
-```sh
+```yaml
 kind: Pod
 apiVersion: v1
 metadata:
-  name: task-pv-pod
+  name: mongo
+
 spec:
   volumes:
-    - name: task-pv-storage
-      # Complete volume declaration here
-      ...
+    - name: mongo-data
+      # TODO: Complete volume declaration here
   containers:
-    - name: task-pv-container
-      image: nginx
+    - name: mongo
+      image: "mongo:7"
       ports:
-        - containerPort: 80
-          name: "http-server"
+        - containerPort: 27017
+          name: "mongo"
       volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: task-pv-storage
+        - mountPath: "/data/db"
+          name: mongo-data
 ```
 
 Create the pod.
 
 You should get a pv and a pod:
-
 ```sh
-kubectl get pv,pod -o wide
+kubectl get pv,pvc,pod -o wide
 ```
 
 ## Write content to the persistent volume
 
-Now, write content to the persistent volume:
-
+Now, connect to the mongo pod:
 ```sh
-kubectl exec -it task-pv-pod -- bash
-echo 'K8s rules!' > /usr/share/nginx/html/index.html
-curl http://localhost
+kubectl exec -it mongo -- mongo
+```
+
+Then, write some content to the persistent volume:
+```shell
+db.article.insert({title: "My first article", content: "This is my first article"})
 ```
 
 ## Delete the pod and recreate it
 
-Run the kubectl commands to delete the pod.
-Then create-it again.
+Run the kubectl commands to delete the pod. Then create-it again.
 
-Check the index.html file still exists.
+Reconnect to the pod:
+```sh
+kubectl exec -it mongo -- mongo
+```
+
+Check the data is still in the database:
+```shell
+db.article.find()
+```
+
 
 ## Bonus: force the pod to be created on another node
 
 Note the worker node which hosts the pod.
-Then delete the task-pv-pod pod.
+Then delete the `mongo` pod.
 
-Edit the <walkthrough-editor-open-file filePath="pv-pod.yaml">pv-pod.yaml</walkthrough-editor-open-file>  file and use the `nodeName` field in the spec to indicate another worker node.
+Edit the <walkthrough-editor-open-file filePath="pv-pod.yaml">pv-pod.yaml</walkthrough-editor-open-file> file and 
+use the `nodeName` field in the spec to indicate another worker node.
 
 Apply the changes.
 
@@ -121,8 +131,8 @@ Is it possible?
 ## Clean
 
 ```sh
-kubectl delete pvc task-pv-claim
-kubectl delete po task-pv-pod
+kubectl delete pvc mongo-pvc
+kubectl delete po mongo
 ```
 
 ## Congratulations

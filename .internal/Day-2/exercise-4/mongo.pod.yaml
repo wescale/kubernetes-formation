@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mongo
+
+spec:
+
+  volumes:
+    - name: mongo-data
+      persistentVolumeClaim:
+        claimName: mongo-pvc
+
+  containers:
+    - name: mongo
+      image: "mongo:7"
+      ports:
+        - containerPort: 27017
+          name: "mongo"
+      volumeMounts:
+        - mountPath: "/data/db"
+          name: mongo-data

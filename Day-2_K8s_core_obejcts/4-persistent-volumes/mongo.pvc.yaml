@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: task-pv-claim
+  name: mongodb-pvc
+
 spec:
   accessModes:
     - ReadWriteOneRingToRuleThemAll
   resources:
     requests:
-      storage: 1GOCTETS
-
+      storage: 1GIBIOTETS

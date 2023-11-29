@@ -36,6 +36,10 @@ Ensure you have 1 running pod:
 kubectl get deployment,pods
 ```
 
+### The deployment "desired" state
+
+Our deployment specify we want exactly **1** replica running of the pod. This is called the "desired" state.
+
 Now, delete the pod:
 ```sh
 kubectl #Find the command
@@ -49,9 +53,9 @@ kubectl get deployment,pods
 ## Deploy the article microservice
 
 See the content of <walkthrough-editor-open-file filePath="article.deploy.yml">article.deploy.yml</walkthrough-editor-open-file> 
-file. Define **2 replicas** for the microservice.
+file. 
 
-Then, create the deployment:
+Define **2 replicas** for the microservice. Then, create the deployment:
 ```sh
 kubectl apply -f article.deploy.yml
 ```
@@ -61,8 +65,10 @@ Ensure you have 2 running pods:
 kubectl get deployment,pods
 ```
 
-You'll see that the pods are in the `CrashLoopBackOff` state: This is because the microservice needs a MongoDB instance 
-to work. You can check that by looking at the logs of one of the pods:
+### Pods in `CrashLoopBackOff` state
+
+Wait a little, you'll see that the pods are in the `CrashLoopBackOff` state: This is because the microservice needs 
+a MongoDB instance to work. You can check that by looking at the logs of one of the pods:
 ```sh
 kubectl logs <POD_NAME>
 ```
@@ -95,10 +101,20 @@ You will change the number of replicas to get 3 pods:
 kubectl scale deployment article-api #Find the option!!
 ```
 
+Check the deployment has 3 replicas:
+```sh
+kubectl get deployment,pods
+```
 ## Clean all the resources
 
+Delete all the deployments
 ```sh
 kubectl delete deployment --all
+```
+
+Delete the mongodb service
+```sh
+kubectl delete service mongodb
 ```
 
 ## Congratulations

@@ -1,5 +1,3 @@
-YPO => utiliser une Redis 6 et une Redis 7.
-Utiliser la cli redis-cli pour vérifier la version qui tourne
 
 # Exercise 2.3 - Deployments to ensure pods are running
 

@@ -9,8 +9,6 @@ spec:
     matchLabels:
       app: article-api
 
-  replicas: 2
-
   template:
     metadata:
       labels:

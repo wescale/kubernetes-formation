@@ -31,7 +31,7 @@ To know the name of the attributes, you can run `kubectl explain Pod.spec.contai
 
 Then create the pod:
 ```sh
-kubectl create -f mongo.yml
+kubectl create -f mongodb.yml
 ```
 
 ## List all the pods
@@ -60,7 +60,7 @@ mongo
 ```
 
 Insert a document in the `article` collection:
-```sh
+```
 db.article.insertOne({
   name: "The most wonderful article",
   description: "The best article ever"
@@ -68,7 +68,7 @@ db.article.insertOne({
 ```
 
 Then, retrieve the document:
-```sh
+```
 db.article.find()
 ```
 

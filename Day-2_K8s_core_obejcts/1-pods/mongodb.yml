@@ -7,11 +7,6 @@ metadata:
     env: development
 
 spec:
-  containers:
-    - name: mongo
-      image: mongo:5
-      ports:
-          - containerPort: 27017
-            name: mongo
-            protocol: TCP
+  containers: [] # TODO: Fill the containers section
+
 ...

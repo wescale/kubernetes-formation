@@ -58,7 +58,7 @@ Questions:
 
 ## Create a pod which references the Persistent Volume Claim
 
-Complete the given <walkthrough-editor-open-file filePath="mongo.pod">mongo.pod</walkthrough-editor-open-file> file to 
+Complete the given <walkthrough-editor-open-file filePath="mongo.pod.yaml">mongo.pod.yaml</walkthrough-editor-open-file> file to 
 mount the volume created from the `mongo-pcv` pvc:
 
 ```yaml
@@ -82,7 +82,7 @@ spec:
           name: mongo-data
 ```
 
-Create the pod.
+Then, create the pod.
 
 You should get a pv and a pod:
 ```sh
@@ -93,21 +93,24 @@ kubectl get pv,pvc,pod -o wide
 
 Now, connect to the mongo pod:
 ```sh
-kubectl exec -it mongo -- mongo
+kubectl exec -it mongo -- /usr/bin/mongosh
 ```
 
 Then, write some content to the persistent volume:
 ```shell
-db.article.insert({title: "My first article", content: "This is my first article"})
+db.article.insertOne({title: "My first article", content: "This is my first article"})
 ```
 
 ## Delete the pod and recreate it
 
-Run the kubectl commands to delete the pod. Then create-it again.
+Run the kubectl commands to delete the pod, and check the `pv` and `pvc`:
+```shell
+kubectl get pv,pvc -o wide
+```
 
-Reconnect to the pod:
+Re-create the pod. Then, reconnect to the pod:
 ```sh
-kubectl exec -it mongo -- mongo
+kubectl exec -it mongo -- /usr/bin/mongosh
 ```
 
 Check the data is still in the database:
@@ -115,13 +118,18 @@ Check the data is still in the database:
 db.article.find()
 ```
 
+---
+Yes, you can use a oneliner:
+```shell
+kubectl exec -it mongo -- /usr/bin/mongosh --eval "db.article.find()"
+```
 
 ## Bonus: force the pod to be created on another node
 
 Note the worker node which hosts the pod.
 Then delete the `mongo` pod.
 
-Edit the <walkthrough-editor-open-file filePath="pv-pod.yaml">pv-pod.yaml</walkthrough-editor-open-file> file and 
+Edit the <walkthrough-editor-open-file filePath="mongo.pod.yaml">mongo.pod.yaml</walkthrough-editor-open-file> file and 
 use the `nodeName` field in the spec to indicate another worker node.
 
 Apply the changes.
@@ -130,10 +138,19 @@ Is it possible?
 
 ## Clean
 
+Delete the pod:
 ```sh
-kubectl delete pvc mongo-pvc
 kubectl delete po mongo
 ```
+
+> If you delete the PVC before the pod, the pod will be stuck in the `Terminating` state.
+
+Delete the Persistent Volume Claim:
+```sh
+kubectl delete pvc mongo-pvc
+```
+
+> Deleting the PVC will also delete the PV cause the reclaim policy is set to `Delete`.
 
 ## Congratulations
 

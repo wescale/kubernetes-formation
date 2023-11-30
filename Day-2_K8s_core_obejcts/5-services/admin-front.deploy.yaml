@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-front
+
+spec:
+  selector:
+    matchLabels:
+      app: admin-front
+
+  replicas: 2
+
+  template:
+    metadata:
+      labels:
+        app: admin-front
+
+    spec:
+      containers:
+        - image: "alphayax/microservice-demo-frontend-admin:1.0"
+          name: "admin-front"
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+...

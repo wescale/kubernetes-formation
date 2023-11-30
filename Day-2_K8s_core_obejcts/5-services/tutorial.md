@@ -5,9 +5,9 @@
 ## Description
 
 You will explore the different types of services proposed by kubernetes:
-1. Create a CLUSTER IP service
-2. Create a NodePort service
-3. Create a LoadBalancer service
+1. Create a `ClusterIP` service
+2. Create a `NodePort` service
+3. Create a `LoadBalancer` service
 
 ## Project selection and credentials
 
@@ -39,10 +39,11 @@ Apply the <walkthrough-editor-open-file filePath="mongo.svc.yaml">mongo.svc.yaml
 kubectl apply -f mongo.svc.yaml
 ```
 
-**Describe** the service and ensure it has entries in its `endpoints`... if not, **correct** the service file, and apply 
-it again.
+**Describe** the service and ensure it has entries in its `endpoints`... 
 
-## Article API
+**Correct** the service file, and apply it again. Check the endpoints again.
+
+## Article API (1)
 
 ### Create the deployment
 
@@ -51,9 +52,11 @@ Create the deployment corresponding to the <walkthrough-editor-open-file filePat
 kubectl apply -f article-api.deploy.yaml
 ```
 
-### Expose the deployment
+Check that de pods are up and running. Take a look to the logs.
 
-#### With a NodePort
+## Article API (2)
+
+### Expose the deployment with a NodePort
 
 Now, we'll expose the deployment with a `NodePort` service via a kubectl command:
 
@@ -70,25 +73,29 @@ You can retrieve the created service with the following command:
 kubectl get service article-api -o yaml
 ```
 
-Check the `nodePort` value. You may be able to connect to the service using the following command:
+Check the `nodePort` value. 
+
+Get the nodes `EXTERNAL-IP` addresses:
+```sh
+kubectl get nodes -o wide
+```
+
+You may be able to connect to the service using the following command:
 
 ```sh
 curl -v http://[NODE_IP_ADDRESS]:[NODE_PORT]
 ```
 
 > Due to firewall rules, you may not be able to connect to the service.
+> On GCP, you can open the firewall rule with the following command: 
+> `gcloud compute firewall-rules create test-node-port --network main --allow tcp:30000-32767`
 
-<walkthrough-footnote>
-On GCP, you can open the firewall rule with the following command:
-```shell
-gcloud compute firewall-rules create test-node-port --network main --allow tcp:30000-32767
-```
-</walkthrough-footnote>
+## Article API (3)
 
-#### With a LoadBalancer
+### Expose the deployment with a LoadBalancer
 
 Remove the previous service:
-```shell
+```sh
 kubectl delete service article-api
 ```
 
@@ -98,7 +105,7 @@ kubectl expose deployment article-api --port=8080 --target-port=8080 --name=arti
 ```
 
 Wait for the service to have an external IP:
-```shell
+```sh
 kubectl get services -w
 ```
 
@@ -112,6 +119,21 @@ Try to access the service:
 ```sh
 curl -v http://[EXTERNAL_IP]:8080
 ```
+
+## Clean
+
+Delete the services:
+```sh
+kubectl delete service article-api
+kubectl delete service mongo
+```
+
+Delete the deployments:
+```sh
+kubectl delete deployment --all
+```
+
+> If you add a firewall rule, then remove it.
 
 ## Congratulations
 

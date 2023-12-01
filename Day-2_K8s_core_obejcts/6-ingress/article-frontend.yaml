@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: article-frontend
+
+spec:
+  selector:
+    matchLabels:
+      app: article-frontend
+
+  replicas: 2
+
+  template:
+    metadata:
+      labels:
+        app: article-frontend
+
+    spec:
+      volumes:
+        - name: endpoints-config
+          configMap:
+            name: article-frontend
+      containers:
+        - image: "alphayax/microservice-demo-frontend-admin:1.0"
+          name: "article-frontend"
+          volumeMounts:
+            - name: endpoints-config
+              mountPath: /usr/share/nginx/html/config
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: article-frontend
+
+spec:
+  type: ClusterIP
+  selector:
+    app: article-frontend
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: article-frontend
+
+data:
+  endpoints.json: |-
+    {
+      "apiArticlesEndpoint": "article"
+    }
+...

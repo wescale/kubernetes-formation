@@ -1,20 +1,17 @@
-# Ingress rules
+
+# Exercise 2.6 - Ingress rules
 
 <walkthrough-tutorial-duration duration="30.0"></walkthrough-tutorial-duration>
 
 ## Description
 
-In this exercise, you will create an application pod `/v1` and expose it through an Ingress targetting a Service.
+In this exercise, you will use the same application as in the previous exercise.
 
-Then you will create a second version of the application (`/v2`) and manage the routing via another Ingress.
+You will expose a frontend and the API through an ingress definition.
 
 ## Project selection and credentials
 
-Please ensure your Google Cloud project is the one given by the trainer:
-
-```sh
-gcloud config set project XXX 
-```
+Please ensure your Google Cloud project is the one given by the trainer: <walkthrough-project-setup></walkthrough-project-setup>
 
 Now, you must retrieve the credentials of the kubernetes cluster:
 
@@ -22,104 +19,115 @@ Now, you must retrieve the credentials of the kubernetes cluster:
 gcloud container clusters get-credentials training-cluster --project ${GOOGLE_CLOUD_PROJECT} --zone europe-west1-b
 ```
 
-## Deploy version /v1 of the application
+## Deploy the Database
 
-Instead of creating a YAML file, use the imperative command `kubectl run` to create a pod with:
+Instead of using a YAML file, use the imperative command `kubectl create` to create a deployment with the following attributes:
+- name: `mongo`
+- image: `mongo:7`
+- port: 27017
 
-* name: `web`
-* image: `gcr.io/google-samples/hello-app:1.0`
-* declared port: 8080
+> You can use `kubectl help create deploy` for help
 
-Instead of creating a YAML file, use the imperative command `kubectl expose` to create a NodePort service targetting the pod above.
+Once the deployment is created, expose it as a service with the following attributes:
+- name: `mongo`
+- type: `ClusterIP`
+- ports: 
+  - service port: `27017`
+  - target port: `27017`
+  - protocol: `TCP`
 
-Ensure the pod and the service are OK.
+> You can use `kubectl help expose` for help
 
-## Create an Ingress resource without path based routing rules
-
-Edit and correct the <walkthrough-editor-open-file filePath="basic-ingress.yaml">basic-ingress.yaml</walkthrough-editor-open-file> file:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: basic-ingress
-spec:
-  defaultBackend:
-    service:
-      name: oueb
-      port:
-        number: 666
+Ensure the deployment, pod, service and endpoints are OK.
+```sh
+kubectl get pod,deploy,service,endpoints
 ```
 
-Create the ingress:
+## Deploy the API
+
+The <walkthrough-editor-open-file filePath="article-api.yaml">article-api.yaml</walkthrough-editor-open-file> file contains 
+the definition of the **deployment** AND the **service** of the API in a single file. You can apply it with:
 
 ```sh
-kubectl apply -f basic-ingress.yaml
+kubectl apply -f article-api.yaml
 ```
 
-Ensure the ingress is correctly created (it can take some time):
+> Note: The article API will be deployed in the version `2.0` with new routes.
+
+At this point, we have:
+- a running MongoDb instance with an `ClusterIP` service to expose it inside the cluster.
+- a running Article Api instance with an `ClusterIP` service to expose it inside the cluster. 
+
+## A very basic ingress
+
+Edit and correct the <walkthrough-editor-open-file filePath="article-api.ingress.yaml">article-api.ingress.yaml</walkthrough-editor-open-file> 
+file. Then apply it with:
 
 ```sh
-kubectl get ingress basic-ingress
+kubectl apply -f article-api.ingress.yaml
 ```
 
-Test the connectivity - what is the IP to connect on ?
-
-## Deploy a second version of the application
-
-Create the Pod and service for the version 2:
+Ensure the ingress is correctly created and wait for an external IP address to be defined (it can take 1 or 2 minutes):
 
 ```sh
-kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0 --port=8080
-kubectl expose deployment web2 --target-port=8080 --port=8080 --type=NodePort
+kubectl get ingress -w
 ```
 
-Complete the given <walkthrough-editor-open-file filePath="fanout-ingress.yaml">fanout-ingress.yaml</walkthrough-editor-open-file> file to add a `/v2` path which targets the web2 service:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: fanout-ingress
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /v1
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: web
-            port:
-              number: 80
-      # Add /v2 path
-      ...
-```
-
-Create this new fanout ingress:
+Once the external IP address is defined, you can test the connectivity to the API:
 
 ```sh
-kubectl apply -f fanout-ingress.yaml
+curl -I http://<EXTERNAL_IP>/
 ```
 
-Ensure the ingress is correctly created (it can take some time):
+> Note that even if the ingress is correctly created, you may need additional minutes in order to be able 
+> to connect to the API.
+
+## Deploy the frontend
+
+### The deployment, service and configmap
+
+The <walkthrough-editor-open-file filePath="article-frontend.yaml">article-frontend.yaml</walkthrough-editor-open-file> file contains
+the definition of the **deployment**, the **service** and a **configmap** of the frontend in a single file. You can apply it with:
 
 ```sh
-kubectl get ingress fanout-ingress
+kubectl apply -f article-frontend.yaml
 ```
 
-Connect to the services via this new ingress.
+Like you will see, a configmap have been mount inside the pod, as a volume, in order to configure the frontend.
 
-Test URLs `/v1` and `/v2`.
+## All together: The ingress
+
+The <walkthrough-editor-open-file filePath="admin.ingress.yaml">admin.ingress.yaml</walkthrough-editor-open-file> file contains
+definition for the article administration. It will put together the frontend and the API. Complete the file, we want:
+- The `/` path to target the frontend service
+- The `/article` path to target the API service
+
+
+
+Then, apply it with:
+
+```sh
+kubectl apply -f admin.ingress.yaml
+```
+
+Ensure the ingress is correctly created and wait for an external IP address to be defined (it can take 1 or 2 minutes):
+
+```sh
+kubectl get ingress -w
+```
+
+Once everything is ready, you can open a browser and check that everything is working fine:
+
+```
+http://<EXTERNAL_IP>/
+```
 
 ## Clean
 
 ```sh
-kubectl delete ingress basic-ingress
-kubectl delete ingress fanout-ingress
-kubectl delete pod web
-kubectl delete deployment web2
-kubectl delete service web web2
+kubectl delete ingress --all
+kubectl delete deployment --all
+kubectl delete service article-api article-frontend mongo
 ```
 
 ## Congratulations

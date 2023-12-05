@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: article
+
+spec:
+  rules:
+
+  - http:
+      paths:
+
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: article-frontend
+            port:
+              number: 80
+
+      - path: /article/
+        pathType: Prefix
+        backend:
+          service:
+            name: article-api
+            port:
+              number: 8080

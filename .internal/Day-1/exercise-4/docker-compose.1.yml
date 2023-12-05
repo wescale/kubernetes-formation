@@ -1,0 +1,16 @@
+version: '3'
+services:
+
+  # Article Service
+  article-svc:
+    image: "alphayax/microservice-demo-article-service:latest"
+    environment:
+      MONGODB_URI: "mongodb://mongo:27017"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "mongo"
+
+  # MongoDb
+  mongo:
+    image: "mongo"

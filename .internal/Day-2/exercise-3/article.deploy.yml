@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: article-api
+
+spec:
+  selector:
+    matchLabels:
+      app: article-api
+
+  replicas: 2
+
+  template:
+    metadata:
+      labels:
+        app: article-api
+
+    spec:
+      containers:
+        - image: "alphayax/microservice-demo-article-service:1.0"
+          name: "article-api"
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://mongodb:27017"
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+...

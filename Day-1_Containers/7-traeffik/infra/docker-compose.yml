@@ -1,0 +1,71 @@
+version: '3'
+services:
+
+  ## Databases
+  mongo:
+    image: "mongo:4"
+
+  redis:
+    image: "redis"
+
+
+  ## APIs
+  api-cart:
+    image: "alphayax/microservice-demo-cart-service:1.0"
+    deploy:
+      replicas: 2
+    environment:
+      REDIS_URI: "redis://redis"
+    labels:
+      - "traefik.backend=api-cart"
+      - "traefik.frontend.rule=Host:api-cart.docker.localhost"
+    depends_on:
+      - redis
+
+  api-article:
+    image: "alphayax/microservice-demo-article-service:1.0"
+    deploy:
+      replicas: 2
+    environment:
+      MONGODB_URI: "mongodb://mongo"
+    labels:
+      - "traefik.backend=api-article"
+      - "traefik.frontend.rule=Host:api-article.docker.localhost"
+    depends_on:
+      - mongo
+
+
+  ## Fronts
+  front-admin:
+    image: "alphayax/microservice-demo-frontend-admin:1.0"
+    deploy:
+      replicas: 2
+    labels:
+      - "traefik.backend=front-admin"
+      - "traefik.frontend.rule=Host:front-admin.docker.localhost"
+    #volumes:
+    #  - ./config/frontend-admin.json:/usr/share/nginx/html/config/endpoints.json:ro
+
+  front-client:
+    image: "alphayax/microservice-demo-frontend-user:1.0"
+    deploy:
+      replicas: 2
+    labels:
+      - "traefik.backend=front-user"
+      - "traefik.frontend.rule=Host:front-user.docker.localhost"
+    #volumes:
+    #  - ./config/frontend-user.json:/usr/share/nginx/html/config/endpoints.json:ro
+
+
+  # Test
+  test:
+    build:
+      context: ../webservice-test
+    labels:
+      - "traefik.backend=test"
+      - "traefik.frontend.rule=Host:test.docker.localhost"
+
+networks:
+  web:
+    external: true
+    name: traefik_webgateway

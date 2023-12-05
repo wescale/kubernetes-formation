@@ -1,0 +1,51 @@
+version: '3'
+services:
+
+  ## Databases
+  mongo:
+    image: ""
+
+  redis:
+    image: ""
+
+
+  ## APIs
+  api-cart:
+    image: ""
+    environment:
+      REDIS_URI: ""
+    depends_on:
+      - redis
+
+  api-article:
+    image: ""
+    environment:
+      MONGODB_URI: ""
+    depends_on:
+      - mongo
+
+
+  ## Fronts
+  front-admin:
+    image: ""
+    volumes:
+      - ./config/frontend-admin.json:/usr/share/nginx/html/config/endpoints.json:ro
+
+  front-client:
+    image: ""
+    volumes:
+      - ./config/frontend-user.json:/usr/share/nginx/html/config/endpoints.json:ro
+
+
+  ## Incoming traffic
+  ingress:
+    image: nginx:1.19
+    ports:
+      - "8080:80"
+    volumes:
+      - ./config/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - api-cart
+      - api-article
+      - front-admin
+      - front-client

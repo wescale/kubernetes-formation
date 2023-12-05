@@ -1,0 +1,4 @@
+{
+  "apiArticlesEndpoint": "https://8080-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/api-article",
+  "apiCartEndpoint": "https://8080-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/api-cart"
+}

@@ -1,0 +1,3 @@
+{
+  "apiArticlesEndpoint": "http://article-svc:8080"
+}

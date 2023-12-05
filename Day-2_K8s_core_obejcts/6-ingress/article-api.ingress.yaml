@@ -1,0 +1,11 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: article-api
+
+spec:
+  defaultBackend:
+    service:
+      name: "Name of the article service"
+      port:
+        number: PortOfTheArticleService

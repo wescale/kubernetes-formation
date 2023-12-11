@@ -12,7 +12,7 @@ We'll use a basic golang program and will see how to build a docker image from i
 
 The application is a simple program that write a message in the standard output.
 
-You can take a look at the <walkthrough-editor-open-file filePath="go-app/main.go">main.go</walkthrough-editor-open-file> file.
+You can take a look at the <walkthrough-editor-open-file filePath="go-app/main.go">go-app/main.go</walkthrough-editor-open-file> file.
 
 You can edit this file to change the message, or add more features to the application (But stay basic, we don't want to spend too much time on this part)
 
@@ -46,7 +46,7 @@ The dockerfile will do these main steps :
 
 ### Create the image
 
-To build a docker image from a `Dockerfile`, you can use the following command: `docker build -t <image-name>:<image-tag> <path-to-context>`.
+To build a docker image from a `Dockerfile`, you can use the following command: `docker build -t <image-name>:<image-tag> <path-to-context>`
 - The `image-name` is the name of the image you want to build.
 - The `image-tag` is the tag of the image you want to build.
 - The `path-to-context` is the relative folder where the `COPY` and `ADD` command will be resolved.

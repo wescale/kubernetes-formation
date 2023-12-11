@@ -11,7 +11,7 @@ docker run hello-world
 And the following output:
 
 ```
-alphayax@cloudshell:~/cloudshell_open/kubernetes-formation-17$ docker run hello-world
+trainer@cloudshell:~/cloudshell_open/kubernetes-formation-17$ docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 719385e32844: Already exists

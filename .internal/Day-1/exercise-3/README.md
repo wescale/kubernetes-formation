@@ -15,7 +15,7 @@ docker run \
   --network my-net \
   -e MONGODB_URI=mongodb://mongo:27017 \
   -d  \
-  alphayax/microservice-demo-article-service:latest 
+  europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:latest 
 ```
 
 ### Question

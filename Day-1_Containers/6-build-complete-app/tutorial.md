@@ -17,16 +17,16 @@ We want to use:
   - Add a volume to handle persistence
 - a [Redis](http://hub.docker.com/_/redis/) database to store the user cart content 
   - Add a volume to handle persistence
-- a [cart service](https://hub.docker.com/repository/docker/alphayax/microservice-demo-cart-service) to manage the cart
+- a cart service to manage the cart
   - use the `1.0` tag image
   - specify the `REDIS_URI` environment variable to connect to the redis database
-- an [article service](https://hub.docker.com/repository/docker/alphayax/microservice-demo-article-service) to manage the articles
+- an article service to manage the articles
   - use the `1.0` tag image
   - specify the `MONGODB_URI` environment variable to connect to the mongo database
-- a [user frontend](https://hub.docker.com/repository/docker/alphayax/microservice-demo-frontend-user) to serve the user application
+- a user frontend to serve the user application
   - use the `1.0` tag image
   - update the frontend user config file.
-- an [admin frontend](https://hub.docker.com/repository/docker/alphayax/microservice-demo-frontend-admin) to serve the admin application
+- an admin frontend to serve the admin application
   - use the `1.0` tag image
   - update the frontend admin config file.
 

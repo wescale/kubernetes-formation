@@ -25,14 +25,14 @@ services:
 
   ## APIs
   api-cart:
-    image: "alphayax/microservice-demo-cart-service:1.0"
+    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/cart-service:1.0"
     environment:
       REDIS_URI: "redis://redis"
     depends_on:
       - redis
 
   api-article:
-    image: "alphayax/microservice-demo-article-service:1.0"
+    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:1.0"
     environment:
       MONGODB_URI: "mongodb://mongo"
     depends_on:
@@ -41,12 +41,12 @@ services:
 
   ## Fronts
   front-admin:
-    image: "alphayax/microservice-demo-frontend-admin:1.0"
+    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/frontend-admin:1.0"
     volumes:
       - ./config/frontend-admin.json:/usr/share/nginx/html/config/endpoints.json:ro
 
   front-client:
-    image: "alphayax/microservice-demo-frontend-user:1.0"
+    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/frontend-user:1.0"
     volumes:
       - ./config/frontend-user.json:/usr/share/nginx/html/config/endpoints.json:ro
 

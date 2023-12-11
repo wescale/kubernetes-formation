@@ -6,15 +6,15 @@
 
 In this exercise you will get familiar with the docker networks.
 
-We'll use this [Microservice demo project](https://github.com/alphayax/microservices-demo) as example.
+We'll use this [Microservice demo project](https://github.com/wescale/microservices-demo) as example.
 
-In the previous lab, we build the `article-service` image. Hopefully, we'll not have to rebuild it because I already 
-built-it and push-it to dockerhub. 
+In the previous lab, we build the `article-service` image. Hopefully, we'll not have to rebuild it because it's already 
+built and pushed to dockerhub. 
 
 You can retrieve the image with the following command:
 
 ```bash
-docker pull alphayax/microservice-demo-article-service
+docker pull europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service
 ```
 
 The goal of this exercise will be to add the missing configuration to the **article-service** and connect it to a **mongodb** instance.
@@ -48,7 +48,7 @@ docker network connect my-net mongo
 ## The article-service container
 
 Now, `run` an **article-svc** container with the correct options to:
-- Use the image `alphayax/microservice-demo-article-service:latest`
+- Use the image `europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:latest`
 - Give him the name **article-service**
 - Connect it to the **my-net** network (`--network`)
 - Specify the mongodb endpoint (`mongodb://mongo:27017`) with the `MONGODB_URI` environment variable (`-e`)
@@ -73,7 +73,7 @@ docker rm -vf mongo article-service
 
 Remove the `mongo` and the `article-service` image:
 ```sh
-docker rmi mongo alphayax/microservice-demo-article-service:latest
+docker rmi mongo europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:latest
 ```
 
 Remove the `my-net` network:

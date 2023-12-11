@@ -68,12 +68,12 @@ Now, we'll use a more complex golang application.
 To do that you can checkout the code from the GitHub repository with the following command:
 
 ```sh
-git clone https://github.com/alphayax/microservices-demo.git
+git clone https://github.com/wescale/microservices-demo.git
 ```
 
 > A new folder named **microservices-demo** will be created.
 
-Then, you can take a look at the <walkthrough-editor-open-file filePath="microservices-demo/article-service/Dockerfile">Dockerfile</walkthrough-editor-open-file> file.
+Then, you can take a look at the <walkthrough-editor-open-file filePath="microservices-demo/article-service/Dockerfile">microservices-demo/article-service/Dockerfile</walkthrough-editor-open-file> file.
 You'll see a [multi-stage](https://docs.docker.com/build/building/multi-stage/) build (With 2 `FROM` instructions).
 
 ## Containerize the application

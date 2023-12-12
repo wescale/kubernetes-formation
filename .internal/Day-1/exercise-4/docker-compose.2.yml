@@ -3,7 +3,7 @@ services:
 
   # Article Service
   article-svc:
-    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:latest"
+    image: "alphayax/microservice-demo-article-service:latest"
     environment:
       MONGODB_URI: "mongodb://mongo:27017"
     depends_on:
@@ -15,7 +15,7 @@ services:
 
   # Frontend Admin
   frontend-admin:
-    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/frontend-admin:latest"
+    image: "alphayax/microservice-demo-frontend-admin:latest"
     ports:
       - "8080:80"
     depends_on:

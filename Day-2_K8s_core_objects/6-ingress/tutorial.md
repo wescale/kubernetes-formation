@@ -101,7 +101,7 @@ The <walkthrough-editor-open-file filePath="admin.ingress.yaml">admin.ingress.ya
 definition for the article administration. It will put together the frontend and the API. Complete the file, we want:
 - The `/` path to target the frontend service
 - The `/article` path to target the API service
-
+> You can use examples from the [official documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) if needed.
 
 
 Then, apply it with:
@@ -110,7 +110,7 @@ Then, apply it with:
 kubectl apply -f admin.ingress.yaml
 ```
 
-Ensure the ingress is correctly created and wait for an external IP address to be defined (it can take 1 or 2 minutes):
+Ensure the ingress is correctly created and wait for an external IP address to be defined (it can take several minutes to be fully working):
 
 ```sh
 kubectl get ingress -w

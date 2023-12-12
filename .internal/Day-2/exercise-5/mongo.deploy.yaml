@@ -20,4 +20,3 @@ spec:
           name: "mongo"
           ports:
             - containerPort: 27017
-...

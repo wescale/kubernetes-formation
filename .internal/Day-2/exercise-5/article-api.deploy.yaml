@@ -18,7 +18,7 @@ spec:
 
     spec:
       containers:
-        - image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:1.0"
+        - image: "alphayax/microservice-demo-article-service:1.0"
           name: "article-api"
           env:
             - name: MONGODB_URI
@@ -27,4 +27,3 @@ spec:
             - containerPort: 8080
               name: http
               protocol: TCP
-...

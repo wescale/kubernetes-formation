@@ -7,6 +7,6 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: "Name of the article service"
+      name: article-api
       port:
-        number: PortOfTheArticleService
+        number: 8080

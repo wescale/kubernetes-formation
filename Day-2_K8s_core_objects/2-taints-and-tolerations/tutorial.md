@@ -57,6 +57,11 @@ kubectl taint node <NODE2_NAME> node-type=dev:NoExecute
 kubectl taint node <NODE3_NAME> node-type=iso:NoExecute
 ```
 
+You can generate these lines with:
+```sh
+envs=(prod dev iso);i=0; for nodeName in $(kubectl get no -o jsonpath='{.items[*].metadata.name}'); do echo "kubectl taint node $nodeName node-type=${envs[i]}:NoExecute"; ((i++)); done
+```
+
 ## Verify the taints are ok
 
 ```sh

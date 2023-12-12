@@ -1,6 +1,6 @@
 # Create a pod, execute commands inside then delete it
 
-<walkthrough-tutorial-duration duration="20.0"></walkthrough-tutorial-duration>
+<walkthrough-tutorial-duration duration="15.0"></walkthrough-tutorial-duration>
 
 ## Description
 
@@ -45,42 +45,6 @@ kubectl get pods -o wide
 ```
 
 Note the IP of the `mongo` POD.
-
-## Execute a Shell inside the nginx container
-
-With `kubectl exec` you can execute commands inside a container:
-
-```sh
-kubectl exec -it mongo -- /bin/bash
-```
-
-You can access the mongodb shell with the following command:
-```sh
-mongo
-```
-
-Insert a document in the `article` collection:
-```
-db.article.insertOne({
-  name: "The most wonderful article",
-  description: "The best article ever"
-})
-```
-
-Then, retrieve the document:
-```
-db.article.find()
-```
-
-Exit the mongodb shell:
-```sh
-exit
-```
-
-Exit the shell from inside the container.
-```sh
-exit
-```
 
 **Question**: If you try to access the Pod IP from the CloudShell instance, does it work?
 

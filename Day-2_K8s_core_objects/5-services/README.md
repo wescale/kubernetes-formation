@@ -1,5 +1,3 @@
-YPO => Redis + sa Gui ?
-
 # Exercise 2.5 - Services
 
 Click the button below to start the exercise.

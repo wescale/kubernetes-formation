@@ -109,7 +109,7 @@ Wait for the service to have an external IP:
 kubectl get services -w
 ```
 
-You should see something like this:
+You should see something like this (the EXTERNAL-IP may take several minutes to be populated):
 ```
 NAME          TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 article-api   LoadBalancer   10.0.25.51   34.76.167.255   8080:32568/TCP   43s

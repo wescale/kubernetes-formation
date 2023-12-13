@@ -59,7 +59,7 @@ You can declaratively create the secret:
 
 ```sh
 kubectl create secret generic mariadb-user-creds \
-      --from-literal=MYSQL_USER=kubeuser\
+      --from-literal=MYSQL_USER=kubeuser \
       --from-literal=MYSQL_PASSWORD=KubernetesTraining
 ```
 

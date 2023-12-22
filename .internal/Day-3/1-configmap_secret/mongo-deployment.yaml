@@ -17,6 +17,9 @@ spec:
       containers:
       - name: mongo
         image: mongo:7
+        ports:
+        - containerPort: 27017
+          name: mongo
         env:
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
@@ -26,19 +29,17 @@ spec:
         envFrom:
         - secretRef:
             name: mongo-user-creds
-        ports:
-        - containerPort: 27017
-          name: mongo
         volumeMounts:
         - mountPath: /data/db
           name: mongo-volume-1
-        - mountPath: /config
+        - mountPath: /etc/mongo
           name: mongo-config-volume
       volumes:
       - emptyDir: {}
-        name: mongo-volume-1
-      - configMap:
-        name: mongo-config
-        items:
-        - key: mongod.conf
-          path: mongod.conf
+        name: mongo-volume-1      
+      - name: mongo-config-volume
+        configMap:
+          name: mongod-config
+          items:
+            - key: mongod.conf
+              path: mongod.conf

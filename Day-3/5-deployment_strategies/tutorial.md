@@ -28,7 +28,7 @@ Before deploy the application `article-service` you need to deploy the database.
 
 To do that:
 ```sh
-kubectl apply -f database.yml
+kubectl apply -f database.yaml
 ```
 
 

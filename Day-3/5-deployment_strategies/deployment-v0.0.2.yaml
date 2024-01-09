@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: article-service
-        image: alphayax/microservice-demo-article-service:1.0.2
+        image: europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:0.0.2
         env:
           - name: MONGODB_PASSWORD
             valueFrom:

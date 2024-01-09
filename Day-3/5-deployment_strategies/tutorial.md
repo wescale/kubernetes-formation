@@ -4,9 +4,9 @@
 
 ## Description
 
-In this exercise, you will deploy a subset of your application (MongoDB + article-service) in the version *1.0.2*.
+In this exercise, you will deploy a subset of your application (MongoDB + article-service) in the version *0.0.2*.
 
-After performing a rolling update to the version *2.0.1*, you will do a rollback to *1.0.2*.
+After performing a rolling update to the version *1.0.0*, you will do a rollback to *0.0.2*.
 
 ## Project selection and credentials
 
@@ -34,7 +34,7 @@ kubectl apply -f database.yml
 
 ## Deploy the version v1.0.2
 
-Complete the provided <walkthrough-editor-open-file filePath="deployment-v1.0.2.yaml">deployment-v1.0.2.yaml</walkthrough-editor-open-file> file to indicate the deployment strategy:
+Complete the provided <walkthrough-editor-open-file filePath="deployment-v0.0.2.yaml">deployment-v0.0.2.yaml</walkthrough-editor-open-file> file to indicate the deployment strategy:
 
 ```yaml
 strategy:
@@ -47,7 +47,7 @@ strategy:
 Then create the deployment:
 
 ```sh
-kubectl apply -f deployment-v1.0.2.yaml
+kubectl apply -f deployment-v0.0.2.yaml
 ```
 
 ## Ensure everything is fine
@@ -84,7 +84,7 @@ Retrieve the external IP/port.
 
 Then display the service in your web Browser.
 
-In the version 1.0.2, only the path exists:
+In the version 0.0.2, only the path exists:
 
 * GET / View the articles
 * POST / Create an article with a body like that:
@@ -107,12 +107,12 @@ Try to insert a new article
 
 ## Deploy a new version of the site
 
-See <walkthrough-editor-open-file filePath="deployment-v2.0.1.yaml">deployment-v2.0.1.yaml</walkthrough-editor-open-file> file, which updates the image tag.
+See <walkthrough-editor-open-file filePath="deployment-v1.0.0.yaml">deployment-v1.0.0.yaml</walkthrough-editor-open-file> file, which updates the image tag.
 
 Then apply the update:
 
 ```sh
-kubectl apply -f deployment-v2.0.1.yaml
+kubectl apply -f deployment-v1.0.0.yaml
 ```
 
 Check the pod statuses:
@@ -123,7 +123,7 @@ watch kubectl get pods -o wide
 
 Verify you get a new version of the website in your browser.
 
-In the release 2.0.1 the paths are updated:
+In the release 1.0.1 the paths are updated:
 
 * GET /
 
@@ -142,7 +142,7 @@ In the release 2.0.1 the paths are updated:
 
 Show the articles with the new path.
 
-## RollBack to v1.0.2
+## RollBack to v0.0.2
 
 Kubernetes allows to perform rollback of deployment with the `rollout` command.
 
@@ -158,7 +158,7 @@ kubectl rollout status deployment release-name-article-service
 
 ```sh
 kubectl delete services article-svc
-kubectl delete -f deployment-v1.0.2.yaml
+kubectl delete -f deployment-v0.0.2.yaml
 kubectl delete -f database.yaml
 ```
 

@@ -16,14 +16,14 @@ services:
       - "frontend-admin"
 
   frontend-admin:
-    image: "alphayax/microservice-demo-frontend-admin:latest"
+    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-admin:1.0.0"
     depends_on:
       - "article-svc"
     volumes:
       - "./frontend-admin:/usr/share/nginx/html/config"
 
   article-svc:
-    image: "alphayax/microservice-demo-article-service:latest"
+    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:1.0.0"
     environment:
       MONGODB_URI: "mongodb://mongo:27017"
     depends_on:

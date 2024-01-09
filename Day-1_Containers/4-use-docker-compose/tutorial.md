@@ -16,13 +16,29 @@ Docker compose is already installed in the CloudShell default image.
 
 On a classical server, you should install it: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
 
+## Project selection and credentials
+
+Please ensure your Google Cloud project is the one given by the trainer:
+
+```sh
+gcloud config set project XXX 
+```
+
+Now, you must login on the GCP registry:
+
+```sh
+gcloud auth login
+gcloud auth configure-docker europe-west1-docker.pkg.dev
+```
+
+
 ## Launch the application
 
 Complete the <walkthrough-editor-open-file filePath="docker-compose.yml">docker-compose.yml</walkthrough-editor-open-file> file.
 
 The expected directives are:
 * The `article-svc` application:
-  * use the `alphayax/microservice-demo-article-service:latest` [image](https://github.com/compose-spec/compose-spec/blob/master/spec.md#image) 
+  * use the `europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:1.0.0` [image](https://github.com/compose-spec/compose-spec/blob/master/spec.md#image) 
   * Specify the `MONGODB_URI` [environment](https://github.com/compose-spec/compose-spec/blob/master/spec.md#environment) variable with the value `mongodb://mongo:27017`
   * [Bind](https://github.com/compose-spec/compose-spec/blob/master/spec.md#ports) the port **8080** inside the container to the port **8080** on the Docker host
 * The `mongo` service simply starts the official image from [Dockerhub](https://hub.docker.com/).
@@ -57,7 +73,7 @@ How is the address resolution performed from the `article-service` container?
 ## Add a frontend
 
 Add a new service named `frontend-admin`
-- use the `alphayax/microservice-demo-frontend-admin:latest` image. 
+- use the `europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-admin:1.0.0` image. 
 - Remove the port mapping for the `article-svc` service.
 - Add the following port mapping for the `frontend-admin` service: `8080:80`.
 

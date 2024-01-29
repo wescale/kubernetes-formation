@@ -1,3 +1,3 @@
 ```sh
-kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+kubectl autoscale deployment article-service --cpu-percent=50 --min=1 --max=10
 ```

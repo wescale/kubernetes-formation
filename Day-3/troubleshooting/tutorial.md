@@ -4,7 +4,7 @@
 
 ## Description
 
-In this exercise, you will troubleshoot a wordpress application deployed in the `application` namespace.
+In this exercise, you will troubleshoot an application of microservices deployed in the `application` namespace.
 
 ## Project selection and credentials
 

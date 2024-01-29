@@ -4,7 +4,7 @@
 
 ## Description
 
-In this exercise, you will create a k8s secret as well as a k8s configmap to correctly configure a MariaDB database.
+In this exercise, you will create a k8s secret as well as a k8s configmap to correctly configure a MongoDB database.
 
 ## Project selection and credentials
 
@@ -20,7 +20,7 @@ Now, you must retrieve the credentials of the kubernetes cluster:
 gcloud container clusters get-credentials training-cluster --project ${GOOGLE_CLOUD_PROJECT} --zone europe-west1-b
 ```
 
-## Create the MYSQL_ROOT_PASSWORD secret
+## Create the MONGO_INITDB_ROOT_PASSWORD secret
 
 Generate a base-64 encoded string:
 
@@ -28,29 +28,29 @@ Generate a base-64 encoded string:
 echo -n 'KubernetesTraining' | base64
 ```
 
-Note the value and put it in the <walkthrough-editor-open-file filePath="mysql-secret.yaml">mysql-secret.yaml</walkthrough-editor-open-file>  file:
+Note the value and put it in the <walkthrough-editor-open-file filePath="mongodb-secret.yaml">mo-secret.yaml</walkthrough-editor-open-file>  file:
 
 ```yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: mariadb-root-password 
+  name: mongo-root-password 
 type: Opaque
 data:
   password: YOUR_VALUE
 ```
 
-Then, create the `mariadb-root-password` secret:
+Then, create the `mongo-root-password` secret:
 
 ```sh
-kubectl apply -f mysql-secret.yaml
+kubectl apply -f mongo-secret.yaml
 ```
 
 View the secret:
 
 ```sh
-kubectl describe secret mariadb-root-password
-kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64 -d
+kubectl describe secret mongo-root-password
+kubectl get secret mongo-root-password -o jsonpath='{.data.password}' | base64 -d
 ```
 
 ## Second way to create a secret
@@ -58,40 +58,40 @@ kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64
 You can declaratively create the secret:
 
 ```sh
-kubectl create secret generic mariadb-user-creds \
-      --from-literal=MYSQL_USER=kubeuser \
-      --from-literal=MYSQL_PASSWORD=KubernetesTraining
+kubectl create secret generic mongo-user-creds \
+      --from-literal=MONGO_INITDB_ROOT_USERNAME=kubeuser \
+      --from-literal=MONGO_INITDB_ROOT_PASSWORD=KubernetesTraining
 ```
 
 View the secret: You are a k8s ninja, you know how to do that.
 
-## Create a configMap to configure the mariadb application
+## Create a configMap to configure the mongoDB application
 
-See the <walkthrough-editor-open-file filePath="max_allowed_packet.cnf">max_allowed_packet.cnf</walkthrough-editor-open-file> configuration file for mariadb.
+See the <walkthrough-editor-open-file filePath="mongod.conf">mongod.conf</walkthrough-editor-open-file> configuration file for mongodb.
 
-Create the config map `mariadb-config` from this file:
+Create the config map `mongod-config` from this file:
 
 ```sh
 kubectl create configmap # Complete arguments
 ```
 
-Edit the configMap to change the value of `max_allowed_packet` to 32M.
+Edit the configMap to change the value of `net.maxIncomingConnections` to 10000.
 
 ## Use the secrets as environment variables in a deployment
 
-Add 2 secrets as environment variables to the <walkthrough-editor-open-file filePath="mariadb-deployment.yaml">mariadb-deployment.yaml</walkthrough-editor-open-file> deployment file:
+Add 2 secrets as environment variables to the <walkthrough-editor-open-file filePath="mongo-deployment.yaml">mongo-deployment.yaml</walkthrough-editor-open-file> deployment file:
 
-* `mariadb-root-password`: key/value pair
-* `mariadb-user-creds`: key/value pair
+* `mongo-root-password`: key/value pair
+* `mongo-user-creds`: key/value pair
 
 Both elements must be added in the deployment:
 
 ```yaml
 env:
-   - name: MYSQL_ROOT_PASSWORD
+   - name: MONGO_INITDB_ROOT_PASSWORD
      valueFrom:
        secretKeyRef:
-         name: mariadb-root-password
+         name: mongo-root-password
          key: password
 ```
 
@@ -100,30 +100,30 @@ and
 ```yaml
 envFrom:
 - secretRef:
-    name: mariadb-user-creds
+    name: mongo-user-creds
 ```
 
 ## Use a configmap as a volume in a deployment
 
 Add your ConfigMap as source into the `volumes` entry of the pod spec. Then add a `volumeMount` to the container definition.
 
-Use the configMap as a `volumeMount` to `/etc/mysql/conf.d`.
+Use the configMap as a `volumeMount` to `/etc/mongo`.
 
 See the documentation for help.
 
 ## Create the deployment
 
 ```sh
-kubectl create -f mariadb-deployment.yaml
+kubectl create -f mongo-deployment.yaml
 ```
 
 Verify the pod uses the Secrets and ConfigMap
 
 ```sh
-kubectl exec -it [pod-id] -- env |grep MYSQL
-kubectl exec -it [pod-id] -- ls /etc/mysql/conf.d
+kubectl exec -it [pod-id] -- env |grep MONGO
+kubectl exec -it [pod-id] -- ls /etc/mongo
 
-kubectl exec -it [pod-id] -- cat /etc/mysql/conf.d/max_allowed_packet.cnf
+kubectl exec -it [pod-id] -- cat /etc/mongo/mongod.conf
 ```
 
 ## Check if it works
@@ -131,16 +131,19 @@ kubectl exec -it [pod-id] -- cat /etc/mysql/conf.d/max_allowed_packet.cnf
 ```sh
 kubectl exec -it [pod-id] -- /bin/sh
 
-mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e 'show databases;'
-mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "SHOW VARIABLES LIKE 'max_allowed_packet';"
+mongosh --host localhost -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD}
+
+test> db.getName();
+test> exit
+
 ```
 
 ## Clean
 
 ```sh
-kubectl delete deployment mariadb-deployment
-kubectl delete cm mariadb-config
-kubectl delete secret mariadb-root-password mariadb-user-creds
+kubectl delete deployment mongo-deployment
+kubectl delete cm mongod-config
+kubectl delete secret mongo-root-password mongo-user-creds
 ```
 
 ## Congratulations

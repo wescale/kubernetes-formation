@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongo
+  name: mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:7
+        ports:
+        - containerPort: 27017
+          name: mongo
+        env:
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-root-password
+              key: password
+        envFrom:
+        - secretRef:
+            name: mongo-user-creds
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongo-volume-1
+        - mountPath: /etc/mongo
+          name: mongo-config-volume
+      volumes:
+      - emptyDir: {}
+        name: mongo-volume-1      
+      - name: mongo-config-volume
+        configMap:
+          name: mongod-config
+          items:
+            - key: mongod.conf
+              path: mongod.conf

@@ -22,7 +22,7 @@ spec:
           configMap:
             name: article-frontend
       containers:
-        - image: "alphayax/microservice-demo-frontend-admin:1.0"
+        - image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-admin:1.0.0"
           name: "article-frontend"
           volumeMounts:
             - name: endpoints-config

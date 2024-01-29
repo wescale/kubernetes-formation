@@ -2,6 +2,21 @@
 
 <walkthrough-tutorial-duration duration="20.0"></walkthrough-tutorial-duration>
 
+## Project selection and credentials
+
+Please ensure your Google Cloud project is the one given by the trainer:
+
+```sh
+gcloud config set project XXX 
+```
+
+Now, you must login on the GCP registry:
+
+```sh
+gcloud auth login
+gcloud auth configure-docker europe-west1-docker.pkg.dev
+```
+
 ## Description
 
 In this exercise you will deploy the full microservices-demo application.
@@ -18,16 +33,16 @@ We want to use:
 - a [Redis](http://hub.docker.com/_/redis/) database to store the user cart content 
   - Add a volume to handle persistence
 - a cart service to manage the cart
-  - use the `1.0` tag image
+  - use the `1.0.0` tag image
   - specify the `REDIS_URI` environment variable to connect to the redis database
 - an article service to manage the articles
-  - use the `1.0` tag image
+  - use the `1.0.0` tag image
   - specify the `MONGODB_URI` environment variable to connect to the mongo database
 - a user frontend to serve the user application
-  - use the `1.0` tag image
+  - use the `1.0.0` tag image
   - update the frontend user config file.
 - an admin frontend to serve the admin application
-  - use the `1.0` tag image
+  - use the `1.0.0` tag image
   - update the frontend admin config file.
 
 In order to define the frontend configuration, you can run the following script:

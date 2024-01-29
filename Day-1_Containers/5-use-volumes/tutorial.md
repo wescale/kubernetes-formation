@@ -2,6 +2,21 @@
 
 <walkthrough-tutorial-duration duration="20.0"></walkthrough-tutorial-duration>
 
+## Project selection and credentials
+
+Please ensure your Google Cloud project is the one given by the trainer:
+
+```sh
+gcloud config set project XXX 
+```
+
+Now, you must login on the GCP registry:
+
+```sh
+gcloud auth login
+gcloud auth configure-docker europe-west1-docker.pkg.dev
+```
+
 ## Description
 
 We use the same application as the one of the previous exercises. 

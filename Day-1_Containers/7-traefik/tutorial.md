@@ -2,6 +2,22 @@
 
 <walkthrough-tutorial-duration duration="30.0"></walkthrough-tutorial-duration>
 
+## Project selection and credentials
+
+Please ensure your Google Cloud project is the one given by the trainer:
+
+```sh
+gcloud config set project XXX 
+```
+
+Now, you must login on the GCP registry:
+
+```sh
+gcloud auth login
+gcloud auth configure-docker europe-west1-docker.pkg.dev
+```
+
+
 ## Description
 
 You will use traefik to illustrate service discovery:

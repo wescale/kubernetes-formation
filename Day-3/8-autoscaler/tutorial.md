@@ -6,7 +6,7 @@
 
 In this exercise, you will create and use an horizontal autoscaler.
 
-After deploying a PHP webserver exposed by a service, you will generate load and see the scale-out then scale-down.
+After deploying the API article-service exposed by a service, you will generate load and see the scale-out then scale-down.
 
 ## Project selection and credentials
 
@@ -43,7 +43,7 @@ It must target a CPU usage of 50%.
 Create the horizontal autoscaler with the `kubectl autoscale` command:
 
 ```sh
-kubectl autoscale deployment php-apache ...
+kubectl autoscale deployment article-service ...
 ```
 
 Like all k8s objects, you can query the hpa:
@@ -65,13 +65,13 @@ kubectl run -it --rm load-generator --image=busybox /bin/sh
 Then run a `wget` in a loop:
 
 ```sh
-while true; do wget -q -O- http://php-apache; done
+while true; do wget -q -O- http://article-svc/article; done
 ```
 
 Watch the deployment and wait 1 minute:
 
 ```sh
-kubectl get deployment php-apache -w
+kubectl get deployment article-service -w
 ```
 
 What does happen ?

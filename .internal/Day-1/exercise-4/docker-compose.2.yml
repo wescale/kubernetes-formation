@@ -14,7 +14,7 @@ services:
     image: "mongo"
 
   # Frontend Admin
-  frontend-admin:
+  front-admin:
     image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-admin:1.0.0"
     ports:
       - "8080:80"

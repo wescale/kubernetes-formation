@@ -9,9 +9,9 @@ services:
       - "8080:80"
     depends_on:
       - "article-svc"
-      - "frontend-admin"
+      - "front-admin"
 
-  frontend-admin:
+  front-admin:
     image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-admin:1.0.0"
     depends_on:
       - "article-svc"

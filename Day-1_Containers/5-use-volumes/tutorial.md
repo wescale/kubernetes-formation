@@ -41,21 +41,21 @@ To do that, we **bind** the local folder `./nginx` inside the container at the p
 file to check the syntax).
 
 This proxy have 2 upstreams:
-- The **frontend-admin** service will be accessible trough the `/` path
+- The **front-admin** service will be accessible trough the `/` path
 - The **article-svc** service will be accessible trough the `/api` path
 
 ## The frontend
 
-The frontend configuration is stored in the `./frontend-admin` folder, in the file
-<walkthrough-editor-open-file filePath="frontend-admin/endpoints.json">frontend-admin/endpoints.json</walkthrough-editor-open-file>.
+The frontend configuration is stored in the `./front-admin` folder, in the file
+<walkthrough-editor-open-file filePath="front-admin/endpoints.json">front-admin/endpoints.json</walkthrough-editor-open-file>.
 We need to update it to overwrite the default address of the backend.
 
 The new `apiArticlesEndpoint` value will be the result of the following line:
 ```bash
-echo "https://8080-${WEB_HOST}/api"
+echo "https://8080-${WEB_HOST}/api/article"
 ```
 
-Then, mount the `./frontend-admin` configuration folder inside the container at the path `/usr/share/nginx/html/config`. 
+Then, mount the `./front-admin` configuration folder inside the container at the path `/usr/share/nginx/html/config`. 
 
 Finally, start your docker compose stack.
 
@@ -80,6 +80,8 @@ docker compose up -d
 
 Then click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon to check if the articles are still here.
 You'll see that all the articles are lost.
+
+Why?
 
 This is because the container is **ephemeral**: The data is stored inside the container and is lost when the container is
 stopped.

@@ -17,6 +17,12 @@ gcloud auth login
 gcloud auth configure-docker europe-west1-docker.pkg.dev
 ```
 
+## Prerequisites
+
+Docker compose is already installed in the CloudShell default image.
+
+On a classical server, you should install it: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
+
 ## Description
 
 We'll use this [Microservice demo project](https://github.com/wescale/microservices-demo) as example.
@@ -32,12 +38,6 @@ docker pull europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-
 The aim is to run 2 containers and connect them without running docker cli but a `docker-compose.yml` file.
 
 To do that, you get a `docker-compose` skeleton file. You must complete the file with the correct instructions.
-
-## Prerequisites
-
-Docker compose is already installed in the CloudShell default image.
-
-On a classical server, you should install it: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
 
 ## Launch the application
 
@@ -59,10 +59,7 @@ You can launch the following command to start all the services:
 docker compose up -d
 ```
 
-To test if your application works well, you can click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> 
-icon. 
-
-`/article/` path must return a json with the following content:
+To test if your application works well, you can click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon. `/article/` path must return a json with the following content:
 
 ```json
 {

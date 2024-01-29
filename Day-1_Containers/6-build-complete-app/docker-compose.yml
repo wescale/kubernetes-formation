@@ -29,12 +29,12 @@ services:
   front-admin:
     image: ""
     volumes:
-      - ./config/frontend-admin.json:/usr/share/nginx/html/config/endpoints.json:ro
+      - ./config/front-admin.json:/usr/share/nginx/html/config/endpoints.json:ro
 
   front-client:
     image: ""
     volumes:
-      - ./config/frontend-user.json:/usr/share/nginx/html/config/endpoints.json:ro
+      - ./config/front-user.json:/usr/share/nginx/html/config/endpoints.json:ro
 
 
   ## Incoming traffic

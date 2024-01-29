@@ -1,4 +1,4 @@
-# Exercice-4: Multiple services
+# Exercise 6: Run a complete app with multiple services
 
 <walkthrough-tutorial-duration duration="20.0"></walkthrough-tutorial-duration>
 

@@ -2,7 +2,6 @@
 
 <walkthrough-tutorial-duration duration="40.0"></walkthrough-tutorial-duration>
 
-
 ## Project selection and credentials
 
 Please ensure your Google Cloud project is the one given by the trainer:

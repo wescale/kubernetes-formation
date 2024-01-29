@@ -60,7 +60,6 @@ Then, you can test the containerized application:
 docker run go-app:latest
 ```
 
-
 ## A more complex golang application
 
 Now, we'll use a more complex golang application.

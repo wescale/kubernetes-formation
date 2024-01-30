@@ -1,13 +1,11 @@
-version: '3'
+version: "3"
 services:
-
   ## Databases
   mongo:
     image: ""
 
   redis:
     image: ""
-
 
   ## APIs
   api-cart:
@@ -24,18 +22,16 @@ services:
     depends_on:
       - mongo
 
-
   ## Fronts
   front-admin:
     image: ""
     volumes:
       - ./config/front-admin.json:/usr/share/nginx/html/config/endpoints.json:ro
 
-  front-client:
+  front-user:
     image: ""
     volumes:
       - ./config/front-user.json:/usr/share/nginx/html/config/endpoints.json:ro
-
 
   ## Incoming traffic
   ingress:
@@ -48,4 +44,4 @@ services:
       - api-cart
       - api-article
       - front-admin
-      - front-client
+      - front-user

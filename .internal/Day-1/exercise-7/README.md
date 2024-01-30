@@ -7,7 +7,7 @@ What are the routing rules for those services ?
 - `api-article-infra` -> `api-article:8080`
 - `api-cart-infra` -> `api-cart:8081`
 - `front-admin-infra` -> `front-admin:80`
-- `front-client-infra` -> `front-client:80`
+- `front-user-infra` -> `front-user:80`
 - `mongo-infra` -> `mongo:27017`
 - `redis-infra` -> `redis:6379`
 - `test-infra` -> `test:8080`

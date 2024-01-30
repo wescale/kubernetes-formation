@@ -4,9 +4,13 @@ services:
   ## Databases
   mongo:
     image: "mongo:4"
+    labels:
+    - "traefik.enable=false"
 
   redis:
     image: "redis"
+    labels:
+    - "traefik.enable=false"
 
 
   ## APIs
@@ -17,8 +21,7 @@ services:
     environment:
       REDIS_URI: "redis://redis"
     labels:
-      - "traefik.backend=api-cart"
-      - "traefik.frontend.rule=Host:api-cart.docker.localhost"
+      - "traefik.http.routers.api-cart.rule=Host(`api-cart.docker.local`)"
     depends_on:
       - redis
 
@@ -29,11 +32,9 @@ services:
     environment:
       MONGODB_URI: "mongodb://mongo"
     labels:
-      - "traefik.backend=api-article"
-      - "traefik.frontend.rule=Host:api-article.docker.localhost"
+      - "traefik.http.routers.api-article.rule=Host(`api-article.docker.local`)"
     depends_on:
       - mongo
-
 
   ## Fronts
   front-admin:
@@ -41,20 +42,14 @@ services:
     deploy:
       replicas: 2
     labels:
-      - "traefik.backend=front-admin"
-      - "traefik.frontend.rule=Host:front-admin.docker.localhost"
-    #volumes:
-    #  - ./config/frontend-admin.json:/usr/share/nginx/html/config/endpoints.json:ro
+      - "traefik.http.routers.front-admin.rule=Host(`front-admin.docker.local`)"
 
-  front-client:
-    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-client:1.0.0"
+  front-user:
+    image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-user:1.0.0"
     deploy:
       replicas: 2
     labels:
-      - "traefik.backend=front-user"
-      - "traefik.frontend.rule=Host:front-user.docker.localhost"
-    #volumes:
-    #  - ./config/frontend-user.json:/usr/share/nginx/html/config/endpoints.json:ro
+      - "traefik.http.routers.front-user.rule=Host(`front-user.docker.local`)"
 
 
   # Test
@@ -62,8 +57,7 @@ services:
     build:
       context: ../webservice-test
     labels:
-      - "traefik.backend=test"
-      - "traefik.frontend.rule=Host:test.docker.localhost"
+      - "traefik.http.routers.testt.rule=Host(`test.docker.local`)"
 
 networks:
   web:

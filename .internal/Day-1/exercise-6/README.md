@@ -45,7 +45,7 @@ services:
     volumes:
       - ./config/frontend-admin.json:/usr/share/nginx/html/config/endpoints.json:ro
 
-  front-client:
+  front-user:
     image: "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-user:1.0.0"
     volumes:
       - ./config/frontend-user.json:/usr/share/nginx/html/config/endpoints.json:ro
@@ -62,7 +62,7 @@ services:
       - api-cart
       - api-article
       - front-admin
-      - front-client
+      - front-user
   
 volumes:
   mongo-data:

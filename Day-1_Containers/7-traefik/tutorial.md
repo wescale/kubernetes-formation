@@ -61,9 +61,7 @@ Now, if you consult the Traefik HTTP services, you should see 7 more entries:
 - `api-article-infra`
 - `api-cart-infra`
 - `front-admin-infra`
-- `front-client-infra`
-- `mongo-infra`
-- `redis-infra`
+- `front-user-infra`
 - `test-infra`
 
 What are the routing rules for those services?

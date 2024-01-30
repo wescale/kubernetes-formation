@@ -77,7 +77,7 @@ docker compose stop
 ## Swipe the frontend
 
 Update the <walkthrough-editor-open-file filePath="config/default.conf">nginx config file</walkthrough-editor-open-file>
-and update the `proxy_pass` value for the location `/` to `http://front-client/;`: The goal here is to replace the admin
+and update the `proxy_pass` value for the location `/` to `http://front-user/;`: The goal here is to replace the admin
 frontend we use to add article by the user frontend.
 
 Then restart the stack:

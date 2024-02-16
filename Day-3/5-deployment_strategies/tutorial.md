@@ -24,17 +24,16 @@ gcloud container clusters get-credentials training-cluster --project ${GOOGLE_CL
 
 ## Setup
 
-Before deploy the application `article-service` you need to deploy the database.
+Before deploying the application `article-service`, you need to deploy the database with:
 
-To do that:
 ```sh
 kubectl apply -f database.yaml
 ```
 
 
-## Deploy the version v1.0.2
+## Deploy the version v0.0.2
 
-Complete the provided <walkthrough-editor-open-file filePath="deployment-v0.0.2.yaml">deployment-v0.0.2.yaml</walkthrough-editor-open-file> file to indicate the deployment strategy:
+Complete the provided <walkthrough-editor-open-file filePath="deployment.yaml">deployment.yaml</walkthrough-editor-open-file> file to indicate the deployment strategy:
 
 ```yaml
 strategy:
@@ -47,72 +46,59 @@ strategy:
 Then create the deployment:
 
 ```sh
-kubectl apply -f deployment-v0.0.2.yaml
+kubectl apply -f deployment.yaml
 ```
 
 ## Ensure everything is fine
 
-List the deployements, get details about `release-name-article-service` and consult the pod statuses:
+List the deployements, get details about `article-service` and verify the pod statuses:
 
 ```sh
 kubectl get deployments
-kubectl describe deployments release-name-article-service
+kubectl describe deployments article-service
 kubectl get pods -o wide
 ```
 
-## Create a service to externally expose the deployment
-
-What are the solutions to expose a service outside the cluster network ?
+## Create a service to expose the pods
 
 Here, we create a NodePort service imperatively:
 
 ```sh
-kubectl expose deployment release-name-article-service \
+kubectl expose deployment article-service \
 --type=NodePort \
 --name=article-svc \
 --port=80 \
 --target-port=8080
 ```
 
-or declaratively with a  <walkthrough-editor-open-file filePath="service.yaml">service.yaml</walkthrough-editor-open-file> file:
 
-```sh
-kubectl apply -f service.yaml
-```
-
-Retrieve the external IP/port.
+Retrieve the external IP of a node and the allocated port.
 
 Then display the service in your web Browser.
 
-In the version 0.0.2, only the path exists:
-
-* GET / View the articles
-* POST / Create an article with a body like that:
-```json
-{
-  "name": "Article 1",
-  "description": "The best article of all times"
-}
+In the version 0.0.2, you can add and list articles on the path /.
+Add an article with:
+```bash
+curl -X POST http://EXTERNAL_IP:PORT/ -d '{ "name": "Article 1", "description": "The best article of all times" }'
 ```
-* DELETE /{articleId} Delete an article
+and check it appears in the list from your browser.
 
-Try to insert a new article
+
+Now we want to add a health page on /healthz and move article list on /article.
+If you try to access this endpoint it should respond a 404 error:
 
 ```bash
- curl -X POST http://EXTERNAL_IP:PORT/ -d '{  
-  "name": "Article 1",
-  "description": "The best article of all times"
-}' 
+ curl -X http://EXTERNAL_IP:PORT/healthz
 ```
 
 ## Deploy a new version of the site
 
-See <walkthrough-editor-open-file filePath="deployment-v1.0.0.yaml">deployment-v1.0.0.yaml</walkthrough-editor-open-file> file, which updates the image tag.
+Update the <walkthrough-editor-open-file filePath="deployment.yaml">deployment.yaml</walkthrough-editor-open-file> file to use the `1.0.0` image tag.
 
 Then apply the update:
 
 ```sh
-kubectl apply -f deployment-v1.0.0.yaml
+kubectl apply -f deployment.yaml
 ```
 
 Check the pod statuses:
@@ -121,44 +107,25 @@ Check the pod statuses:
 watch kubectl get pods -o wide
 ```
 
-Verify you get a new version of the website in your browser.
-
-In the release 1.0.1 the paths are updated:
-
-* GET /
-
-* GET /healthz
-
-* GET /article/
-* POST /article/
-```json
-{
-  "name": "Article 1",
-  "description": "The best article of all times"
-}
-``````
-* DELETE /article/{articleID}
-
-
-Show the articles with the new path.
+Verify you get a new version of the website in your browser by requesting /article and /healthz paths.
 
 ## RollBack to v0.0.2
 
 Kubernetes allows to perform rollback of deployment with the `rollout` command.
 
-Perform a rollback for deployment `release-name-article-service` and consult its status:
+Perform a rollback for deployment `article-service` and consult its status:
 
 ```sh
-kubectl rollout undo deployment release-name-article-service
+kubectl rollout undo deployment article-service
 
-kubectl rollout status deployment release-name-article-service
+kubectl rollout status deployment article-service
 ```
 
 ## Clean
 
 ```sh
 kubectl delete services article-svc
-kubectl delete -f deployment-v0.0.2.yaml
+kubectl delete -f deployment.yaml
 kubectl delete -f database.yaml
 ```
 

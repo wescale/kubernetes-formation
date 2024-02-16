@@ -1,7 +1,4 @@
 
-# Exercise 5: Persistence with docker volumes
-
-```yaml
 version: '3'
 services:
 
@@ -36,4 +33,3 @@ services:
 
 volumes:
   dbdata:
-```

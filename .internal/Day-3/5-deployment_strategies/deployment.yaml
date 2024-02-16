@@ -1,14 +1,18 @@
 kind: Deployment
 apiVersion:	apps/v1
 metadata:
-  name: release-name-article-service
+  name: article-service
 spec:
   replicas: 3
   selector:
    matchLabels:
     app.kubernetes.io/name: article-service
-# Set strategy here
-...
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1  
+  minReadySeconds: 20
   template:
     metadata:
       labels:

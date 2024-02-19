@@ -33,16 +33,16 @@ We want to use:
 - a [Redis](http://hub.docker.com/_/redis/) database to store the user cart content 
   - Add a volume to handle persistence
 - a cart service to manage the cart
-  - use the `1.0.0` tag image
-  - specify the `REDIS_URI` environment variable to connect to the redis database
+  - use the `europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/cart-service:1.0.0` image
+  - specify the `REDIS_URI` environment variable to connect to the redis database on `redis://<SERVICE_NAME>`
 - an article service to manage the articles
-  - use the `1.0.0` tag image
-  - specify the `MONGODB_URI` environment variable to connect to the mongo database
+  - use the `europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/article-service:1.0.0` image
+  - specify the `MONGODB_URI` environment variable to connect to the mongo database on `mongodb://<SERVICE_NAME>`
 - a user frontend to serve the user application
-  - use the `1.0.0` tag image
+  - use the `europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-user:1.0.0` image
   - update the frontend user config file.
 - an admin frontend to serve the admin application
-  - use the `1.0.0` tag image
+  - use the `europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-admin:1.0.0` image
   - update the frontend admin config file.
 
 In order to define the frontend configuration, you can run the following script:

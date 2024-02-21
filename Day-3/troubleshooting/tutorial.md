@@ -26,7 +26,7 @@ With `kubectl`, investigate and fix the different resources.
 
 Usefull commands: `kubectl get events`, `kubectl logs` and of course `kubectl describe`.
 
-You have finished the exercise once the worpress application is correctly displayed in your web browser accessing the NodePort service.
+You have finished the exercise once the [microservices-demo stack](https://github.com/wescale/microservices-demo) is functional, accessing the NodePort service with your web browser.
 
 ## Congratulations
 

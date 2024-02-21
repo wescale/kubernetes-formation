@@ -59,7 +59,7 @@ Questions:
 ## Create a pod which references the Persistent Volume Claim
 
 Complete the given <walkthrough-editor-open-file filePath="mongo.pod.yaml">mongo.pod.yaml</walkthrough-editor-open-file> file to 
-mount the volume created from the `mongo-pcv` pvc:
+mount the volume created from the `mongo-pvc` pvc:
 
 ```yaml
 kind: Pod

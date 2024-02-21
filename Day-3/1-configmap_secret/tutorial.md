@@ -28,7 +28,7 @@ Generate a base-64 encoded string:
 echo -n 'KubernetesTraining' | base64
 ```
 
-Note the value and put it in the <walkthrough-editor-open-file filePath="mongodb-secret.yaml">mo-secret.yaml</walkthrough-editor-open-file>  file:
+Note the value and put it in the <walkthrough-editor-open-file filePath="mongo-secret.yaml">mongo-secret.yaml</walkthrough-editor-open-file>  file:
 
 ```yaml
 apiVersion: v1

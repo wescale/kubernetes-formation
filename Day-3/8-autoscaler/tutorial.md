@@ -56,16 +56,10 @@ Wait a minute to ensure the HPA has collected some metrics to do its job.
 
 ## Generate load
 
-With a basic linux container:
+With a basic linux container, run a `wget` in a loop:
 
 ```sh
-kubectl run -it --rm load-generator --image=busybox /bin/sh
-```
-
-Then run a `wget` in a loop:
-
-```sh
-while true; do wget -q -O- http://article-svc/article; done
+kubectl run load-generator --image=busybox -- /bin/sh -c "while true; do wget -q -O- http://article-svc/article; done"
 ```
 
 Watch the deployment and wait 1 minute:
@@ -79,6 +73,7 @@ What does happen ?
 ## Clean
 
 ```sh
+kubectl delete po load-generator
 kubectl delete hpa --all
 kubectl delete -f deployment.yml
 ```

@@ -30,6 +30,11 @@ Then, you can run the application to test it:
 ./main
 ```
 
+After the test, Delete the `main` file because it's only purpose was testing the app. This `main` file is not used in the image building process :
+```sh
+rm ./main
+```
+
 ## Containerize the application
 
 ### The Dockerfile

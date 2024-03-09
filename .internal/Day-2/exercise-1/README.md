@@ -15,7 +15,7 @@ metadata:
 spec:
   containers:
     - name: mongo
-      image: mongo:5
+      image: mongo:7
       ports:
           - containerPort: 27017
             name: mongo

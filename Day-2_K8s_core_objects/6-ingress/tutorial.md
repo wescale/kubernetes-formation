@@ -73,10 +73,10 @@ Ensure the ingress is correctly created and wait for an external IP address to b
 kubectl get ingress -w
 ```
 
-Once the external IP address is defined, you can test the connectivity to the API:
+Once the external IP address is defined, you can test the connectivity to the API with curl or with a web browser:
 
 ```sh
-curl -I http://<EXTERNAL_IP>/
+curl -v http://<EXTERNAL_IP>/article/
 ```
 
 > Note that even if the ingress is correctly created, you may need additional minutes in order to be able 

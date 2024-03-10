@@ -104,7 +104,7 @@ db.article.insertOne({title: "My first article", content: "This is my first arti
 ## Delete the pod and recreate it
 
 Run the kubectl commands to delete the pod, and check the `pv` and `pvc`:
-```shell
+```sh
 kubectl get pv,pvc -o wide
 ```
 
@@ -120,7 +120,7 @@ db.article.find()
 
 ---
 Yes, you can use a oneliner:
-```shell
+```sh
 kubectl exec -it mongo -- /usr/bin/mongosh --eval "db.article.find()"
 ```
 

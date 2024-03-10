@@ -24,9 +24,25 @@ gcloud container clusters get-credentials training-cluster --project ${GOOGLE_CL
 
 With `kubectl`, investigate and fix the different resources.
 
-Usefull commands: `kubectl get events`, `kubectl logs` and of course `kubectl describe`.
+Usefull commands: 
+- `kubectl get events`, 
+- `kubectl logs`
+- `kubectl get all`
+- `kubectl get endpoints`
+- and of course `kubectl describe`.
+
+
+To explore your private registry (change <ENV-NUMBER>)
+`https://console.cloud.google.com/artifacts/docker/wsc-kubernetes-training-<ENV-NUMBER>/europe-west1/microservices-demo?project=wsc-kubernetes-training-<ENV-NUMBER>`
 
 You have finished the exercise once the [microservices-demo stack](https://github.com/wescale/microservices-demo) is functional, accessing the NodePort service with your web browser.
+
+
+Since the application to troobleshoot is not in the default namespace, it's mandatory to add `--namespace application` or `-n application` in all kubectl command
+To save time you can specify the namespace as default in your current config with this command :
+```sh
+kubectl config set-context --current --namespace=application
+```
 
 ## Congratulations
 

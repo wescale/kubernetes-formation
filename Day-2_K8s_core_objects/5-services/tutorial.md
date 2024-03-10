@@ -99,9 +99,9 @@ Remove the previous service:
 kubectl delete service article-api
 ```
 
-Then, expose the deployment with a `LoadBalancer` service:
+Then, expose the deployment with a `LoadBalancer` service, configure the loadBalancer to listen on default http port (80):
 ```sh
-kubectl expose deployment article-api --port=8080 --target-port=8080 --name=article-api --type=LoadBalancer
+kubectl expose deployment article-api --port=80 --target-port=8080 --name=article-api --type=LoadBalancer
 ```
 
 Wait for the service to have an external IP:
@@ -112,12 +112,12 @@ kubectl get services -w
 You should see something like this (the EXTERNAL-IP may take several minutes to be populated):
 ```
 NAME          TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-article-api   LoadBalancer   10.0.25.51   34.76.167.255   8080:32568/TCP   43s
+article-api   LoadBalancer   10.0.25.51   34.76.167.255   80:32568/TCP   43s
 ```
 
 Try to access the service:
 ```sh
-curl -v http://[EXTERNAL_IP]:8080
+curl -v http://[EXTERNAL_IP]
 ```
 
 ## Clean

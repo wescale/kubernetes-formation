@@ -44,7 +44,8 @@ You are a k8s ninja!
 You know how to do that.
 
 ```sh
-kubectl get secret mongo-root-password -o jsonpath='{.data.password}' | base64 -d
+kubectl get secret mongo-user-creds -o jsonpath='{.data.MONGO_INITDB_ROOT_PASSWORD}' | base64 -d
+kubectl get secret mongo-user-creds -o jsonpath='{.data.MONGO_INITDB_ROOT_USERNAME}' | base64 -d
 ```
 
 # ConfigMap

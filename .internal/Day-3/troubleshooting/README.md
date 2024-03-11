@@ -1,6 +1,6 @@
 # List of errors
 
-Look for `# HERE` inside [k8s-troubleshooting.yml](../../../kubernetes-ressources/terraform/k8s-troubleshooting.yml):
+Look for `# HERE` inside the private gitlab repo [k8s-troubleshooting.yml](https://gitlab.prod.aws.wescale.fr/wescalefr/training/kubernetes-fondamentaux/-/blob/main/k8s-troubleshooting.yml?ref_type=heads):
 * invalid selector in service wordpress
 * invalid env var MARIA_DB_HOST in wordpress deployment
 * invalid registry name for mariadb depl: should be `docker.io/bitnami/mariadb:10.5.15-debian-10-r40`
@@ -160,84 +160,6 @@ the service name is `microservices-mongodb` not  `microservices-mongo`
 
 k edit deployments.apps article-service to fix
 
-
-## Let's fix admin frontend 
-
- ```sh
- k describe pod front-admin
- Events:
-  Type    Reason   Age                     From     Message
-  ----    ------   ----                    ----     -------
-  Normal  Pulling  22m (x246 over 20h)     kubelet  Pulling image "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/frontend-admin:1.0.0"
-  Normal  BackOff  2m32s (x5549 over 20h)  kubelet  Back-off pulling image "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/frontend-admin:1.0.0"
- ```
-
-check the container registry 
-https://console.cloud.google.com/artifacts/docker/wsc-kubernetes-training-0/europe-west1/microservices-demo?project=wsc-kubernetes-training-0
-
-the correct image name is europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/front-admin:1.0.0
-
- ```sh
-k edit deployments.apps front-admin
- ```
-
-## Let's fix user frontend
-
- ```sh
- k describe pod front-user-64b84dbf8d-9mt7t
-
-
-Events:
-  Type    Reason   Age                     From     Message
-  ----    ------   ----                    ----     -------
-  Normal  BackOff  4m34s (x5566 over 21h)  kubelet  Back-off pulling image "europe-west1-docker.pkg.dev/wsc-kubernetes-training-0/microservices-demo/frontend-user:1.0.0"
-
- k edit deployments.apps front-user
-  #replace frontend by front in the image name
-```
-
-## Let's fix reverse proxy
-
-
-```sh
-
-k describe pod reverse-proxy-<TAB>
-Events:
-  Type     Reason   Age                     From     Message
-  ----     ------   ----                    ----     -------
-  Warning  BackOff  3m41s (x6116 over 21h)  kubelet  Back-off restarting failed container reverse-proxy in pod reverse-proxy-587948898d-548b8_application(10ac0bb7-c2ba-47bb-a6eb-2ffe9097f738)
-
-  # issue about probe (liveness ?)
-  # no everything seems to be ok in probe declaration
-
-k logs reverse-proxy-587948898d-548b8
-  /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-  /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-  /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-  10-listen-on-ipv6-by-default.sh: info: can not modify /etc/nginx/conf.d/default.conf (read-only file system?)
-  /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
-  /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-  /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
-  /docker-entrypoint.sh: Configuration complete; ready for start up
-  2024/03/10 11:18:14 [emerg] 1#1: invalid number of arguments in "proxy_set_header" directive in /etc/nginx/conf.d/default.conf:8
-  nginx: [emerg] invalid number of arguments in "proxy_set_header" directive in /etc/nginx/conf.d/default.conf:8
-  # issue in config : check config map
-
-
-```
-
-correct config is
-```sh
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header X-Forwarded-Host $host;
-      proxy_set_header X-Forwarded-Port $server_port;
-```
-
-```sh
- k edit configmaps reverse-proxy-config
-
- k rollout restart deployment reverse-proxy
-```
 
  ## check all service endpoint
 

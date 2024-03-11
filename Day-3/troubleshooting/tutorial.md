@@ -32,8 +32,6 @@ Usefull commands:
 - and of course `kubectl describe`.
 
 
-To explore your private registry (change <ENV-NUMBER>)
-`https://console.cloud.google.com/artifacts/docker/wsc-kubernetes-training-<ENV-NUMBER>/europe-west1/microservices-demo?project=wsc-kubernetes-training-<ENV-NUMBER>`
 
 You have finished the exercise once the [microservices-demo stack](https://github.com/wescale/microservices-demo) is functional, accessing the NodePort service with your web browser.
 

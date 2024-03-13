@@ -21,7 +21,7 @@ gcloud container clusters get-credentials training-cluster --project ${GOOGLE_CL
 ## Start the pod
 
 You need to complete the <walkthrough-editor-open-file filePath="mongodb.yml">mongodb.yml</walkthrough-editor-open-file> 
-file to declare a `mongo` pod with the following characteristics:
+file to declare a `mongo` container into the `mongo` pod with the following characteristics:
 - name: `mongo`
 - image: `mongo:7`
 - ports: name `mongo`: `27017` (TCP)

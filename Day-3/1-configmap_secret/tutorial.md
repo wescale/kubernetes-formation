@@ -69,7 +69,7 @@ View the secret: You are a k8s ninja, you know how to do that.
 
 See the <walkthrough-editor-open-file filePath="mongod.conf">mongod.conf</walkthrough-editor-open-file> configuration file for mongodb.
 
-Create the config map `mongod-config` from this file:
+Create the config map `mongod-config` from the `mongod.conf` file. Complete this command:
 
 ```sh
 kubectl create configmap # Complete arguments

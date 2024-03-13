@@ -31,7 +31,7 @@ docker run hello-world
 Observe the produced output and answer to the following questions:
 
 * Container image format is IMAGE:TAG. What is the tag used in our case?
-* What is the SHA1 used in our case?
+* What is the SHA (Secure Hash Algorithm) used in our case?
 * What is the source of the hello-world image?
 
 **docker run** has a huge amount of options.

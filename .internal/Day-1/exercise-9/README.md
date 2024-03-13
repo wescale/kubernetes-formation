@@ -3,12 +3,12 @@
 
 ## Run the simple image
 
-Run the container using Docker
+Run the container using Podman
 ```sh
 podman run --rm demo-wescale-training:latest
 ```
 
-Run the container using Podman
+Run the container using Docker
 ```sh
 docker run --rm demo-wescale-training:latest
 ```

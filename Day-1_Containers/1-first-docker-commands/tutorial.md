@@ -78,7 +78,7 @@ docker inspect ${CONTAINER_ID} | jq .
 
 Observe the result to determine:
 * What is the executed command?
-* What is the hostname saw inside the container?
+* What is the hostname inside the container?
 
 ## Retrieve the logs
 

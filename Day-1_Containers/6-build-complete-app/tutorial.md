@@ -69,6 +69,8 @@ Open a tab to the frontend user page by clicking on the <walkthrough-web-preview
 
 Check that the application is working by adding new articles.
 
+> Warning: As we use the same URL as preceding exercise but with a new reverse proxy, the browser cache may be very difficult to refresh. Try multiples CTRL+F5 (forced refresh) or use a private browsing tab.
+
 Once it's done, stop your docker compose stack:
 ```sh
 docker compose stop

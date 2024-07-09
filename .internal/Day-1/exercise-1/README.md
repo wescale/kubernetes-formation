@@ -38,7 +38,7 @@ docker inspect ${CONTAINER_ID} | jq .[0].Config.Cmd
 ```
 > The executed command is ["/hello"]
 
-What is the hostname saw inside the container?
+What is the hostname inside the container?
 ```bash
 docker inspect ${CONTAINER_ID} | jq .[0].Config.Hostname
 ```

@@ -65,6 +65,8 @@ docker compose up -d
 
 To test if your application works well, you can click on the <walkthrough-web-preview-icon></walkthrough-web-preview-icon> icon.
 
+> Warning: As we use the same URL as preceding exercise but with a new reverse proxy, the browser cache may be very difficult to refresh. Try multiples CTRL+F5 (forced refresh) or use a private browsing tab.
+
 ## Check persistence
 
 To check the persistence of the mongo database, you can add articles by using the frontend.
@@ -88,7 +90,7 @@ stopped.
 
 ## Add persistence to the mongoDb container
 
-To add persistence to the mongoDb container, you need to mount a [volume](https://docs.docker.com/compose/compose-file/compose-file-v3/#volumes)
+To add persistence to the mongoDb container, you need to mount a [volume](https://docs.docker.com/compose/compose-file/07-volumes/)
 inside the container at the path `/data/db` (like specified in the
 [mongodb image documentation](https://github.com/docker-library/docs/tree/master/mongo#where-to-store-data)).
 To do that, you can use a "named volume" instead a "bind mount".
